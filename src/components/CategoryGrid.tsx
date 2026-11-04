@@ -96,7 +96,7 @@ export default function CategoryGrid() {
                   {category.subheading}
                 </p>
 
-                <p className="mt-3 text-xs leading-relaxed text-slate-600 line-clamp-3">
+                <p className="mt-3 text-xs leading-relaxed text-[#C82425] line-clamp-3">
                   {category.description}
                 </p>
               </div>

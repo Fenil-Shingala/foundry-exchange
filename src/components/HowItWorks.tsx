@@ -6,7 +6,8 @@ const steps = [
   {
     stepNumber: "01",
     title: "Find & Source",
-    summary: "Discover inventory stock, open melt capacity, or submit CAD tooling packages.",
+    summary:
+      "Discover inventory stock, open melt capacity, or submit CAD tooling packages.",
     description:
       "Filter through thousands of certified casting products, surplus induction equipment, or post a targeted RFQ detailing your alloy chemistry, annual volume, and geometric tolerances.",
     icon: Search,
@@ -15,7 +16,8 @@ const steps = [
   {
     stepNumber: "02",
     title: "Verify Against Spec",
-    summary: "Audit certifications, metallurgical chemistry, and mechanical properties.",
+    summary:
+      "Audit certifications, metallurgical chemistry, and mechanical properties.",
     description:
       "All participating facilities are pre-screened for ISO 9001, IATF 16949, or AFS compliance. Review 3.1 Mill Test reports, optical spectrometry, and NDT radiography before committing.",
     icon: ShieldCheck,
@@ -34,7 +36,10 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section id="services" className="section-blueprint text-white py-20 md:py-24 border-b border-navy-800 relative">
+    <section
+      id="services"
+      className="section-blueprint text-white py-20 md:py-24 border-b border-navy-800 relative"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="flex items-center justify-center gap-3 mb-2">
@@ -48,7 +53,9 @@ export default function HowItWorks() {
             How The Exchange Works
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-300">
-            A transparent, three-step procurement and liquid asset exchange designed specifically for foundrymen, OEMs, and metallurgical engineers.
+            A transparent, three-step procurement and liquid asset exchange
+            designed specifically for foundrymen, OEMs, and metallurgical
+            engineers.
           </p>
         </div>
 
@@ -100,7 +107,8 @@ export default function HowItWorks() {
               Have an urgent casting drawing or melt schedule requirement?
             </h4>
             <p className="text-xs sm:text-sm text-slate-300 mt-1">
-              Upload your 2D/3D CAD models and specification sheet to initiate the 24-hour foundry matching process.
+              Upload your 2D/3D CAD models and specification sheet to initiate
+              the 24-hour foundry matching process.
             </p>
           </div>
           <div className="flex items-center gap-3 shrink-0">

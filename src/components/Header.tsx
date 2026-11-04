@@ -115,14 +115,14 @@ export default function Header() {
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-3 lg:gap-5 px-4 sm:px-6 lg:px-8">
           {/* Logo on clean badge */}
           <Link href="/" className="flex items-center gap-3 shrink-0">
-            <div className="relative flex items-center bg-white px-2.5 py-1 rounded-sm shadow-xs border border-white/20">
+            <div className="relative flex items-center bg-white px-3 sm:px-4 py-1.5 rounded-md shadow-sm border border-white/20">
               <Image
                 src="/logo.png"
                 alt="Foundry Exchange Logo"
-                width={170}
-                height={44}
+                width={220}
+                height={65}
                 priority
-                className="h-9 sm:h-10 w-auto object-contain"
+                className="h-11 sm:h-12 md:h-13 lg:h-14 w-auto object-contain"
               />
             </div>
           </Link>

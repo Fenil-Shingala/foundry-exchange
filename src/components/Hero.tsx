@@ -37,7 +37,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative z-20 bg-navy-950 py-20 lg:py-28 text-white border-b-2 border-navy-800">
+    <section id="hero-section" className="relative z-20 bg-navy-950 py-20 lg:py-28 text-white border-b-2 border-navy-800">
       {/* Background Ambience Container (isolated overflow-hidden prevents clipping dropdowns) */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         {/* Molten Glow & Heavy Industrial Atmospheric Lighting */}
