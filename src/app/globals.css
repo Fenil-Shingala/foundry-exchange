@@ -1,26 +1,97 @@
 @import "tailwindcss";
 
+@theme {
+  /* Industrial Red (Core Brand — derived from Logo #c82425) */
+  --color-brand: #c82425;
+  --color-brand-hover: #b01f20;
+  --color-brand-dark: #911a1b;
+  --color-brand-light: #fef2f2;
+  
+  /* Deep American Industrial Navy (Matching PrecastXchange palette) */
+  --color-navy: #0a3161;
+  --color-navy-dark: #062040;
+  --color-navy-light: #13396b;
+  --color-navy-950: #062040;
+  --color-navy-900: #0a3161;
+  --color-navy-800: #13396b;
+  --color-navy-700: #21447b;
+  --color-navy-600: #2c5597;
+  --color-navy-muted: #1e457a;
+  
+  /* Cobalt & Engineering Accents */
+  --color-cobalt: #1d4ed8;
+  --color-cobalt-light: #eff6ff;
+  
+  /* Text & Structural Dark */
+  --color-ink: #062040;
+  --color-ink-dark: #041426;
+  
+  /* Background Canvas & Card Surfaces */
+  --color-surface: #f5f7fa;
+  --color-surface-white: #ffffff;
+  
+  /* Molten Heat Accents */
+  --color-molten: #f26a1b;
+  --color-molten-hover: #d6550f;
+  
+  /* Typography */
+  --font-heading: var(--font-heading), "Rajdhani", sans-serif;
+  --font-body: var(--font-body), "IBM Plex Sans", sans-serif;
+  --font-mono: var(--font-mono), "IBM Plex Mono", monospace;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #f5f7fa;
+  --foreground: #062040;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: 0.02em;
+}
+
+/* Monospace utility for engineering and metallurgical specs */
+.spec-tag, .font-spec {
+  font-family: var(--font-mono);
+}
+
+/* Blueprint section texture matching heavy industrial engineering style */
+.section-blueprint {
+  background-color: #062040;
+  background-image: 
+    linear-gradient(rgba(33, 68, 123, 0.25) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(33, 68, 123, 0.25) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Smooth interaction transitions */
+a, button {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Custom Sleek Scrollbar for Dropdowns and Overflows */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(203, 213, 225, 0.7);
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.4) transparent;
 }

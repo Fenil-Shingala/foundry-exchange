@@ -1,0 +1,159 @@
+export type ListingStatus = "Ready Stock" | "Made to Order" | "Surplus" | "Auction";
+
+export interface ProductListing {
+  id: string;
+  title: string;
+  category: string;
+  alloySpec: string;
+  standards: string[];
+  weightOrCapacity: string;
+  location: string;
+  leadTime: string;
+  priceEstimate: string;
+  status: ListingStatus;
+  statusType: "ready" | "mto" | "surplus" | "auction";
+  vendorVerified: boolean;
+  vendorName: string;
+  imageUrl: string;
+  description: string;
+}
+
+export const featuredListings: ProductListing[] = [
+  {
+    id: "fl-001",
+    title: "Heavy-Duty Pump Volute Casing (Machined)",
+    category: "Castings",
+    alloySpec: "Ductile Iron EN-GJS-400-15 / ASTM A536 65-45-12",
+    standards: ["ASTM A536", "ISO 1083", "Hydrotested 25 bar"],
+    weightOrCapacity: "480 kg / pc",
+    location: "Cleveland, OH, USA",
+    leadTime: "In Stock (3 units)",
+    priceEstimate: "$2,850 / unit",
+    status: "Ready Stock",
+    statusType: "ready",
+    vendorVerified: true,
+    vendorName: "Apex Foundry Works Ltd.",
+    imageUrl: "/images/listings/casing.svg",
+    description: "Fully finish-machined centrifugal pump volute casing. 100% dye penetrant and ultrasonic tested, supplied with 3.1 mill test certificates.",
+  },
+  {
+    id: "fl-002",
+    title: "Inductotherm 3.5T Coreless Induction Furnace (Melt Power 2500 kW)",
+    category: "Foundry Equipment",
+    alloySpec: "Steel / Cast Iron Melt System",
+    standards: ["CE Certified", "VIP Power-Trak", "Hydraulic Tilt"],
+    weightOrCapacity: "3,500 kg batch capacity",
+    location: "Dortmund, Germany",
+    leadTime: "Immediate Disassembly",
+    priceEstimate: "$145,000",
+    status: "Surplus",
+    statusType: "surplus",
+    vendorVerified: true,
+    vendorName: "Rhein-Ruhr Metallurgical Assets",
+    imageUrl: "/images/listings/furnace.svg",
+    description: "Decommissioned during plant upgrade in Q4. Complete package includes dual furnace bodies, 2500 kW power supply, water cooling skids, and control desk.",
+  },
+  {
+    id: "fl-003",
+    title: "Custom High-Chrome Impeller Castings (Mining Slurry)",
+    category: "Castings",
+    alloySpec: "High-Chromium White Iron (ASTM A532 Class III Type A - 25% Cr)",
+    standards: ["ASTM A532", "Hardness 62-65 HRC"],
+    weightOrCapacity: "120 - 950 kg",
+    location: "Belo Horizonte, Brazil",
+    leadTime: "3-4 Weeks Production",
+    priceEstimate: "RFQ for Lot Pricing",
+    status: "Made to Order",
+    statusType: "mto",
+    vendorVerified: true,
+    vendorName: "Minas Wear Castings S.A.",
+    imageUrl: "/images/listings/impeller.svg",
+    description: "Abrasion-resistant impellers engineered for severe abrasive and erosive slurry pumping environments in mineral processing circuits.",
+  },
+  {
+    id: "fl-004",
+    title: "Foundry-Grade Low-Phosphorus Pig Iron (Briquetted)",
+    category: "Raw Materials",
+    alloySpec: "Fe 94.5% min | C 3.8-4.2% | Si 1.8-2.2% | P <0.04% | S <0.02%",
+    standards: ["ISO 9147", "AFS Grade PL-1"],
+    weightOrCapacity: "120 Metric Tons",
+    location: "Rotterdam Port, Netherlands",
+    leadTime: "Ready for Dispatch",
+    priceEstimate: "$540 / MT",
+    status: "Ready Stock",
+    statusType: "ready",
+    vendorVerified: true,
+    vendorName: "EuroMelt Commodities B.V.",
+    imageUrl: "/images/listings/pig-iron.svg",
+    description: "High-purity virgin blast furnace pig iron ideal for ductile and high-grade grey iron melting. Free from tramp elements and contaminants.",
+  },
+  {
+    id: "fl-005",
+    title: "DISA Match 24/28 Flaskless Molding Line (Tooling & Turntable)",
+    category: "Foundry Equipment",
+    alloySpec: "Green Sand High-Speed Molding",
+    standards: ["24x28 inch mold size", "Up to 180 molds/hr"],
+    weightOrCapacity: "Green sand line",
+    location: "Monterrey, Mexico",
+    leadTime: "Available for Inspection",
+    priceEstimate: "Bidding Starts $88,000",
+    status: "Surplus",
+    statusType: "surplus",
+    vendorVerified: true,
+    vendorName: "Norte Casting Solutions",
+    imageUrl: "/images/listings/molding.svg",
+    description: "Surplus green sand automatic matchplate molding system with quick pattern-change system, mold conveyor, and core setting station.",
+  },
+  {
+    id: "fl-006",
+    title: "Automotive Transmission Case Tooling & Hardened Matchplates",
+    category: "Patterns & Tooling",
+    alloySpec: "Cast Tooling Urethane on Al 7075 Base",
+    standards: ["Geometric Tolerances DIN ISO 2768-m", "CAD step included"],
+    weightOrCapacity: "2-Cavity Pattern Set",
+    location: "Detroit, MI, USA",
+    leadTime: "Immediate Transfer",
+    priceEstimate: "$12,400",
+    status: "Surplus",
+    statusType: "surplus",
+    vendorVerified: true,
+    vendorName: "Apex Pattern & Model Studio",
+    imageUrl: "/images/listings/pattern.svg",
+    description: "Surplus automotive transmission tooling set with over 80,000 cycle remaining life. Includes core prints, runner gating system, and inspection reports.",
+  },
+  {
+    id: "fl-007",
+    title: "High-Purity Fused Alumina Crucibles & Ramming Mix (92% Al2O3)",
+    category: "Refractories",
+    alloySpec: "Al2O3-MgO Dry Vibratable Mass",
+    standards: ["Service Temp 1750°C", "ISO 13765"],
+    weightOrCapacity: "25 MT Palletized (25 kg bags)",
+    location: "Mumbai, India",
+    leadTime: "In Stock",
+    priceEstimate: "$890 / MT",
+    status: "Ready Stock",
+    statusType: "ready",
+    vendorVerified: true,
+    vendorName: "Bharat Refractories & Thermal Tech",
+    imageUrl: "/images/listings/refractory.svg",
+    description: "Spinel-forming dry vibratable refractory lining formulated for coreless induction furnaces melting carbon steels and stainless alloys.",
+  },
+  {
+    id: "fl-008",
+    title: "Precision Die-Cast Aluminum Valve Bodies (A380 / ADC12)",
+    category: "Castings",
+    alloySpec: "Al-Si-Cu Die Cast Alloy (ASTM B85 A380)",
+    standards: ["ASTM B85", "IATF 16949 Certified Foundry", "Leak Test 6 bar"],
+    weightOrCapacity: "1.4 kg / piece (Batch of 5,000+)",
+    location: "Nagoya, Japan",
+    leadTime: "Production Batch (4 Weeks)",
+    priceEstimate: "$14.80 / pc",
+    status: "Made to Order",
+    statusType: "mto",
+    vendorVerified: true,
+    vendorName: "Chubu Precision Casting Corp",
+    imageUrl: "/images/listings/valve.svg",
+    description: "High-integrity hydraulic and pneumatic valve bodies cast on 800T cold-chamber machines with automated real-time X-ray monitoring.",
+  },
+];
+
