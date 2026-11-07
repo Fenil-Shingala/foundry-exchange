@@ -6,6 +6,7 @@ import ExchangeModes from "@/components/ExchangeModes";
 import FeaturedListings from "@/components/FeaturedListings";
 import WhySection from "@/components/WhySection";
 import IndustriesSection from "@/components/IndustriesSection";
+import AssociationsSection from "@/components/AssociationsSection";
 import CTASection from "@/components/CTASection";
 import ContactForm from "@/components/ContactForm";
 
@@ -39,6 +40,9 @@ export default function HomePage() {
 
         {/* Industries Served */}
         <IndustriesSection />
+
+        {/* Industry Associations & Governing Bodies */}
+        <AssociationsSection />
 
         {/* Call-to-Action Band */}
         <CTASection />

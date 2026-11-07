@@ -14,6 +14,22 @@ export default function FeaturedListings() {
       ? featuredListings
       : featuredListings.filter((l) => l.status === activeFilter);
 
+  const filterTabs = [
+    { name: "All", count: featuredListings.length },
+    {
+      name: "Ready Stock",
+      count: featuredListings.filter((l) => l.status === "Ready Stock").length,
+    },
+    {
+      name: "Made to Order",
+      count: featuredListings.filter((l) => l.status === "Made to Order").length,
+    },
+    {
+      name: "Surplus",
+      count: featuredListings.filter((l) => l.status === "Surplus").length,
+    },
+  ];
+
   const getStatusBadgeStyle = (status: ProductListing["status"]) => {
     switch (status) {
       case "Ready Stock":
@@ -21,7 +37,7 @@ export default function FeaturedListings() {
       case "Made to Order":
         return "bg-blue-50 text-cobalt border-blue-200";
       case "Surplus":
-        return "bg-amber-50 text-amber-900 border-amber-200";
+        return "bg-indigo-50 text-indigo-900 border-indigo-200";
       case "Auction":
         return "bg-purple-50 text-purple-800 border-purple-200";
       default:
@@ -36,8 +52,8 @@ export default function FeaturedListings() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header with Precast Accent */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
-          <div>
+        <div className="flex flex-col xl:flex-row xl:items-end justify-between mb-8 gap-6">
+          <div className="max-w-xl">
             <div className="flex items-center gap-3 mb-2">
               <span className="h-[3px] w-10 bg-brand" aria-hidden="true" />
               <span className="text-xs font-bold uppercase tracking-wider text-brand">
@@ -47,26 +63,35 @@ export default function FeaturedListings() {
             <h2 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-navy font-heading">
               Featured Marketplace Listings
             </h2>
-            <p className="mt-2 max-w-2xl text-sm sm:text-base text-slate-600">
+            <p className="mt-2 text-sm sm:text-base text-slate-600 leading-relaxed">
               Verified casting lots, plant machinery, pattern tooling, and
               metallurgical alloys ready for order or inquiry.
             </p>
           </div>
 
-          {/* Filter Tabs — Brand Red Active State */}
-          <div className="flex flex-wrap items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 p-1">
-            {["All", "Ready Stock", "Made to Order", "Surplus"].map((tab) => (
+          {/* Filter Tabs — Single-line Segmented Control with Live Counts */}
+          <div className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 p-1 shrink-0 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden shadow-2xs">
+            {filterTabs.map((tab) => (
               <button
-                key={tab}
+                key={tab.name}
                 type="button"
-                onClick={() => setActiveFilter(tab)}
-                className={`rounded-md px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider transition-all ${
-                  activeFilter === tab
+                onClick={() => setActiveFilter(tab.name)}
+                className={`inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap shrink-0 ${
+                  activeFilter === tab.name
                     ? "bg-brand text-white shadow-xs"
-                    : "text-slate-600 hover:text-navy"
+                    : "text-slate-600 hover:text-navy hover:bg-white"
                 }`}
               >
-                {tab}
+                <span>{tab.name}</span>
+                <span
+                  className={`inline-flex items-center justify-center px-1.5 py-0.5 rounded text-[10px] font-mono font-bold leading-none ${
+                    activeFilter === tab.name
+                      ? "bg-white/25 text-white"
+                      : "bg-slate-200/80 text-slate-500"
+                  }`}
+                >
+                  {tab.count}
+                </span>
               </button>
             ))}
           </div>

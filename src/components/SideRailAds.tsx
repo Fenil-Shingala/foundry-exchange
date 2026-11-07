@@ -41,15 +41,15 @@ function RailColumn({
       }}
     >
       {/* Top Rail Header with Pulsing Indicator & Dismiss Control */}
-      <div className="pointer-events-auto mb-2 flex items-center justify-between rounded-lg border border-white/10 bg-[#07070B]/95 px-2.5 py-1 text-[10px] font-mono uppercase tracking-wider text-[#8A8A99] backdrop-blur-md shadow-sm">
-        <span className="flex items-center gap-1.5 font-bold text-[#F4EFE6]">
+      <div className="pointer-events-auto mb-2 flex items-center justify-between rounded-lg border border-navy-700 bg-navy-950/95 px-2.5 py-1 text-[10px] font-mono uppercase tracking-wider text-slate-300 backdrop-blur-md shadow-sm">
+        <span className="flex items-center gap-1.5 font-bold text-white">
           <span className="h-2 w-2 rounded-full bg-brand animate-pulse shadow-[0_0_8px_#E3262F]" />
           <span>{isLeft ? "Melt Capacity" : "Live RFQs"}</span>
         </span>
         <button
           type="button"
           onClick={onDismiss}
-          className="rounded p-0.5 text-[#8A8A99] hover:bg-white/10 hover:text-white transition-colors cursor-pointer"
+          className="rounded p-0.5 text-slate-400 hover:bg-white/10 hover:text-white transition-colors cursor-pointer"
           title="Dismiss ad rails"
           aria-label="Dismiss advertisements"
         >
@@ -69,7 +69,7 @@ function RailColumn({
           return (
             <article
               key={ad.id}
-              className="group/ad pointer-events-auto relative w-full shrink-0 overflow-hidden rounded-xl border border-white/10 bg-[#07070B] shadow-lg transition-all duration-300 hover:border-brand/70 hover:shadow-[0_4px_24px_rgba(227,38,47,0.25)] hover:-translate-y-0.5"
+              className="group/ad pointer-events-auto relative w-full shrink-0 overflow-hidden rounded-xl border border-navy-700 bg-navy-950 shadow-lg transition-all duration-300 hover:border-brand/70 hover:shadow-[0_4px_24px_rgba(200,36,37,0.25)] hover:-translate-y-0.5"
             >
               {/* Clickable Full-bleed Photo or Logo Banner */}
               <Link
@@ -77,7 +77,7 @@ function RailColumn({
                 target={isExternal ? "_blank" : undefined}
                 rel={isExternal ? "noopener noreferrer" : undefined}
                 className={`relative block h-[125px] min-[1660px]:h-[140px] w-full overflow-hidden ${
-                  isLogo ? "bg-[#0d101a]" : "bg-[#0a0a10]"
+                  isLogo ? "bg-navy-900" : "bg-navy-950"
                 }`}
                 title={`Visit ${ad.title}`}
               >
@@ -93,38 +93,38 @@ function RailColumn({
 
                 {/* Subtle backlight for transparent brand logos */}
                 {isLogo && (
-                  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_70%)]" />
+                  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.12)_0%,transparent_70%)]" />
                 )}
 
                 {/* Top Vignette for Badges */}
-                <div className="pointer-events-none absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-black/75 to-transparent" />
+                <div className="pointer-events-none absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-navy-950/80 to-transparent" />
 
                 {/* Bottom Gradient for Text Readability */}
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#07070B] via-[#07070B]/85 to-transparent" />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-navy-950 via-navy-950/85 to-transparent" />
 
                 {/* Top Badges */}
                 <div className="pointer-events-none absolute left-1.5 top-1.5 right-1.5 z-10 flex items-center justify-between gap-1">
                   <span className="rounded bg-brand px-1.5 py-0.5 text-[8px] font-extrabold uppercase leading-none tracking-wider text-white shadow-xs">
                     Ad
                   </span>
-                  <span className="rounded bg-black/85 backdrop-blur-xs px-1.5 py-0.5 text-[8px] font-mono font-semibold uppercase leading-none text-[#F4EFE6] border border-white/10 truncate max-w-[95px]">
+                  <span className="rounded bg-navy-900/90 backdrop-blur-xs px-1.5 py-0.5 text-[8px] font-mono font-semibold uppercase leading-none text-white border border-navy-700 truncate max-w-[95px]">
                     {ad.badge}
                   </span>
                 </div>
 
                 {/* Title & Subtitle Overlaid cleanly at the bottom */}
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 p-2 pt-4">
-                  <h4 className="font-heading text-[11px] font-bold uppercase tracking-tight text-[#F4EFE6] truncate leading-tight group-hover/ad:text-brand transition-colors drop-shadow-xs">
+                  <h4 className="font-heading text-[11px] font-bold uppercase tracking-tight text-white truncate leading-tight group-hover/ad:text-brand transition-colors drop-shadow-xs">
                     {ad.title}
                   </h4>
-                  <p className="mt-0.5 text-[9px] text-[#A0A0B0] truncate leading-tight font-sans drop-shadow-xs">
+                  <p className="mt-0.5 text-[9px] text-slate-300 truncate leading-tight font-sans drop-shadow-xs">
                     {ad.subtitle}
                   </p>
                 </div>
               </Link>
 
               {/* Farm Exchange Style Dual Action Toolbar */}
-              <div className="grid grid-cols-2 gap-1 bg-[#07070B] p-1 border-t border-white/10">
+              <div className="grid grid-cols-2 gap-1 bg-navy-950 p-1 border-t border-navy-800">
                 <Link
                   href={ad.actionHref}
                   target={isExternal ? "_blank" : undefined}
@@ -136,7 +136,7 @@ function RailColumn({
 
                 <Link
                   href="/#contact-form"
-                  className="rounded-[3px] bg-white/10 py-1 px-1 text-center text-[8px] min-[1660px]:text-[8.5px] font-bold uppercase leading-none tracking-wide text-[#F4EFE6] transition-colors hover:bg-white hover:text-black whitespace-nowrap truncate flex items-center justify-center h-[22px]"
+                  className="rounded-[3px] bg-navy-800/80 py-1 px-1 text-center text-[8px] min-[1660px]:text-[8.5px] font-bold uppercase leading-none tracking-wide text-slate-200 transition-colors hover:bg-white hover:text-navy-950 whitespace-nowrap truncate flex items-center justify-center h-[22px] border border-navy-700/60"
                   title="Sponsor an ad rail on Foundry Exchange"
                 >
                   Advertise

@@ -54,7 +54,7 @@ export const siteConfig = {
       badge: "B2B Bilateral",
       description: "Exchange surplus alloy inventory, scrap batches, or secondary materials directly between foundries.",
       iconName: "ArrowLeftRight",
-      colorClass: "from-amber-600 to-molten",
+      colorClass: "from-blue-600 to-navy-700",
     },
     {
       id: "barter",
@@ -86,7 +86,7 @@ export const siteConfig = {
       badge: "Circular Economy",
       description: "Acquire idle patterns, matchplates, dies, and flasks from other foundries at a fraction of machining lead times.",
       iconName: "Archive",
-      colorClass: "from-orange-600 to-amber-700",
+      colorClass: "from-indigo-600 to-navy-800",
     },
   ] as ExchangeMode[],
   industries: [

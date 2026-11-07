@@ -286,6 +286,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/#associations" className="hover:text-white">
+                  Industry Associations
+                </Link>
+              </li>
+              <li>
                 <Link href="/#contact-form" className="hover:text-white">
                   Careers in Foundry Tech
                 </Link>
