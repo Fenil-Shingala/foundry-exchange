@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     "B2B exchange",
   ],
   icons: {
-    icon: "/foundry-exchange-logo.png",
+    icon: "/logo.png",
   },
   openGraph: {
     title: "Foundry Exchange | B2B Metal Casting & Equipment Marketplace",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     siteName: "Foundry Exchange",
     images: [
       {
-        url: "/foundry-exchange-logo.png",
+        url: "/logo.png",
         width: 800,
         height: 600,
         alt: "Foundry Exchange Monogram Logo",

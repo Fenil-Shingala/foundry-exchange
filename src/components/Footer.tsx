@@ -50,7 +50,7 @@ export default function Footer() {
               className="inline-block bg-white p-1.5 rounded-sm border border-slate-200 shadow-xs"
             >
               <Image
-                src="/foundry-exchange-logo.png"
+                src="/logo.png"
                 alt="Foundry Exchange Logo"
                 width={190}
                 height={48}
