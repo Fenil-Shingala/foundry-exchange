@@ -31,7 +31,7 @@ npm run start
 ```
 foundry-exchange/
 ├── public/
-│   ├── logo.png                # Brand logo (FE monogram + ladle + typography)
+│   ├── foundry-logo.png                # Brand logo (FE monogram + ladle + typography)
 │   ├── images/
 │   │   ├── associations/       # Official high-resolution association vector & retina marks
 │   │   │   ├── cfa.svg         # Canadian Foundry Association official vector

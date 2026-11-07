@@ -117,7 +117,7 @@ export default function Header() {
           <Link href="/" className="flex items-center gap-3 shrink-0">
             <div className="relative flex items-center bg-white px-3 sm:px-4 py-1.5 rounded-md shadow-sm border border-white/20">
               <Image
-                src="/logo.png"
+                src="/foundry-logo.png"
                 alt="Foundry Exchange Logo"
                 width={220}
                 height={65}
