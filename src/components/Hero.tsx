@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Search, ArrowRight } from "lucide-react";
@@ -37,7 +38,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero-section" className="relative z-20 bg-navy-950 py-20 lg:py-28 text-white border-b-2 border-navy-800">
+    <section id="hero-section" className="relative z-20 bg-navy-950 py-20 text-white border-b-2 border-navy-800">
       {/* Background Ambience Container (isolated overflow-hidden prevents clipping dropdowns) */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         {/* Molten Glow & Heavy Industrial Atmospheric Lighting */}
@@ -61,6 +62,20 @@ export default function Hero() {
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+        {/* Centered Brand Header Logo / Icon */}
+        <div className="mx-auto mb-6 flex justify-center">
+          <div className="bg-white px-5 py-3 rounded-xl shadow-2xl border border-navy-700/60 inline-flex items-center justify-center transition-transform hover:scale-105">
+            <Image
+              src="/foundry-logo.png"
+              alt="Foundry Exchange Logo"
+              width={260}
+              height={78}
+              priority
+              className="h-12 sm:h-14 md:h-16 w-auto object-contain"
+            />
+          </div>
+        </div>
+
         {/* USA Industrial Badge */}
         <div className="inline-flex items-center gap-2 rounded-full border border-navy-700 bg-navy-900/90 px-4 py-1.5 text-xs font-semibold tracking-wide text-zinc-200 shadow-inner mb-6 backdrop-blur-xs">
           <span className="flex h-2 w-2 rounded-full bg-brand animate-pulse" />

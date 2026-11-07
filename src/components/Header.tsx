@@ -112,8 +112,22 @@ export default function Header() {
 
       {/* 2. Main Sticky Navigation — PrecastXchange Signature Navy-900 with Red Underline Bar */}
       <div className="bg-navy-900 text-white border-b-2 border-brand">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-3 lg:gap-5 px-4 sm:px-6 lg:px-8">
-          {/* Logo on clean badge */}
+        <div className="mx-auto flex h-16 sm:h-20 max-w-7xl items-center justify-between gap-3 lg:gap-5 px-4 sm:px-6 lg:px-8">
+          <form
+            onSubmit={handleSearchSubmit}
+            className="flex relative items-center w-52 sm:w-64 xl:w-72 2xl:w-80 shrink-0 transition-all focus-within:w-60 sm:focus-within:w-72"
+          >
+            <Search className="absolute left-3.5 h-3.5 w-3.5 text-slate-400" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search castings..."
+              className="w-full rounded-full border border-navy-700 bg-navy-950/80 py-1.5 pl-9 pr-3 text-xs text-white placeholder:text-slate-400 shadow-inner transition-all focus:border-brand focus:bg-navy-950 focus:outline-hidden focus:ring-1 focus:ring-brand"
+            />
+          </form>
+          {/* Logo in heaer section */}
+          {/* <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-3 lg:gap-5 px-4 sm:px-6 lg:px-8">
           <Link href="/" className="flex items-center gap-3 shrink-0">
             <div className="relative flex items-center bg-white px-3 sm:px-4 py-1.5 rounded-md shadow-sm border border-white/20">
               <Image
@@ -127,7 +141,6 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Desktop Compact Search Bar — Dark Navy theme with Red focus */}
           <form
             onSubmit={handleSearchSubmit}
             className="hidden lg:flex relative items-center w-40 xl:w-48 2xl:w-60 shrink-0 transition-all focus-within:w-56 xl:focus-within:w-64"
@@ -140,7 +153,7 @@ export default function Header() {
               placeholder="Search castings..."
               className="w-full rounded-full border border-navy-700 bg-navy-950/80 py-1.5 pl-9 pr-3 text-xs text-white placeholder:text-slate-400 shadow-inner transition-all focus:border-brand focus:bg-navy-950 focus:outline-hidden focus:ring-1 focus:ring-brand"
             />
-          </form>
+          </form> */}
 
           {/* Desktop Navigation Links — Precast-inspired Sheet Numbers & Red Hover Accents */}
           <nav className="hidden xl:flex items-center gap-5 2xl:gap-7 whitespace-nowrap shrink-0">
