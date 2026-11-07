@@ -56,7 +56,7 @@ foundry-exchange/
 │   │   └── about/
 │   │       └── page.tsx        # About page route with metallurgical mission
 │   ├── components/
-│   │   ├── Header.tsx          # Utility bar + Sticky header + search + mobile drawer
+│   │   ├── Header.tsx          # Utility bar + Sticky header + search + mobile drawer + BidSpotter taxonomy sub-bar & mega-menus
 │   │   ├── Hero.tsx            # Industrial hero with molten glow & search bar
 │   │   ├── CategoryGrid.tsx    # 8 Foundry categories with specs & explore tags
 │   │   ├── HowItWorks.tsx      # 3-step procurement process (Find, Verify, Quote)
@@ -66,11 +66,13 @@ foundry-exchange/
 │   │   ├── IndustriesSection.tsx# 6 end-market industrial sectors served
 │   │   ├── AssociationsSection.tsx# Industry Standards & Global Foundry Associations
 │   │   ├── CTASection.tsx      # "Put your foundry on the map" call-to-action band
+│   │   ├── AuctionSection.tsx  # Live foundry plant liquidations & timed bidding (BidSpotter 4-image layout)
 │   │   ├── ContactForm.tsx     # Technical inquiry desk form (UI only)
 │   │   ├── SideRailAds.tsx     # Sticky B2B industrial side rails with clearance margins
 │   │   └── Footer.tsx          # Full industrial footer with links, standards & social SVGs
 │   └── data/
 │       ├── associations.ts     # Recognized governing bodies & regional chapters data
+│       ├── auctions.ts         # BidSpotter-inspired 9-category heavy machinery taxonomy & liquidation catalogs
 │       ├── categories.ts       # Foundry category taxonomy & tags
 │       ├── listings.ts         # Mock product cards with typed metallurgical specs
 │       └── siteConfig.ts       # Single source of truth for stats, modes, & contact details
@@ -125,6 +127,21 @@ foundry-exchange/
   3. **AIA Canada (Automotive Industries Association of Canada):** Official vector brand SVG with Canadian red maple leaf & deep navy typography (`aia-canada.svg`).
   4. **EFF (European Foundry Federation):** Official vector brand SVG with dual-tone teal/blue spark symbol (`eff.svg`).
 - Modeled after PrecastXchange's signature section styling with index callout `07 Recognized Governing Bodies & Regional Chapters`, interactive 4-card grid, infinite-scroll logo marquee rail, and standardization compliance notice.
+
+### 6. BidSpotter-Adapted Equipment Taxonomy & Live Auctions
+- Configured in [`src/data/auctions.ts`](file:///d:/Projects/foundry-exchange/src/data/auctions.ts) and rendered via [`src/components/Header.tsx`](file:///d:/Projects/foundry-exchange/src/components/Header.tsx) and [`src/components/AuctionSection.tsx`](file:///d:/Projects/foundry-exchange/src/components/AuctionSection.tsx).
+- **Secondary Header Sub-Bar:** Features 9 specialized metalcasting equipment categories:
+  1. *Melt Shop & Furnaces* (142 Lots)
+  2. *Molding & Sand Systems* (89 Lots)
+  3. *Coremaking & Tooling* (64 Lots)
+  4. *Fettling & Shot Blast* (76 Lots)
+  5. *Heat Treating & Ovens* (48 Lots)
+  6. *Metallurgical Lab & QA* (35 Lots)
+  7. *Cranes & Heavy Handling* (52 Lots)
+  8. *Surplus Alloys & Ingots* (94 Lots)
+  9. *Plant Closures & Liquidations* (6 Catalogs)
+- **Interactive 3-Column Mega-Menu:** Displays granular subcategories, indexed OEM manufacturers (Inductotherm, DISA, Wheelabrator, Thermo Fisher), escrow guarantees, and a live featured auction lot card.
+- **Auction Events Showcase:** Implements BidSpotter's signature 4-image highlight lot strip within facility liquidation cards (e.g. *Complete 45,000 Sq.Ft Automotive Ductile Iron Foundry Liquidation*), countdown clocks, buyer's premiums, inspection dates, and interactive hot-lot quick bidding.
 
 ---
 
