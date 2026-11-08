@@ -4,13 +4,27 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Phone, Mail, Search, Menu, X, ArrowRight } from "lucide-react";
+import {
+  Phone,
+  Mail,
+  Search,
+  Menu,
+  X,
+  ArrowRight,
+  ChevronDown,
+  Gavel,
+  Clock,
+} from "lucide-react";
 import { siteConfig } from "@/data/siteConfig";
+import { auctionCategories } from "@/data/auctions";
 
 export default function Header() {
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeCategoryMegaMenu, setActiveCategoryMegaMenu] = useState<
+    string | null
+  >(null);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,7 +40,7 @@ export default function Header() {
 
   const navItems = [
     { num: "01", label: "Marketplace", href: "/#marketplace" },
-    { num: "02", label: "Auctions", href: "/#contact-form" },
+    { num: "02", label: "Auctions", href: "/#auctions" },
     { num: "03", label: "Exchange", href: "/#exchange" },
     { num: "04", label: "Services", href: "/#services" },
     { num: "05", label: "Knowledge", href: "/#contact-form" },
@@ -207,6 +221,180 @@ export default function Header() {
           </button>
         </div>
 
+        {/* 3. BidSpotter-Style Category Header Navigation Bar */}
+        <div
+          className="relative bg-navy-950 border-t border-navy-800 text-slate-300 text-xs shadow-inner select-none"
+          onMouseLeave={() => setActiveCategoryMegaMenu(null)}
+        >
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between gap-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden py-1">
+              {auctionCategories.map((cat) => {
+                const isActive = activeCategoryMegaMenu === cat.id;
+                return (
+                  <div key={cat.id} className="relative shrink-0">
+                    <button
+                      type="button"
+                      onMouseEnter={() => setActiveCategoryMegaMenu(cat.id)}
+                      onClick={() =>
+                        setActiveCategoryMegaMenu(isActive ? null : cat.id)
+                      }
+                      className={`inline-flex items-center gap-1.5 py-1.5 px-2.5 rounded-md text-xs font-semibold tracking-wide transition-all whitespace-nowrap ${
+                        isActive
+                          ? "bg-navy-900 text-brand shadow-xs"
+                          : "text-slate-300 hover:text-white hover:bg-navy-900/60"
+                      }`}
+                    >
+                      <span>{cat.name}</span>
+                      <span className="font-mono text-[10px] text-slate-400 opacity-80">
+                        ({cat.count})
+                      </span>
+                      <ChevronDown
+                        className={`h-3 w-3 text-slate-400 transition-transform duration-200 ${
+                          isActive ? "rotate-180 text-brand" : ""
+                        }`}
+                      />
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* BidSpotter-Style Full Mega-Menu Dropdown */}
+          {activeCategoryMegaMenu && (
+            <div
+              className="absolute top-full left-0 w-full bg-navy-900/98 backdrop-blur-md border-b-2 border-brand shadow-2xl z-50 text-white"
+              onMouseEnter={() =>
+                setActiveCategoryMegaMenu(activeCategoryMegaMenu)
+              }
+              onMouseLeave={() => setActiveCategoryMegaMenu(null)}
+            >
+              {(() => {
+                const selectedCat = auctionCategories.find(
+                  (c) => c.id === activeCategoryMegaMenu,
+                );
+                if (!selectedCat) return null;
+
+                return (
+                  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                      {/* Column 1: Subcategories & Active Lots (5 cols) */}
+                      <div className="md:col-span-5 space-y-3">
+                        <div className="flex items-center justify-between border-b border-navy-800 pb-2">
+                          <span className="font-heading text-xs font-bold uppercase tracking-wider text-brand">
+                            {selectedCat.name} Subcategories
+                          </span>
+                          <span className="text-[11px] font-mono text-slate-400">
+                            {selectedCat.count} Active Auction Lots
+                          </span>
+                        </div>
+                        <ul className="space-y-1.5">
+                          {selectedCat.subcategories.map((sub, sIdx) => (
+                            <li key={sIdx}>
+                              <Link
+                                href="/#auctions"
+                                onClick={() => setActiveCategoryMegaMenu(null)}
+                                className="group flex items-center justify-between py-1 px-2 rounded hover:bg-navy-800 text-xs text-slate-300 hover:text-white transition-colors"
+                              >
+                                <span className="group-hover:translate-x-0.5 transition-transform">
+                                  {sub.name}
+                                </span>
+                                <span className="font-mono text-[11px] text-slate-400 bg-navy-950 px-1.5 py-0.5 rounded">
+                                  {sub.count} lots
+                                </span>
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Column 2: Top Brands & Specs (3 cols) */}
+                      <div className="md:col-span-3 space-y-3">
+                        <div className="border-b border-navy-800 pb-2">
+                          <span className="font-heading text-xs font-bold uppercase tracking-wider text-slate-300">
+                            Premier OEM Brands
+                          </span>
+                        </div>
+                        <div className="flex flex-wrap gap-2 pt-1">
+                          {selectedCat.popularBrands.map((brand, bIdx) => (
+                            <Link
+                              key={bIdx}
+                              href="/#auctions"
+                              onClick={() => setActiveCategoryMegaMenu(null)}
+                              className="rounded-md border border-navy-700 bg-navy-950 px-2.5 py-1 text-xs font-semibold text-slate-300 hover:border-brand hover:text-white transition-colors"
+                            >
+                              {brand}
+                            </Link>
+                          ))}
+                        </div>
+                        <div className="pt-4">
+                          <Link
+                            href="/#auctions"
+                            onClick={() => setActiveCategoryMegaMenu(null)}
+                            className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand hover:text-brand-light transition-colors"
+                          >
+                            <span>Explore All {selectedCat.count} Lots</span>
+                            <ArrowRight className="h-3.5 w-3.5" />
+                          </Link>
+                        </div>
+                      </div>
+
+                      {/* Column 3: Featured Lot Preview (4 cols) */}
+                      <div className="md:col-span-4 bg-navy-950/80 rounded-xl border border-navy-800 p-4">
+                        <div className="flex items-center justify-between text-[11px] mb-2">
+                          <span className="font-mono font-bold text-brand uppercase">
+                            {selectedCat.featuredLot.lotNumber}
+                          </span>
+                          <span className="flex items-center gap-1 text-slate-400">
+                            <Clock className="h-3 w-3 text-brand animate-pulse" />
+                            <span className="font-mono text-white">
+                              {selectedCat.featuredLot.endsIn} left
+                            </span>
+                          </span>
+                        </div>
+
+                        <div className="relative h-24 w-full rounded-lg bg-navy-900 flex items-center justify-center p-2 mb-3 border border-navy-800">
+                          <Image
+                            src={selectedCat.featuredLot.imageUrl}
+                            alt={selectedCat.featuredLot.title}
+                            width={140}
+                            height={70}
+                            className="max-h-18 w-auto object-contain"
+                          />
+                        </div>
+
+                        <h4 className="text-xs font-bold text-white line-clamp-2 leading-snug mb-2">
+                          {selectedCat.featuredLot.title}
+                        </h4>
+
+                        <div className="flex items-baseline justify-between pt-2 border-t border-navy-800">
+                          <div>
+                            <span className="text-[10px] uppercase font-bold text-slate-400">
+                              Current Bid
+                            </span>
+                            <p className="font-mono font-black text-sm text-white">
+                              {selectedCat.featuredLot.currentBid}
+                            </p>
+                          </div>
+
+                          <Link
+                            href="/#auctions"
+                            onClick={() => setActiveCategoryMegaMenu(null)}
+                            className="inline-flex items-center gap-1 rounded bg-brand px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-white hover:bg-brand-hover shadow-2xs"
+                          >
+                            <Gavel className="h-3 w-3" />
+                            <span>Bid Now</span>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()}
+            </div>
+          )}
+        </div>
+
         {/* Mobile Dropdown Panel in Deep Navy */}
         {mobileMenuOpen && (
           <div className="border-t border-navy-800 bg-navy-900 px-4 py-6 shadow-2xl xl:hidden text-white">
@@ -231,12 +419,36 @@ export default function Header() {
                   className="flex items-center justify-between text-slate-200 hover:text-brand py-1.5"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="font-mono text-xs font-bold text-brand">{item.num}</span>
+                    <span className="font-mono text-xs font-bold text-brand">
+                      {item.num}
+                    </span>
                     <span>{item.label}</span>
                   </div>
                   <ArrowRight className="h-4 w-4 text-navy-600" />
                 </Link>
               ))}
+            </div>
+
+            {/* Mobile Auction Categories List */}
+            <div className="py-4 border-b border-navy-800">
+              <p className="text-xs font-bold uppercase tracking-wider text-brand mb-2">
+                Auction Categories
+              </p>
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                {auctionCategories.map((cat) => (
+                  <Link
+                    key={cat.id}
+                    href="/#auctions"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="py-1 px-2 rounded bg-navy-950 text-slate-300 hover:text-white hover:bg-navy-800 flex items-center justify-between"
+                  >
+                    <span className="truncate">{cat.shortName}</span>
+                    <span className="font-mono text-[10px] text-slate-400">
+                      ({cat.count})
+                    </span>
+                  </Link>
+                ))}
+              </div>
             </div>
 
             {/* Mobile CTAs */}

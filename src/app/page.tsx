@@ -8,6 +8,7 @@ import WhySection from "@/components/WhySection";
 import IndustriesSection from "@/components/IndustriesSection";
 import AssociationsSection from "@/components/AssociationsSection";
 import CTASection from "@/components/CTASection";
+import AuctionSection from "@/components/AuctionSection";
 import ContactForm from "@/components/ContactForm";
 
 export default function HomePage() {
@@ -46,6 +47,9 @@ export default function HomePage() {
 
         {/* Call-to-Action Band */}
         <CTASection />
+
+        {/* Industrial Auctions & Plant Liquidations (BidSpotter Style) */}
+        <AuctionSection />
 
         {/* Contact / Technical Inquiry Form */}
         <ContactForm />
