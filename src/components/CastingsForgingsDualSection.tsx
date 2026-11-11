@@ -94,13 +94,10 @@ export default function CastingsForgingsDualSection() {
                   </span>
                 </div>
 
-                {/* Bottom Badge: Verified Metrics */}
-                <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs font-mono text-white">
+                {/* Bottom Badge: Capacity Spec */}
+                <div className="absolute bottom-3 left-4 text-xs font-mono text-white">
                   <span className="rounded bg-navy-950/90 px-2.5 py-1 font-semibold border border-navy-700 backdrop-blur-xs">
                     Pour: Up to 50 MT
-                  </span>
-                  <span className="rounded bg-navy-950/90 px-2.5 py-1 font-semibold border border-navy-700 backdrop-blur-xs">
-                    52 Verified Foundries
                   </span>
                 </div>
               </div>
@@ -221,13 +218,10 @@ export default function CastingsForgingsDualSection() {
                   </span>
                 </div>
 
-                {/* Bottom Badge: Verified Metrics */}
-                <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs font-mono text-white">
+                {/* Bottom Badge: Capacity Spec */}
+                <div className="absolute bottom-3 left-4 text-xs font-mono text-white">
                   <span className="rounded bg-navy-950/90 px-2.5 py-1 font-semibold border border-navy-700 backdrop-blur-xs">
                     Press: Up to 15,000T
-                  </span>
-                  <span className="rounded bg-navy-950/90 px-2.5 py-1 font-semibold border border-navy-700 backdrop-blur-xs">
-                    38 Certified Forge Shops
                   </span>
                 </div>
               </div>
