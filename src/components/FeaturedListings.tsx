@@ -64,7 +64,7 @@ export default function FeaturedListings() {
               Featured Marketplace Listings
             </h2>
             <p className="mt-2 text-sm sm:text-base text-slate-600 leading-relaxed">
-              Verified casting lots, plant machinery, pattern tooling, and
+              Verified casting lots, precision forgings, plant machinery, pattern tooling, and
               metallurgical alloys ready for order or inquiry.
             </p>
           </div>

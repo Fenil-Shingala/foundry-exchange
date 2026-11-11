@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import { Search, ShieldCheck, FileCheck2, ArrowRight } from "lucide-react";
 
 const steps = [
@@ -112,13 +111,15 @@ export default function HowItWorks() {
             </p>
           </div>
           <div className="flex items-center gap-3 shrink-0">
-            <Link
-              href="/#contact-form"
+            <a
+              href="http://foundrydrawings.com/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg bg-brand px-6 py-3 text-xs font-bold uppercase tracking-wider text-white hover:bg-brand-hover shadow-lg hover:scale-105 transition-all"
             >
               <span>Submit RFQ Now</span>
               <ArrowRight className="h-4 w-4" />
-            </Link>
+            </a>
           </div>
         </div>
       </div>

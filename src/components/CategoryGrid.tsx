@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import {
   Layers,
+  Hammer,
   Factory,
   Wrench,
   Flame,
@@ -18,6 +19,8 @@ function renderCategoryIcon(iconName: string) {
   switch (iconName) {
     case "Layers":
       return <Layers {...iconProps} />;
+    case "Hammer":
+      return <Hammer {...iconProps} />;
     case "Factory":
       return <Factory {...iconProps} />;
     case "Wrench":

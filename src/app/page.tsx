@@ -1,6 +1,7 @@
 import React from "react";
 import Hero from "@/components/Hero";
 import CategoryGrid from "@/components/CategoryGrid";
+import CastingsForgingsDualSection from "@/components/CastingsForgingsDualSection";
 import HowItWorks from "@/components/HowItWorks";
 import ExchangeModes from "@/components/ExchangeModes";
 import FeaturedListings from "@/components/FeaturedListings";
@@ -26,6 +27,9 @@ export default function HomePage() {
       <div className="w-full min-[1360px]:px-[175px] min-[1660px]:px-0 transition-all duration-300">
         {/* Browse by Category Grid */}
         <CategoryGrid />
+
+        {/* 50% Castings & 50% Forgings Dual Capability Division */}
+        <CastingsForgingsDualSection />
 
         {/* How It Works (4 Steps) */}
         <HowItWorks />

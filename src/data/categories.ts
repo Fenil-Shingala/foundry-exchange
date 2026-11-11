@@ -19,6 +19,15 @@ export const foundryCategories: Category[] = [
     featuredTags: ["ASTM A48", "Ductile 65-45-12", "A356 Al", "Stainless 316"],
   },
   {
+    id: "forgings",
+    name: "Forgings",
+    subheading: "Open & Closed Die, Rolled Rings",
+    description: "High-integrity open-die shafts, impression drop forgings, seamless rolled rings, and high-pressure flanges in carbon, alloy & stainless steel.",
+    iconName: "Hammer",
+    href: "/#contact-form",
+    featuredTags: ["ASTM A105", "A182 F316L", "4140 Q&T", "ASTM A350 LF2"],
+  },
+  {
     id: "equipment",
     name: "Foundry Equipment",
     subheading: "Primary & Auxiliary Machinery",

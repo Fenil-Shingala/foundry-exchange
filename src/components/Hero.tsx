@@ -11,13 +11,14 @@ import CustomDropdown, { DropdownOption } from "@/components/CustomDropdown";
 const categoryOptions: DropdownOption[] = [
   { value: "all", label: "All Categories" },
   { value: "castings", label: "Castings (Ferrous/Non-Ferrous)" },
-  { value: "equipment", label: "Foundry Equipment" },
-  { value: "tooling", label: "Patterns & Tooling" },
+  { value: "forgings", label: "Forgings (Open/Closed Die & Rings)" },
+  { value: "equipment", label: "Foundry & Forge Equipment" },
+  { value: "tooling", label: "Patterns, Tooling & Dies" },
   { value: "raw-materials", label: "Raw Materials & Alloys" },
   { value: "sand-binders", label: "Sand & Binders" },
   { value: "refractories", label: "Refractories" },
   { value: "machining-finishing", label: "Machining & Finishing" },
-  { value: "testing-inspection", label: "Testing & Inspection" },
+  { value: "testing-inspection", label: "Testing & Inspection (NDT)" },
 ];
 
 export default function Hero() {
@@ -79,13 +80,13 @@ export default function Hero() {
         {/* USA Industrial Badge */}
         <div className="inline-flex items-center gap-2 rounded-full border border-navy-700 bg-navy-900/90 px-4 py-1.5 text-xs font-semibold tracking-wide text-zinc-200 shadow-inner mb-6 backdrop-blur-xs">
           <span className="flex h-2 w-2 rounded-full bg-brand animate-pulse" />
-          <span className="text-white font-bold tracking-wider uppercase">B2B Foundry Exchange</span>
+          <span className="text-white font-bold tracking-wider uppercase">B2B Foundry & Forge Exchange</span>
           <span className="text-slate-500">•</span>
-          <span className="text-slate-300">Castings • Equipment • Raw Materials</span>
+          <span className="text-slate-300">Castings • Forgings • Equipment • Raw Materials</span>
         </div>
 
-        {/* Strong Heading */}
-        <h1 className="mx-auto max-w-4xl text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight text-white font-heading">
+        {/* Strong Heading — Full Width Single Line */}
+        <h1 className="mx-auto w-full max-w-7xl text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[4.15rem] 2xl:text-[4.25rem] font-bold uppercase tracking-tight text-white font-heading whitespace-normal sm:whitespace-nowrap leading-none mt-2">
           {siteConfig.tagline}
         </h1>
 
