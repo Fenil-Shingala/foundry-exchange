@@ -1,5 +1,6 @@
 import React from "react";
 import Hero from "@/components/Hero";
+import SideRailAds from "@/components/SideRailAds";
 import CategoryGrid from "@/components/CategoryGrid";
 import CastingsForgingsDualSection from "@/components/CastingsForgingsDualSection";
 import HowItWorks from "@/components/HowItWorks";
@@ -17,6 +18,9 @@ export default function HomePage() {
     <>
       {/* 1. Hero Section (Full width, clean, ads are hidden during hero) */}
       <Hero />
+
+      {/* Floating Side-Rail Advertisements (Home Page Only) */}
+      <SideRailAds />
 
       {/* 
         2. Sub-Hero Content Column

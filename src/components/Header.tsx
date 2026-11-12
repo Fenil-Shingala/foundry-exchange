@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -25,6 +25,22 @@ export default function Header() {
   const [activeCategoryMegaMenu, setActiveCategoryMegaMenu] = useState<
     string | null
   >(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrolled = window.scrollY > 40;
+      setIsScrolled(scrolled);
+      if (scrolled) {
+        setActiveCategoryMegaMenu(null);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -223,7 +239,11 @@ export default function Header() {
 
         {/* 3. BidSpotter-Style Category Header Navigation Bar */}
         <div
-          className="relative bg-navy-950 border-t border-navy-800 text-slate-300 text-xs shadow-inner select-none"
+          className={`relative bg-navy-950 text-slate-300 text-xs shadow-inner select-none transition-all duration-300 ease-in-out ${
+            isScrolled
+              ? "max-h-0 opacity-0 overflow-hidden pointer-events-none border-t-0 -translate-y-1"
+              : "max-h-16 opacity-100 overflow-visible pointer-events-auto border-t border-navy-800 translate-y-0"
+          }`}
           onMouseLeave={() => setActiveCategoryMegaMenu(null)}
         >
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

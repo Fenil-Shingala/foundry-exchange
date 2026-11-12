@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Rajdhani, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import SideRailAds from "@/components/SideRailAds";
 import "./globals.css";
 
 // Machined, square-shouldered industrial heading font — forged metal / foundry aesthetic
@@ -78,8 +77,6 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col bg-surface text-ink antialiased font-body">
         <Header />
-        {/* Floating Side-Rail Advertisements */}
-        <SideRailAds />
         <main className="flex-1 w-full">{children}</main>
         <Footer />
       </body>

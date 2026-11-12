@@ -105,7 +105,10 @@ export default function FeaturedListings() {
               className="group flex flex-col justify-between rounded-xl border border-slate-200 border-t-2 border-t-transparent hover:border-t-brand bg-white overflow-hidden shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-brand hover:shadow-xl"
             >
               {/* Product Image Box */}
-              <div className="relative aspect-4/3 w-full bg-navy-950 overflow-hidden border-b border-slate-100">
+              <Link
+                href={`/listings/${listing.id}`}
+                className="relative aspect-4/3 w-full bg-navy-950 overflow-hidden border-b border-slate-100 block cursor-pointer"
+              >
                 <Image
                   src={listing.imageUrl}
                   alt={listing.title}
@@ -127,7 +130,7 @@ export default function FeaturedListings() {
                 <span className="absolute bottom-3 right-3 rounded bg-navy-900/90 backdrop-blur-xs px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white">
                   {listing.category}
                 </span>
-              </div>
+              </Link>
 
               {/* Product Info */}
               <div className="p-5 flex-1 flex flex-col justify-between">
@@ -137,9 +140,11 @@ export default function FeaturedListings() {
                     <span className="truncate">{listing.location}</span>
                   </div>
 
-                  <h3 className="font-heading text-lg font-bold uppercase tracking-tight text-navy group-hover:text-brand transition-colors line-clamp-2">
-                    {listing.title}
-                  </h3>
+                  <Link href={`/listings/${listing.id}`} className="block">
+                    <h3 className="font-heading text-lg font-bold uppercase tracking-tight text-navy group-hover:text-brand transition-colors line-clamp-2">
+                      {listing.title}
+                    </h3>
+                  </Link>
 
                   <p className="mt-1.5 text-xs font-semibold text-slate-700 line-clamp-1">
                     {listing.alloySpec}
@@ -191,10 +196,10 @@ export default function FeaturedListings() {
                     </div>
 
                     <Link
-                      href="/#contact-form"
+                      href={`/listings/${listing.id}`}
                       className="rounded-md bg-brand px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-white hover:bg-brand-hover shadow-2xs hover:scale-105 transition-all"
                     >
-                      Inquire
+                      View Lot
                     </Link>
                   </div>
                 </div>
