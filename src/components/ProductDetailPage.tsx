@@ -223,8 +223,6 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
     setTimeout(() => setCartSuccess(false), 3500);
   };
 
-
-
   return (
     <div className="bg-white min-h-screen text-slate-800">
       <div className="w-full">
