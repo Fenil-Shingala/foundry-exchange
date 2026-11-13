@@ -180,6 +180,40 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
   const [isMuted, setIsMuted] = useState(true);
   const [videoProgress, setVideoProgress] = useState(0);
 
+  // Sticky Bottom Pinning for Left Gallery Column (No empty space when scrolling right column)
+  const leftColRef = useRef<HTMLDivElement | null>(null);
+  const [stickyTop, setStickyTop] = useState<string>("auto");
+
+  useEffect(() => {
+    const updateSticky = () => {
+      if (leftColRef.current && window.innerWidth >= 1024) {
+        const h = leftColRef.current.offsetHeight;
+        const vh = window.innerHeight;
+        if (h > vh) {
+          setStickyTop(`calc(100vh - ${h}px - 24px)`);
+        } else {
+          setStickyTop("88px");
+        }
+      } else {
+        setStickyTop("auto");
+      }
+    };
+
+    updateSticky();
+    window.addEventListener("resize", updateSticky);
+
+    let ro: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== "undefined" && leftColRef.current) {
+      ro = new ResizeObserver(updateSticky);
+      ro.observe(leftColRef.current);
+    }
+
+    return () => {
+      window.removeEventListener("resize", updateSticky);
+      if (ro) ro.disconnect();
+    };
+  }, []);
+
   // Pricing calculation
   const basePrice = 2850 + selectedVariant.priceOffset;
   const listPrice = Math.round(basePrice * 1.48);
@@ -226,7 +260,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
   return (
     <div className="bg-white min-h-screen text-slate-800">
       <div className="w-full">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-8 sm:py-12">
           {/* Breadcrumb Navigation */}
           <nav className="mb-6 flex items-center gap-2 text-xs font-medium text-slate-500" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-navy transition-colors">Home</Link>
@@ -245,8 +279,13 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
             
             {/* ============================================================ */}
             {/* LEFT COLUMN: VIDEO AT TOP + 2-COLUMN IMAGE GALLERY           */}
+            {/* Sticks at bottom once reached so no empty space appears     */}
             {/* ============================================================ */}
-            <div className="lg:col-span-7 xl:col-span-7 space-y-4 sm:space-y-6">
+            <div
+              ref={leftColRef}
+              className="lg:col-span-7 xl:col-span-7 space-y-4 sm:space-y-6 lg:sticky"
+              style={{ top: stickyTop }}
+            >
               
               {/* 1. VIDEO BEFORE THE IMAGES (Full-width in Left Column) */}
               <div className="relative overflow-hidden rounded-2xl border-2 border-slate-200 bg-navy-950 shadow-xl group">
@@ -268,64 +307,80 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                   {/* Dark Vignette Overlay */}
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-navy-950/30" />
 
-                  {/* Top Badges */}
-                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
-                    <span className="inline-flex items-center gap-1.5 rounded-md bg-brand px-3 py-1 text-xs font-mono font-bold uppercase text-white shadow-md">
-                      <span className="h-2 w-2 rounded-full bg-white animate-pulse" />
-                      4K UHD • Shop Floor QA Video
+                  {/* Top Badges — Responsive for mobile & desktop */}
+                  <div className="absolute top-2.5 inset-x-2.5 sm:top-4 sm:inset-x-4 flex items-center justify-between pointer-events-none z-10">
+                    <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full sm:rounded-md bg-brand px-2 py-0.5 sm:px-3 sm:py-1 text-[10px] sm:text-xs font-mono font-bold uppercase text-white shadow-md">
+                      <span className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-white animate-pulse" />
+                      <span>4K UHD<span className="hidden sm:inline"> • Shop Floor QA Video</span></span>
                     </span>
-                    <span className="rounded-md bg-navy-900/90 backdrop-blur-xs px-2.5 py-1 text-xs font-mono text-slate-200 border border-navy-700">
-                      Duration: 0:45
+                    <span className="rounded-full sm:rounded-md bg-navy-900/90 backdrop-blur-xs px-2 py-0.5 sm:px-2.5 sm:py-1 text-[10px] sm:text-xs font-mono text-slate-200 border border-navy-700/80 shadow-xs">
+                      <span className="hidden sm:inline">Duration: </span>0:45
                     </span>
                   </div>
 
-                  {/* Center Play Button Overlay (when paused) */}
+                  {/* Center Play Button Overlay (when paused) — proportional size */}
                   {!isPlaying && (
                     <button
                       type="button"
                       onClick={togglePlay}
-                      className="absolute inset-0 m-auto flex h-16 w-16 items-center justify-center rounded-full bg-brand/90 text-white shadow-2xl transition-all duration-300 hover:scale-110 hover:bg-brand cursor-pointer z-10"
+                      className="absolute inset-0 m-auto flex h-12 w-12 sm:h-16 sm:w-16 items-center justify-center rounded-full bg-brand/90 text-white shadow-2xl transition-all duration-300 hover:scale-110 hover:bg-brand cursor-pointer z-10"
                       aria-label="Play video"
                     >
-                      <Play className="h-7 w-7 translate-x-0.5 fill-white text-white" />
+                      <Play className="h-5 w-5 sm:h-7 sm:w-7 translate-x-0.5 fill-white text-white" />
                     </button>
                   )}
 
-                  {/* Bottom Video Controls Bar */}
-                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-navy-950/95 via-navy-950/70 to-transparent p-4 flex items-center justify-between text-white text-xs">
-                    <div className="flex items-center gap-3">
-                      <button
-                        type="button"
-                        onClick={togglePlay}
-                        className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-colors cursor-pointer"
-                        aria-label={isPlaying ? "Pause video" : "Play video"}
-                      >
-                        {isPlaying ? <Pause className="h-4 w-4 fill-white" /> : <Play className="h-4 w-4 fill-white translate-x-0.5" />}
-                      </button>
+                  {/* Bottom Video Controls Bar — Responsive single-line layout */}
+                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-navy-950/95 via-navy-950/70 to-transparent pt-4 pb-2 px-3 sm:px-4 sm:pb-3 flex flex-col justify-end text-white text-xs z-10">
+                    <div className="flex items-center justify-between gap-2 pb-1.5">
+                      {/* Left: Play/Pause, Mute & Title */}
+                      <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                        <button
+                          type="button"
+                          onClick={togglePlay}
+                          className="flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-colors cursor-pointer"
+                          aria-label={isPlaying ? "Pause video" : "Play video"}
+                        >
+                          {isPlaying ? (
+                            <Pause className="h-3.5 w-3.5 sm:h-4 sm:w-4 fill-white" />
+                          ) : (
+                            <Play className="h-3.5 w-3.5 sm:h-4 sm:w-4 fill-white translate-x-0.5" />
+                          )}
+                        </button>
 
-                      <button
-                        type="button"
-                        onClick={toggleMute}
-                        className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-colors cursor-pointer"
-                        aria-label={isMuted ? "Unmute" : "Mute"}
-                      >
-                        {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
-                      </button>
+                        <button
+                          type="button"
+                          onClick={toggleMute}
+                          className="flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-colors cursor-pointer"
+                          aria-label={isMuted ? "Unmute" : "Mute"}
+                        >
+                          {isMuted ? (
+                            <VolumeX className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                          ) : (
+                            <Volume2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                          )}
+                        </button>
 
-                      <div className="font-mono text-[11px] text-slate-300">
-                        <span>Live CNC Flange Machining &amp; Hydrotest</span>
+                        <div className="font-mono text-[10px] sm:text-[11px] text-slate-300 truncate">
+                          <span className="hidden sm:inline">Live CNC Flange Machining &amp; Hydrotest</span>
+                          <span className="sm:hidden">CNC Machining &amp; Hydrotest</span>
+                        </div>
+                      </div>
+
+                      {/* Right: Quality Badge */}
+                      <div className="flex items-center gap-2 shrink-0">
+                        <span className="font-mono text-[9px] sm:text-[11px] px-1.5 py-0.5 rounded bg-white/10 text-slate-200 border border-white/15">
+                          1080p
+                        </span>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3">
-                      {/* Progress Bar */}
-                      <div className="w-24 sm:w-36 h-1.5 bg-white/20 rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-brand rounded-full transition-all duration-100"
-                          style={{ width: `${videoProgress}%` }}
-                        />
-                      </div>
-                      <span className="font-mono text-[11px] text-slate-300">1080p</span>
+                    {/* Clean Full-Width Scrub / Progress Bar */}
+                    <div className="w-full h-1 bg-white/20 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-brand rounded-full transition-all duration-100"
+                        style={{ width: `${videoProgress}%` }}
+                      />
                     </div>
                   </div>
                 </div>

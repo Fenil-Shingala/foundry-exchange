@@ -90,4 +90,13 @@ export const foundryCategories: Category[] = [
     href: "/#contact-form",
     featuredTags: ["OES Chemistry", "Radiography RT", "CMM Inspection"],
   },
+  {
+    id: "heat-treating",
+    name: "Heat Treating & Ovens",
+    subheading: "Thermal Processing & Quench",
+    description: "Car bottom furnaces, continuous austempering, solution annealing, quench tanks, and vacuum hardening ovens.",
+    iconName: "Thermometer",
+    href: "/#contact-form",
+    featuredTags: ["Car Bottom 1200°C", "Austempering", "Q&T Oil Quench"],
+  },
 ];

@@ -39,7 +39,7 @@ export default function HowItWorks() {
       id="services"
       className="section-blueprint text-white py-20 md:py-24 border-b border-navy-800 relative"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="flex items-center justify-center gap-3 mb-2">
             <span className="h-[3px] w-10 bg-brand" aria-hidden="true" />

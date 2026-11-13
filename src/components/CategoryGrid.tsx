@@ -10,6 +10,7 @@ import {
   Box,
   SlidersHorizontal,
   ShieldCheck,
+  Thermometer,
   ArrowRight,
 } from "lucide-react";
 import { foundryCategories } from "@/data/categories";
@@ -35,6 +36,8 @@ function renderCategoryIcon(iconName: string) {
       return <SlidersHorizontal {...iconProps} />;
     case "ShieldCheck":
       return <ShieldCheck {...iconProps} />;
+    case "Thermometer":
+      return <Thermometer {...iconProps} />;
     default:
       return <Layers {...iconProps} />;
   }
@@ -46,7 +49,7 @@ export default function CategoryGrid() {
       id="categories"
       className="relative z-10 bg-surface py-20 border-b border-slate-200"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-10">
         {/* PrecastXchange Signature Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>
@@ -74,8 +77,8 @@ export default function CategoryGrid() {
           </Link>
         </div>
 
-        {/* 8-Card Grid with Bold Brand Red Top Border */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* 10-Card Grid with Bold Brand Red Top Border (5 columns on large screens) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-cols-5-desktop gap-5 xl:gap-6">
           {foundryCategories.map((category) => (
             <Link
               key={category.id}

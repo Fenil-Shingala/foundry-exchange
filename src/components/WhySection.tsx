@@ -30,7 +30,7 @@ function renderFeatureIcon(iconName: string) {
 export default function WhySection() {
   return (
     <section className="bg-surface py-20 border-b border-slate-200">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Column Text */}
           <div className="lg:col-span-5">

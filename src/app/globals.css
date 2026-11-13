@@ -116,3 +116,11 @@ a, button {
   animation-play-state: paused;
 }
 
+/* 5-Column Grid on Wide Desktop Screens (1440px+) */
+@media (min-width: 1440px) {
+  .grid-cols-5-desktop {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+

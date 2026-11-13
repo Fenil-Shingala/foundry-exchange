@@ -9,7 +9,7 @@ export default function Footer() {
     <footer className="bg-navy-950 text-slate-300 border-t-2 border-brand">
       {/* Top Pre-footer Trust Badge — USA Navy-900 */}
       <div className="border-b border-navy-800 bg-navy-900 py-8">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-navy-800 border border-navy-700 text-brand shadow-2xs">
               <ShieldCheck className="h-7 w-7" />
@@ -41,7 +41,7 @@ export default function Footer() {
       </div>
 
       {/* Main Footer Links */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+      <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-10 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10">
           {/* Brand Info & Address */}
           <div className="lg:col-span-2 space-y-4">

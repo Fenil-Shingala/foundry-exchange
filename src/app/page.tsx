@@ -24,11 +24,11 @@ export default function HomePage() {
 
       {/* 
         2. Sub-Hero Content Column
-        On screens 1360px - 1660px where side-rail ads appear, we apply 175px of protective 
-        side padding so the ads sit cleanly in the margins without overlapping any cards.
-        On screens >= 1660px, natural margins handle it, so px-0 is restored.
+        With side-rail ads attached to the viewport edges (w-[155px] / w-[175px]), we apply
+        protective side padding so full-width sections seamlessly fill the entire space between
+        the left and right ads without overlapping.
       */}
-      <div className="w-full min-[1360px]:px-[175px] min-[1660px]:px-0 transition-all duration-300">
+      <div className="w-full min-[1360px]:px-[175px] min-[1660px]:px-[195px] transition-all duration-300">
         {/* Browse by Category Grid */}
         <CategoryGrid />
 

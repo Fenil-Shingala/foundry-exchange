@@ -19,6 +19,7 @@ const categoryOptions: DropdownOption[] = [
   { value: "refractories", label: "Refractories" },
   { value: "machining-finishing", label: "Machining & Finishing" },
   { value: "testing-inspection", label: "Testing & Inspection (NDT)" },
+  { value: "heat-treating", label: "Heat Treating & Ovens" },
 ];
 
 export default function Hero() {
@@ -62,7 +63,7 @@ export default function Hero() {
         />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative w-full px-4 sm:px-6 lg:px-8 xl:px-10 text-center">
         {/* Centered Brand Header Logo / Icon */}
         <div className="mx-auto mb-6 flex justify-center">
           <div className="bg-white px-5 py-3 rounded-xl shadow-2xl border border-navy-700/60 inline-flex items-center justify-center transition-transform hover:scale-105">

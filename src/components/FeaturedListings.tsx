@@ -50,7 +50,7 @@ export default function FeaturedListings() {
       id="marketplace"
       className="bg-white py-20 border-b border-slate-200"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-10">
         {/* Section Header with Precast Accent */}
         <div className="flex flex-col xl:flex-row xl:items-end justify-between mb-8 gap-6">
           <div className="max-w-xl">
@@ -97,8 +97,8 @@ export default function FeaturedListings() {
           </div>
         </div>
 
-        {/* 8 Product Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Product Cards Grid — 5 columns on large screens for balanced 2x5 layout */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 grid-cols-5-desktop gap-5 xl:gap-6">
           {filteredListings.map((listing) => (
             <article
               key={listing.id}

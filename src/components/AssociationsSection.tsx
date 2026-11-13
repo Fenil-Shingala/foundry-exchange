@@ -7,7 +7,7 @@ import { associations } from "@/data/associations";
 export default function AssociationsSection() {
   return (
     <section id="associations" className="relative isolate bg-surface py-20 border-b border-slate-200 scroll-mt-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto">
           <div className="flex items-center justify-center gap-3 mb-2">

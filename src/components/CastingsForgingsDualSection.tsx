@@ -45,7 +45,7 @@ export default function CastingsForgingsDualSection() {
         />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="relative w-full px-4 sm:px-6 lg:px-8 xl:px-10">
         {/* ================================================================ */}
         {/* SECTION HEADER (Clean, readable, consistent with site signature) */}
         {/* ================================================================ */}

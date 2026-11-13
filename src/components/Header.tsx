@@ -67,7 +67,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full shadow-md">
       {/* 1. Top Utility Bar — USA Industrial Navy-950 */}
       <div className="bg-navy-950 text-slate-300 text-xs border-b border-navy-800">
-        <div className="mx-auto flex h-9 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="w-full flex h-9 items-center justify-between px-4 sm:px-6 lg:px-8 xl:px-10">
           <div className="flex items-center gap-4 sm:gap-6">
             <a
               href={`tel:${siteConfig.contactPhone}`}
@@ -142,7 +142,7 @@ export default function Header() {
 
       {/* 2. Main Sticky Navigation — PrecastXchange Signature Navy-900 with Red Underline Bar */}
       <div className="bg-navy-900 text-white border-b-2 border-brand">
-        <div className="mx-auto flex h-16 sm:h-20 max-w-7xl items-center justify-between gap-3 lg:gap-5 px-4 sm:px-6 lg:px-8">
+        <div className="w-full flex h-16 sm:h-20 items-center justify-between gap-3 lg:gap-5 px-4 sm:px-6 lg:px-8 xl:px-10">
           <form
             onSubmit={handleSearchSubmit}
             className="flex relative items-center w-52 sm:w-64 xl:w-72 2xl:w-80 shrink-0 transition-all focus-within:w-60 sm:focus-within:w-72"
@@ -246,7 +246,7 @@ export default function Header() {
           }`}
           onMouseLeave={() => setActiveCategoryMegaMenu(null)}
         >
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-10">
             <div className="flex items-center justify-between gap-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden py-1">
               {auctionCategories.map((cat) => {
                 const isActive = activeCategoryMegaMenu === cat.id;
@@ -296,7 +296,7 @@ export default function Header() {
                 if (!selectedCat) return null;
 
                 return (
-                  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
+                  <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-10 py-6">
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
                       {/* Column 1: Subcategories & Active Lots (5 cols) */}
                       <div className="md:col-span-5 space-y-3">

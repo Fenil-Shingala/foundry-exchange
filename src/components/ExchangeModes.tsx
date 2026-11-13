@@ -43,7 +43,7 @@ export default function ExchangeModes() {
       id="exchange"
       className="bg-surface py-20 border-b border-slate-200"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>
             <div className="flex items-center gap-3 mb-2">

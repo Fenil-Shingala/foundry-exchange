@@ -4,7 +4,11 @@ import React, { useState, useEffect, useRef, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
-import { leftRailAds, rightRailAds, Advertisement } from "@/data/advertisements";
+import {
+  leftRailAds,
+  rightRailAds,
+  Advertisement,
+} from "@/data/advertisements";
 
 interface RailProps {
   side: "left" | "right";
@@ -13,12 +17,7 @@ interface RailProps {
   speed?: number; // Pixels to advance per animation frame
 }
 
-function RailColumn({
-  side,
-  ads,
-  visible,
-  speed = 0.55,
-}: RailProps) {
+function RailColumn({ side, ads, visible, speed = 0.55 }: RailProps) {
   const isLeft = side === "left";
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -104,16 +103,14 @@ function RailColumn({
     <aside
       aria-label={`${side} side advertisements`}
       className={`fixed z-30 w-[155px] min-[1660px]:w-[175px] transition-all duration-500 ease-out ${
-        isLeft
-          ? "left-2.5 min-[1660px]:left-[calc(50vw-640px-185px)]"
-          : "right-2.5 min-[1660px]:right-[calc(50vw-640px-185px)]"
+        isLeft ? "left-2" : "right-2"
       } ${
         visible
           ? "hidden min-[1360px]:flex flex-col opacity-100 translate-y-0 pointer-events-auto"
           : "hidden opacity-0 -translate-y-4 pointer-events-none"
       }`}
       style={{
-        top: "165px",
+        top: "128px",
         bottom: "16px",
       }}
       onMouseEnter={() => setIsHovered(true)}

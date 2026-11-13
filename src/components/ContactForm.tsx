@@ -58,7 +58,7 @@ export default function ContactForm() {
       id="contact-form"
       className="bg-slate-50 py-20 border-b border-slate-200"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Left Column: Direct Info */}
           <div className="lg:col-span-5 flex flex-col justify-between">

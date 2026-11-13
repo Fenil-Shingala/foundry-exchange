@@ -45,7 +45,7 @@ export default function AuctionSection() {
 
   return (
     <section id="auctions" className="relative isolate bg-slate-50 py-20 border-b border-slate-200 scroll-mt-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-10">
         {/* 1. Section Header & Live Bidding Status */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
           <div>
