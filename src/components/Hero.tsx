@@ -71,7 +71,7 @@ export default function Hero() {
 
       <div className="relative w-full px-4 sm:px-6 lg:px-8 xl:px-10 text-center">
         {/* Centered Brand Header Logo / Icon */}
-        <div className="mx-auto mb-6 flex justify-center">
+        {/* <div className="mx-auto mb-6 flex justify-center">
           <div className="bg-white px-5 py-3 rounded-xl shadow-2xl border border-navy-700/60 inline-flex items-center justify-center transition-transform hover:scale-105">
             <Image
               src="/foundry-logo.png"
@@ -82,7 +82,7 @@ export default function Hero() {
               className="h-12 sm:h-14 md:h-16 w-auto object-contain"
             />
           </div>
-        </div>
+        </div> */}
 
         {/* USA Industrial Badge */}
         <div className="inline-flex items-center gap-2 rounded-full border border-navy-700 bg-navy-900/90 px-4 py-1.5 text-xs font-semibold tracking-wide text-zinc-200 shadow-inner mb-6 backdrop-blur-xs">

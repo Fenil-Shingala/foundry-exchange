@@ -142,7 +142,7 @@ export default function Header() {
 
       {/* 2. Main Sticky Navigation — PrecastXchange Signature Navy-900 with Red Underline Bar */}
       <div className="bg-navy-900 text-white border-b-2 border-brand">
-        <div className="w-full flex h-16 sm:h-20 items-center justify-between gap-3 lg:gap-5 px-4 sm:px-6 lg:px-8 xl:px-10">
+        {/* <div className="w-full flex h-16 sm:h-20 items-center justify-between gap-3 lg:gap-5 px-4 sm:px-6 lg:px-8 xl:px-10">
           <form
             onSubmit={handleSearchSubmit}
             className="flex relative items-center w-52 sm:w-64 xl:w-72 2xl:w-80 shrink-0 transition-all focus-within:w-60 sm:focus-within:w-72"
@@ -155,22 +155,9 @@ export default function Header() {
               placeholder="Search castings & forgings..."
               className="w-full rounded-full border border-navy-700 bg-navy-950/80 py-1.5 pl-9 pr-3 text-xs text-white placeholder:text-slate-400 shadow-inner transition-all focus:border-brand focus:bg-navy-950 focus:outline-hidden focus:ring-1 focus:ring-brand"
             />
-          </form>
-          {/* Logo in heaer section */}
-          {/* <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-3 lg:gap-5 px-4 sm:px-6 lg:px-8">
-          <Link href="/" className="flex items-center gap-3 shrink-0">
-            <div className="relative flex items-center bg-white px-3 sm:px-4 py-1.5 rounded-md shadow-sm border border-white/20">
-              <Image
-                src="/foundry-logo.png"
-                alt="Foundry Exchange Logo"
-                width={220}
-                height={65}
-                priority
-                className="h-11 sm:h-12 md:h-13 lg:h-14 w-auto object-contain"
-              />
-            </div>
-          </Link>
-
+          </form> */}
+        {/* Logo in heaer section */}
+        <div style={{ height: '100px'}} className="mx-auto flex h-20  items-center justify-between gap-3 lg:gap-5 px-4 sm:px-6 lg:px-8">
           <form
             onSubmit={handleSearchSubmit}
             className="hidden lg:flex relative items-center w-40 xl:w-48 2xl:w-60 shrink-0 transition-all focus-within:w-56 xl:focus-within:w-64"
@@ -183,7 +170,21 @@ export default function Header() {
               placeholder="Search castings & forgings..."
               className="w-full rounded-full border border-navy-700 bg-navy-950/80 py-1.5 pl-9 pr-3 text-xs text-white placeholder:text-slate-400 shadow-inner transition-all focus:border-brand focus:bg-navy-950 focus:outline-hidden focus:ring-1 focus:ring-brand"
             />
-          </form> */}
+          </form>
+
+          <Link href="/" className="flex items-center gap-3 shrink-0">
+            <div className="relative flex items-center bg-white px-3 sm:px-4 py-1.5 rounded-md shadow-sm border border-white/20">
+              <Image
+                style={{ width: "300px", height: "70px" }}
+                src="/foundry-logo.png"
+                alt="Foundry Exchange Logo"
+                width={220}
+                height={65}
+                priority
+                className="h-11 sm:h-12 md:h-13 lg:h-14 w-auto object-contain"
+              />
+            </div>
+          </Link>
 
           {/* Desktop Navigation Links — Precast-inspired Sheet Numbers & Red Hover Accents */}
           <nav className="hidden xl:flex items-center gap-5 2xl:gap-7 whitespace-nowrap shrink-0">
@@ -206,7 +207,7 @@ export default function Header() {
           </nav>
 
           {/* Header Action Buttons — Red & Crisp White Dual CTAs */}
-          <div className="hidden sm:flex items-center gap-2.5 shrink-0 whitespace-nowrap">
+          {/* <div className="hidden sm:flex items-center gap-2.5 shrink-0 whitespace-nowrap">
             <Link
               href="/#contact-form"
               className="rounded-md bg-brand px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm transition-all hover:bg-brand-hover hover:scale-[1.02] whitespace-nowrap shrink-0"
@@ -219,7 +220,7 @@ export default function Header() {
             >
               List Products
             </Link>
-          </div>
+          </div> */}
 
           {/* Mobile Menu Button */}
           <button
