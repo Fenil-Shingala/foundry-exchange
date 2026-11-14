@@ -96,8 +96,8 @@ export default function Hero() {
           </span>
         </div>
 
-        {/* Strong Heading — Responsive Balanced Typography */}
-        <h1 className="mx-auto w-full max-w-5xl text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-white font-heading leading-tight sm:leading-tight mt-2 text-balance">
+        {/* Strong Heading — Single Line Fluid Typography */}
+        <h1 className="mx-auto w-full max-w-7xl font-bold uppercase tracking-tight text-white font-heading whitespace-nowrap leading-none mt-2 text-[clamp(1.15rem,3.2vw,3.75rem)]">
           {siteConfig.tagline}
         </h1>
 
