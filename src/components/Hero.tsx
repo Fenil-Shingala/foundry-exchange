@@ -40,9 +40,15 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero-section" className="relative z-20 bg-navy-950 py-20 text-white border-b-2 border-navy-800">
+    <section
+      id="hero-section"
+      className="relative z-20 bg-navy-950 py-20 text-white border-b-2 border-navy-800"
+    >
       {/* Background Ambience Container (isolated overflow-hidden prevents clipping dropdowns) */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+      <div
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+        aria-hidden="true"
+      >
         {/* Molten Glow & Heavy Industrial Atmospheric Lighting */}
         <div
           className="absolute -top-40 left-1/2 -translate-x-1/2 h-[550px] w-[950px] rounded-full opacity-25 blur-3xl"
@@ -51,7 +57,7 @@ export default function Hero() {
               "radial-gradient(ellipse at center, #c82425 0%, #0a3161 50%, rgba(6,32,64,0) 80%)",
           }}
         />
-        
+
         {/* Industrial Blueprint Precision Grid Overlay */}
         <div
           className="absolute inset-0 opacity-[0.06]"
@@ -81,24 +87,33 @@ export default function Hero() {
         {/* USA Industrial Badge */}
         <div className="inline-flex items-center gap-2 rounded-full border border-navy-700 bg-navy-900/90 px-4 py-1.5 text-xs font-semibold tracking-wide text-zinc-200 shadow-inner mb-6 backdrop-blur-xs">
           <span className="flex h-2 w-2 rounded-full bg-brand animate-pulse" />
-          <span className="text-white font-bold tracking-wider uppercase">B2B Foundry & Forge Exchange</span>
+          <span className="text-white font-bold tracking-wider uppercase">
+            B2B Foundry & Forge Exchange
+          </span>
           <span className="text-slate-500">•</span>
-          <span className="text-slate-300">Castings • Forgings • Equipment • Raw Materials</span>
+          <span className="text-slate-300">
+            Castings • Forgings • Equipment • Raw Materials
+          </span>
         </div>
 
-        {/* Strong Heading — Full Width Single Line */}
-        <h1 className="mx-auto w-full max-w-7xl text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[4.15rem] 2xl:text-[4.25rem] font-bold uppercase tracking-tight text-white font-heading whitespace-normal sm:whitespace-nowrap leading-none mt-2">
+        {/* Strong Heading — Responsive Balanced Typography */}
+        <h1 className="mx-auto w-full max-w-5xl text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-white font-heading leading-tight sm:leading-tight mt-2 text-balance">
           {siteConfig.tagline}
         </h1>
 
         {/* Subline */}
         <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg text-slate-300 font-normal leading-relaxed">
-          The specialized digital exchange for buying, selling, trading, and sourcing castings, melt-shop equipment, scrap alloys, sand tooling, and metallurgical testing.
+          The specialized digital exchange for buying, selling, trading, and
+          sourcing castings, melt-shop equipment, scrap alloys, sand tooling,
+          and metallurgical testing.
         </p>
 
         {/* Search Box Card — High Contrast Deep Navy Surface */}
         <div className="mx-auto mt-10 max-w-3xl rounded-xl border border-navy-700 bg-navy-900/95 p-3 shadow-2xl backdrop-blur-sm">
-          <form onSubmit={handleSearch} className="flex flex-col sm:flex-row items-center gap-2">
+          <form
+            onSubmit={handleSearch}
+            className="flex flex-col sm:flex-row items-center gap-2"
+          >
             {/* Category Selector */}
             <div className="w-full sm:w-56 shrink-0">
               <CustomDropdown
