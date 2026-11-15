@@ -10,7 +10,7 @@ import {
 import { siteConfig } from "@/data/siteConfig";
 
 function renderIndustryIcon(iconName: string) {
-  const iconProps = { className: "h-6 w-6 text-white" };
+  const iconProps = { className: "h-6 w-6 transition-colors duration-200" };
   switch (iconName) {
     case "Car":
       return <Car {...iconProps} />;
@@ -56,7 +56,7 @@ export default function IndustriesSection() {
               className="group rounded-xl border border-slate-200 border-t-2 border-t-transparent hover:border-t-brand bg-slate-50 p-6 shadow-sm transition-all hover:border-brand hover:shadow-xl hover:bg-white"
             >
               <div className="flex items-center gap-4 mb-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white shadow-xs group-hover:scale-105 transition-all">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white border border-brand shadow-xs transition-all duration-300 group-hover:scale-105 group-hover:bg-white group-hover:text-brand group-hover:border-brand group-hover:shadow-md">
                   {renderIndustryIcon(ind.iconName)}
                 </div>
                 <div>

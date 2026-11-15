@@ -55,11 +55,11 @@ export default function AboutPage() {
 
           {/* Core Pillars */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-2xs">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-50 text-brand mb-4">
-                <ShieldCheck className="h-5 w-5" />
+            <div className="group rounded-xl border border-slate-200 bg-white p-6 shadow-2xs hover:border-brand transition-all">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-50 text-brand border border-brand/20 mb-4 transition-all duration-300 group-hover:scale-105 group-hover:bg-brand group-hover:text-white group-hover:border-brand">
+                <ShieldCheck className="h-5 w-5 transition-colors duration-200" />
               </div>
-              <h3 className="font-heading text-lg font-bold uppercase text-navy">
+              <h3 className="font-heading text-lg font-bold uppercase text-navy group-hover:text-brand transition-colors">
                 Strict Quality Standards
               </h3>
               <p className="mt-2 text-xs text-slate-600 leading-relaxed">
@@ -69,11 +69,11 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-2xs">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-cobalt mb-4 border border-blue-100">
-                <Factory className="h-5 w-5" />
+            <div className="group rounded-xl border border-slate-200 bg-white p-6 shadow-2xs hover:border-cobalt transition-all">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-cobalt mb-4 border border-blue-200 transition-all duration-300 group-hover:scale-105 group-hover:bg-cobalt group-hover:text-white group-hover:border-cobalt">
+                <Factory className="h-5 w-5 transition-colors duration-200" />
               </div>
-              <h3 className="font-heading text-lg font-bold uppercase text-navy">
+              <h3 className="font-heading text-lg font-bold uppercase text-navy group-hover:text-cobalt transition-colors">
                 Circular Tooling Economy
               </h3>
               <p className="mt-2 text-xs text-slate-600 leading-relaxed">

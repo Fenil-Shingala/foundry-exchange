@@ -14,7 +14,7 @@ import {
 import { siteConfig } from "@/data/siteConfig";
 
 function renderModeIcon(iconName: string) {
-  const iconProps = { className: "h-6 w-6 text-white" };
+  const iconProps = { className: "h-6 w-6 transition-colors duration-200" };
   switch (iconName) {
     case "ShoppingCart":
       return <ShoppingCart {...iconProps} />;
@@ -78,7 +78,7 @@ export default function ExchangeModes() {
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white shadow-xs group-hover:scale-105 transition-transform">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white border border-brand shadow-xs transition-all duration-300 group-hover:scale-105 group-hover:bg-white group-hover:text-brand group-hover:border-brand group-hover:shadow-md">
                     {renderModeIcon(mode.iconName)}
                   </div>
                   <span className="rounded-md border border-slate-200 bg-slate-50 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-navy">

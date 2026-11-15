@@ -272,8 +272,8 @@ export default function FeaturedListings() {
               href="/products"
               className="relative aspect-4/3 w-full bg-navy-950 flex flex-col items-center justify-center p-5 text-center border-b border-navy-800 block cursor-pointer group-hover:bg-navy-900 transition-colors"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand text-white shadow-md mb-2 group-hover:scale-110 transition-transform duration-300">
-                <Layers className="h-6 w-6" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand text-white border border-brand shadow-md mb-2 transition-all duration-300 group-hover:scale-110 group-hover:bg-white group-hover:text-brand group-hover:border-brand">
+                <Layers className="h-6 w-6 transition-colors duration-200" />
               </div>
               <span className="font-heading text-base sm:text-lg font-bold uppercase tracking-tight text-white group-hover:text-brand transition-colors">
                 Explore Full Catalog
