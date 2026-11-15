@@ -142,39 +142,37 @@ export default function Header() {
 
       {/* 2. Main Sticky Navigation — PrecastXchange Signature Navy-900 with Red Underline Bar */}
       <div className="bg-navy-900 text-white border-b-2 border-brand">
-        {/* Main Header Bar with Perfectly Centered Logo */}
-        <div className="relative w-full flex h-20 sm:h-24 items-center justify-between px-4 sm:px-6 lg:px-8 xl:px-10">
-          {/* Left Zone: Compact Search Form */}
-          <div className="flex items-center min-w-0">
+        {/* Main Header Bar: Logo on Left, Search in Center, Nav on Right */}
+        <div className="w-full flex h-20 sm:h-22 items-center justify-between gap-4 lg:gap-6 px-4 sm:px-6 lg:px-8 xl:px-10">
+          {/* Left Zone: Brand Logo (Moved to Left where Search was) */}
+          <Link href="/" className="flex items-center shrink-0">
+            <div className="relative flex items-center bg-white px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-xl shadow-md border border-white/40 transition-transform hover:scale-105">
+              <Image
+                src="/foundry-logo.png"
+                alt="Foundry Exchange Logo"
+                width={260}
+                height={78}
+                priority
+                className="h-10 sm:h-12 md:h-13 lg:h-14 w-auto object-contain"
+              />
+            </div>
+          </Link>
+
+          {/* Center Zone: Prominent Industrial Search Form */}
+          <div className="flex-1 max-w-xl mx-2 lg:mx-6 hidden md:flex items-center">
             <form
               onSubmit={handleSearchSubmit}
-              className="hidden lg:flex relative items-center w-48 xl:w-56 2xl:w-64 shrink-0 transition-all focus-within:w-64 xl:focus-within:w-72"
+              className="relative w-full flex items-center"
             >
-              <Search className="absolute left-3.5 h-3.5 w-3.5 text-slate-400" />
+              <Search className="absolute left-3.5 h-4 w-4 text-slate-400" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search castings & forgings..."
-                className="w-full rounded-full border border-navy-700 bg-navy-950/80 py-1.5 pl-9 pr-3 text-xs text-white placeholder:text-slate-400 shadow-inner transition-all focus:border-brand focus:bg-navy-950 focus:outline-hidden focus:ring-1 focus:ring-brand"
+                placeholder="Search castings, forgings, tooling, alloys, specifications..."
+                className="w-full rounded-full border border-navy-700 bg-navy-950/90 py-2 pl-10 pr-4 text-xs lg:text-sm text-white placeholder:text-slate-400 shadow-inner transition-all focus:border-brand focus:bg-navy-950 focus:outline-hidden focus:ring-1 focus:ring-brand"
               />
             </form>
-          </div>
-
-          {/* Center Zone: Exact Mathematically Centered Logo (Increased Size) */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-10 pointer-events-auto">
-            <Link href="/" className="flex items-center shrink-0">
-              <div className="relative flex items-center bg-white px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-xl shadow-lg border border-white/40 transition-transform hover:scale-105">
-                <Image
-                  src="/foundry-logo.png"
-                  alt="Foundry Exchange Logo"
-                  width={280}
-                  height={84}
-                  priority
-                  className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain"
-                />
-              </div>
-            </Link>
           </div>
 
           {/* Right Zone: Desktop Navigation Links & Mobile Menu Button */}

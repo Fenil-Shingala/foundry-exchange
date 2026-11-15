@@ -90,10 +90,10 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
     setTimeout(() => setRfqSubmitted(false), 5000);
   };
 
-  // Deterministic 4 companion/related products
+  // 8 companion/related products
   const sameCategory = featuredListings.filter((l) => l.id !== listing.id && l.category === listing.category);
   const otherCategories = featuredListings.filter((l) => l.id !== listing.id && l.category !== listing.category);
-  const relatedListings = [...sameCategory, ...otherCategories].slice(0, 4);
+  const relatedListings = [...sameCategory, ...otherCategories].slice(0, 8);
 
   // When listing changes, update selected variant and size
   useEffect(() => {
@@ -1273,7 +1273,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 min-[1660px]:grid-cols-8 gap-4 sm:gap-5">
           {relatedListings.map((rel) => (
             <div
               key={rel.id}
