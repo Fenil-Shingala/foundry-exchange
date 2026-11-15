@@ -45,12 +45,49 @@ export default function FeaturedListings() {
     }
   };
 
+  const parseListingPrice = (priceEstimate: string, status: ProductListing["status"]) => {
+    const defaultLabel =
+      status === "Made to Order"
+        ? "Target"
+        : status === "Auction"
+        ? "Bid"
+        : "Price";
+
+    if (priceEstimate.includes("/")) {
+      const parts = priceEstimate.split("/");
+      return {
+        label: defaultLabel,
+        amount: parts[0].trim(),
+        unit: `/${parts[1].trim()}`,
+      };
+    }
+    if (priceEstimate.startsWith("Bidding Starts ")) {
+      return {
+        label: "Auction",
+        amount: priceEstimate.replace("Bidding Starts ", "").trim(),
+        unit: "Opening",
+      };
+    }
+    if (priceEstimate.toLowerCase().includes("rfq")) {
+      return {
+        label: "Inquiry",
+        amount: "RFQ",
+        unit: "Lot Basis",
+      };
+    }
+    return {
+      label: defaultLabel,
+      amount: priceEstimate.trim(),
+      unit: null,
+    };
+  };
+
   return (
     <section
       id="marketplace"
       className="bg-white py-20 border-b border-slate-200"
     >
-      <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-10">
+      <div className="w-full px-3 sm:px-6 lg:px-4 xl:px-5">
         {/* Section Header with Precast Accent */}
         <div className="flex flex-col xl:flex-row xl:items-end justify-between mb-8 gap-6">
           <div className="max-w-xl">
@@ -97,115 +134,133 @@ export default function FeaturedListings() {
           </div>
         </div>
 
-        {/* Product Cards Grid — 5 columns on large screens for balanced 2x5 layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 grid-cols-5-desktop gap-5 xl:gap-6">
-          {filteredListings.map((listing) => (
-            <article
-              key={listing.id}
-              className="group flex flex-col justify-between rounded-xl border border-slate-200 border-t-2 border-t-transparent hover:border-t-brand bg-white overflow-hidden shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-brand hover:shadow-xl"
-            >
-              {/* Product Image Box */}
-              <Link
-                href={`/listings/${listing.id}`}
-                className="relative aspect-4/3 w-full bg-navy-950 overflow-hidden border-b border-slate-100 block cursor-pointer"
+        {/* Product Cards Grid — 5 columns on large screens for balanced 4x5 layout */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 grid-cols-5-desktop gap-3 xl:gap-3.5">
+          {filteredListings.map((listing) => {
+            const priceData = parseListingPrice(listing.priceEstimate, listing.status);
+
+            return (
+              <article
+                key={listing.id}
+                className="group flex flex-col justify-between rounded-xl border border-slate-200 border-t-2 border-t-transparent hover:border-t-brand bg-white overflow-hidden shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-brand hover:shadow-xl"
               >
-                <Image
-                  src={listing.imageUrl}
-                  alt={listing.title}
-                  width={600}
-                  height={400}
-                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-
-                {/* Status Badge */}
-                <span
-                  className={`absolute top-3 left-3 rounded border px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider shadow-2xs ${getStatusBadgeStyle(
-                    listing.status,
-                  )}`}
+                {/* Product Image Box */}
+                <Link
+                  href={`/listings/${listing.id}`}
+                  className="relative aspect-4/3 w-full bg-navy-950 overflow-hidden border-b border-slate-100 block cursor-pointer"
                 >
-                  {listing.status}
-                </span>
+                  <Image
+                    src={listing.imageUrl}
+                    alt={listing.title}
+                    width={600}
+                    height={400}
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    onError={(e) => {
+                      const target = e.currentTarget as HTMLImageElement;
+                      target.srcset = "";
+                      target.src = "/images/fallback-product.jpg";
+                    }}
+                  />
 
-                {/* Category Pill */}
-                <span className="absolute bottom-3 right-3 rounded bg-navy-900/90 backdrop-blur-xs px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white">
-                  {listing.category}
-                </span>
-              </Link>
+                  {/* Status Badge */}
+                  <span
+                    className={`absolute top-2.5 left-2.5 rounded border px-2 py-0.5 text-[10.5px] font-bold uppercase tracking-wider shadow-2xs ${getStatusBadgeStyle(
+                      listing.status,
+                    )}`}
+                  >
+                    {listing.status}
+                  </span>
 
-              {/* Product Info */}
-              <div className="p-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-1.5 text-[11px] text-slate-500 mb-1">
-                    <MapPin className="h-3 w-3 text-brand shrink-0" />
-                    <span className="truncate">{listing.location}</span>
-                  </div>
+                  {/* Category Pill */}
+                  <span className="absolute bottom-2.5 right-2.5 rounded bg-navy-900/90 backdrop-blur-xs px-2 py-0.5 text-[9.5px] font-semibold uppercase tracking-wider text-white">
+                    {listing.category}
+                  </span>
+                </Link>
 
-                  <Link href={`/listings/${listing.id}`} className="block">
-                    <h3 className="font-heading text-lg font-bold uppercase tracking-tight text-navy group-hover:text-brand transition-colors line-clamp-2">
-                      {listing.title}
-                    </h3>
-                  </Link>
-
-                  <p className="mt-1.5 text-xs font-semibold text-slate-700 line-clamp-1">
-                    {listing.alloySpec}
-                  </p>
-
-                  {/* Standard Spec Tags (Monospace) */}
-                  <div className="mt-3 flex flex-wrap gap-1">
-                    {listing.standards.slice(0, 2).map((std) => (
-                      <span
-                        key={std}
-                        className="rounded bg-slate-100 px-2 py-0.5 text-[10px] font-mono font-medium text-navy border border-slate-200/60"
-                      >
-                        {std}
-                      </span>
-                    ))}
-                    {listing.standards.length > 2 && (
-                      <span className="text-[10px] font-mono font-medium text-slate-400 self-center">
-                        +{listing.standards.length - 2}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                <div className="mt-5 pt-3 border-t border-slate-100">
-                  {/* Vendor Verification */}
-                  <div className="flex items-center justify-between text-xs text-slate-500 mb-3">
-                    <span className="truncate max-w-[150px] font-medium text-[11px]">
-                      {listing.vendorName}
-                    </span>
-                    {listing.vendorVerified && (
-                      <span className="flex items-center gap-1 text-[10px] font-bold text-brand bg-red-50 px-1.5 py-0.5 rounded border border-brand/20">
-                        <BadgeCheck className="h-3 w-3 text-brand" />
-                        Verified
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Price & Action */}
-                  <div className="flex items-center justify-between gap-2">
-                    <div>
-                      <span className="block text-[10px] uppercase font-bold text-slate-400">
-                        {listing.status === "Made to Order"
-                          ? "Target"
-                          : "Price"}
-                      </span>
-                      <span className="font-heading text-base font-extrabold text-brand">
-                        {listing.priceEstimate}
-                      </span>
+                {/* Product Info */}
+                <div className="p-3.5 xl:p-4 flex-1 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-1.5 text-[11px] text-slate-500 mb-1">
+                      <MapPin className="h-3 w-3 text-brand shrink-0" />
+                      <span className="truncate">{listing.location}</span>
                     </div>
 
-                    <Link
-                      href={`/listings/${listing.id}`}
-                      className="rounded-md bg-brand px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-white hover:bg-brand-hover shadow-2xs hover:scale-105 transition-all"
-                    >
-                      View Lot
+                    <Link href={`/listings/${listing.id}`} className="block">
+                      <h3 className="font-heading text-sm xl:text-[15px] font-bold uppercase tracking-tight text-navy group-hover:text-brand transition-colors line-clamp-2 min-h-[2.4rem] leading-snug">
+                        {listing.title}
+                      </h3>
                     </Link>
+
+                    <p className="mt-1 text-xs font-semibold text-slate-700 line-clamp-1">
+                      {listing.alloySpec}
+                    </p>
+
+                    {/* Standard Spec Tags (Monospace) */}
+                    <div className="mt-2.5 flex flex-wrap gap-1">
+                      {listing.standards.slice(0, 2).map((std) => (
+                        <span
+                          key={std}
+                          title={std}
+                          className="inline-block max-w-[125px] truncate rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-mono font-medium text-navy border border-slate-200/60 whitespace-nowrap"
+                        >
+                          {std}
+                        </span>
+                      ))}
+                      {listing.standards.length > 2 && (
+                        <span className="text-[10px] font-mono font-medium text-slate-400 self-center shrink-0">
+                          +{listing.standards.length - 2}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="mt-4 pt-2.5 border-t border-slate-100">
+                    {/* Vendor Verification */}
+                    <div className="flex items-center justify-between gap-1 text-slate-500 mb-2">
+                      <span
+                        className="truncate min-w-0 font-medium text-[11px] text-slate-600"
+                        title={listing.vendorName}
+                      >
+                        {listing.vendorName}
+                      </span>
+                      {listing.vendorVerified && (
+                        <span className="shrink-0 inline-flex items-center gap-0.5 text-[9.5px] font-bold text-brand bg-red-50 px-1.5 py-0.5 rounded border border-brand/20 whitespace-nowrap">
+                          <BadgeCheck className="h-3 w-3 text-brand shrink-0" />
+                          Verified
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Price & Action */}
+                    <div className="flex items-center justify-between gap-1">
+                      <div className="min-w-0 flex-1">
+                        <span className="block text-[9px] uppercase font-bold text-slate-400 tracking-wider leading-none mb-1 truncate">
+                          {priceData.label}
+                        </span>
+                        <div className="flex items-baseline gap-0.5 whitespace-nowrap overflow-hidden">
+                          <span className="font-heading text-[13.5px] 2xl:text-[15px] font-black text-brand tracking-tight leading-none whitespace-nowrap">
+                            {priceData.amount}
+                          </span>
+                          {priceData.unit && (
+                            <span className="text-[10px] 2xl:text-[10.5px] font-semibold text-slate-500 whitespace-nowrap leading-none">
+                              {priceData.unit}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      <Link
+                        href={`/listings/${listing.id}`}
+                        className="shrink-0 rounded bg-brand px-2 py-1 text-[10.5px] font-bold uppercase tracking-wider text-white hover:bg-brand-hover shadow-2xs hover:scale-105 transition-all text-center whitespace-nowrap"
+                      >
+                        View Lot
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
 
         {/* View All Bar */}

@@ -24,112 +24,37 @@ import {
   ExternalLink,
   X,
   ZoomIn,
+  MapPin,
+  Building2,
+  Award,
 } from "lucide-react";
 import { ProductListing, featuredListings } from "@/data/listings";
+import { getProductDetailData, DetailVariant, DetailSizeOption } from "@/data/productDetailHelper";
 
 interface ProductDetailPageProps {
   initialListing?: ProductListing;
 }
 
 export default function ProductDetailPage({ initialListing }: ProductDetailPageProps) {
-  // Fallback to fl-001 (Heavy-Duty Pump Volute Casing) if not specified
+  // Fallback to fl-001 if not specified
   const listing = initialListing || featuredListings[0];
+  const detailData = getProductDetailData(listing);
 
-  // Metallurgy / Variant state (matches circular swatches on reference site)
-  const variants = [
-    {
-      id: "ductile-65",
-      name: "ASTM A536 65-45-12 (Ductile Iron)",
-      short: "Ductile 65-45-12",
-      badge: "Standard OEM Spec",
-      priceOffset: 0,
-      image: "/images/gallery/volute-casing-machined.jpg",
-      swatchColor: "#64748b",
-    },
-    {
-      id: "gray-35",
-      name: "ASTM A48 Class 35 (High-Damping Gray Iron)",
-      short: "Gray Iron Cl. 35",
-      badge: "Vibration Damping",
-      priceOffset: -280,
-      image: "/images/gallery/cnc-machining-operation.jpg",
-      swatchColor: "#475569",
-    },
-    {
-      id: "carbon-wcb",
-      name: "ASTM A216 WCB (High-Pressure Cast Carbon Steel)",
-      short: "Cast Steel WCB",
-      badge: "Pressure Vessel",
-      priceOffset: 450,
-      image: "/images/gallery/ndt-ultrasonic-testing.jpg",
-      swatchColor: "#334155",
-    },
-    {
-      id: "stainless-cf8m",
-      name: "ASTM A351 CF8M / 316 (Marine Stainless Steel)",
-      short: "316 Stainless",
-      badge: "Acid / Corrosive",
-      priceOffset: 890,
-      image: "/images/gallery/packaging-dispatch.jpg",
-      swatchColor: "#94a3b8",
-    },
-  ];
+  const variants = detailData.variants;
+  const sizes = detailData.sizes;
+  const galleryImages = detailData.galleryImages;
 
-  // Size / Port rating options (matches square size buttons on reference site)
-  const sizes = [
-    { id: "dn100", label: "DN100 (4\")", bore: "100 mm", pcd: "180 mm", weight: "320 kg", test: "25 bar" },
-    { id: "dn150", label: "DN150 (6\")", bore: "150 mm", pcd: "240 mm", weight: "480 kg", test: "25 bar" },
-    { id: "dn200", label: "DN200 (8\")", bore: "200 mm", pcd: "295 mm", weight: "690 kg", test: "25 bar" },
-    { id: "dn250", label: "DN250 (10\")", bore: "250 mm", pcd: "355 mm", weight: "890 kg", test: "30 bar" },
-    { id: "dn300", label: "DN300 (12\")", bore: "300 mm", pcd: "410 mm", weight: "1,150 kg", test: "30 bar" },
-  ];
-
-
-
-  // Gallery images (2-column grid below video)
-  const galleryImages = [
-    {
-      src: "/images/gallery/volute-casing-machined.jpg",
-      alt: "Machined Volute Casing on Granite Table",
-      caption: "Angle 01 • Finished CNC Machined Casing",
-      badge: "ISO 8062 CT5",
-    },
-    {
-      src: "/images/gallery/cnc-machining-operation.jpg",
-      alt: "5-Axis CNC Milling Operation with Coolant",
-      caption: "Angle 02 • 5-Axis Precision Flange Facing",
-      badge: "Machining Floor",
-    },
-    {
-      src: "/images/gallery/ndt-ultrasonic-testing.jpg",
-      alt: "Ultrasonic NDT QA Testing with Digital Flaw Detector",
-      caption: "Angle 03 • Volumetric Ultrasonic Inspection",
-      badge: "ASTM A388 UT Cl. 1",
-    },
-    {
-      src: "/images/gallery/packaging-dispatch.jpg",
-      alt: "Export Wooden Crate Packaging with VCI Wrap",
-      caption: "Angle 04 • ISPM-15 Heat-Treated Export Crate",
-      badge: "FOB Dispatch Ready",
-    },
-    {
-      src: "/images/capabilities/metal-casting.jpg",
-      alt: "Overhead Ladle Pouring Molten Iron into Mold",
-      caption: "Angle 05 • Induction Melt Pour Deck",
-      badge: "1420°C Inoculation",
-    },
-    {
-      src: "/images/capabilities/precision-forging.jpg",
-      alt: "Heavy Industrial Hydraulic Press Forging",
-      caption: "Angle 06 • Companion Heavy Forge Line",
-      badge: "2000T Hydraulic Press",
-    },
-  ];
-
-  const [selectedVariant, setSelectedVariant] = useState(variants[0]);
-  const [selectedSize, setSelectedSize] = useState(sizes[1]); // Default DN150
+  const [selectedVariant, setSelectedVariant] = useState<DetailVariant>(variants[0]);
+  const [selectedSize, setSelectedSize] = useState<DetailSizeOption>(sizes[0]);
   const [quantity, setQuantity] = useState(1);
   const [cartSuccess, setCartSuccess] = useState(false);
+
+  // When listing changes, update selected variant and size
+  useEffect(() => {
+    setSelectedVariant(detailData.variants[0]);
+    setSelectedSize(detailData.sizes[0]);
+    setQuantity(1);
+  }, [listing.id]);
 
   // Fancybox / Lightbox state
   const [activeModalIndex, setActiveModalIndex] = useState<number | null>(null);
@@ -180,7 +105,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
   const [isMuted, setIsMuted] = useState(true);
   const [videoProgress, setVideoProgress] = useState(0);
 
-  // Sticky Bottom Pinning for Left Gallery Column (No empty space when scrolling right column)
+  // Sticky Bottom Pinning for Left Gallery Column
   const leftColRef = useRef<HTMLDivElement | null>(null);
   const [stickyTop, setStickyTop] = useState<string>("auto");
 
@@ -212,10 +137,10 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
       window.removeEventListener("resize", updateSticky);
       if (ro) ro.disconnect();
     };
-  }, []);
+  }, [listing.id]);
 
   // Pricing calculation
-  const basePrice = 2850 + selectedVariant.priceOffset;
+  const basePrice = detailData.parsedBasePrice + selectedVariant.priceOffset;
   const listPrice = Math.round(basePrice * 1.48);
 
   // Volume discount calculation (Buy 2+ get 10% OFF, Buy 4+ get 15% OFF)
@@ -258,195 +183,219 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
   };
 
   return (
-    <div className="bg-white min-h-screen text-slate-800">
-      <div className="w-full">
-        <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-8 sm:py-12">
-          {/* Breadcrumb Navigation */}
-          <nav className="mb-6 flex items-center gap-2 text-xs font-medium text-slate-500" aria-label="Breadcrumb">
-            <Link href="/" className="hover:text-navy transition-colors">Home</Link>
-            <ChevronRight className="h-3.5 w-3.5 text-slate-400" />
-            <Link href="/#marketplace" className="hover:text-navy transition-colors">Marketplace</Link>
-            <ChevronRight className="h-3.5 w-3.5 text-slate-400" />
-            <span className="text-slate-400">{listing.category}</span>
-            <ChevronRight className="h-3.5 w-3.5 text-slate-400" />
+    <div className="bg-[#f7f8fa] min-h-screen text-slate-800 antialiased font-sans pb-24">
+      {/* ============================================================ */}
+      {/* TOP NAVIGATION / BREADCRUMB BAR                              */}
+      {/* ============================================================ */}
+      <div className="bg-white border-b border-slate-200">
+        <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-3">
+          <nav className="flex items-center gap-2 text-xs text-slate-500 font-medium overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <Link href="/" className="hover:text-brand transition-colors shrink-0">Home</Link>
+            <ChevronRight className="h-3 w-3 text-slate-400 shrink-0" />
+            <Link href="/#marketplace" className="hover:text-brand transition-colors shrink-0">Marketplace</Link>
+            <ChevronRight className="h-3 w-3 text-slate-400 shrink-0" />
+            <span className="text-slate-400 shrink-0">{listing.category}</span>
+            <ChevronRight className="h-3 w-3 text-slate-400 shrink-0" />
             <span className="text-slate-900 font-semibold truncate max-w-[280px] sm:max-w-md">{listing.title}</span>
           </nav>
+        </div>
+      </div>
 
-          {/* ============================================================== */}
-          {/* 2-COLUMN MAIN PRODUCT LAYOUT (Exact layout from reference site) */}
-          {/* ============================================================== */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-start">
-            
-            {/* ============================================================ */}
-            {/* LEFT COLUMN: VIDEO AT TOP + 2-COLUMN IMAGE GALLERY           */}
-            {/* Sticks at bottom once reached so no empty space appears     */}
-            {/* ============================================================ */}
-            <div
-              ref={leftColRef}
-              className="lg:col-span-7 xl:col-span-7 space-y-4 sm:space-y-6 lg:sticky"
-              style={{ top: stickyTop }}
-            >
-              
-              {/* 1. VIDEO BEFORE THE IMAGES (Full-width in Left Column) */}
-              <div className="relative overflow-hidden rounded-2xl border-2 border-slate-200 bg-navy-950 shadow-xl group">
-                <div className="relative aspect-16/9 w-full bg-navy-950 overflow-hidden">
-                  <video
-                    ref={videoRef}
-                    poster="/images/gallery/volute-casing-machined.jpg"
-                    loop
-                    playsInline
-                    muted={isMuted}
-                    onTimeUpdate={handleTimeUpdate}
-                    className="h-full w-full object-cover cursor-pointer"
+      {/* ============================================================ */}
+      {/* MAIN TWO-COLUMN CONTAINER                                    */}
+      {/* ============================================================ */}
+      <main className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 pt-6 sm:pt-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-start">
+
+          {/* ============================================================ */}
+          {/* LEFT COLUMN: VIDEO AT TOP + 2-COLUMN IMAGE GALLERY           */}
+          {/* ============================================================ */}
+          <div
+            ref={leftColRef}
+            className="lg:col-span-7 xl:col-span-7 space-y-4 sm:space-y-6 lg:sticky"
+            style={{ top: stickyTop }}
+          >
+            {/* 1. VIDEO BEFORE THE IMAGES (Full-width in Left Column) */}
+            <div className="relative overflow-hidden rounded-2xl border-2 border-slate-200 bg-navy-950 shadow-xl group">
+              <div className="relative aspect-16/9 w-full bg-navy-950 overflow-hidden">
+                <video
+                  ref={videoRef}
+                  poster={detailData.videoPoster}
+                  loop
+                  playsInline
+                  muted={isMuted}
+                  onTimeUpdate={handleTimeUpdate}
+                  className="h-full w-full object-cover cursor-pointer"
+                  onClick={togglePlay}
+                >
+                  <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4" />
+                  Your browser does not support HTML5 video.
+                </video>
+
+                {/* Dark Vignette Overlay */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-navy-950/30" />
+
+                {/* Top Badges — Responsive for mobile & desktop */}
+                <div className="absolute top-3 inset-x-3 sm:top-4 sm:inset-x-4 flex items-center justify-between pointer-events-none z-10">
+                  <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full sm:rounded-md bg-brand px-2.5 py-0.5 sm:px-3 sm:py-1 text-[10px] sm:text-xs font-mono font-bold uppercase text-white shadow-md">
+                    <span className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-white animate-pulse" />
+                    <span>4K UHD<span className="hidden sm:inline"> • Shop Floor QA Video</span></span>
+                  </span>
+                  <span className="rounded-full sm:rounded-md bg-navy-900/90 backdrop-blur-xs px-2.5 py-0.5 sm:px-2.5 sm:py-1 text-[10px] sm:text-xs font-mono text-slate-200 border border-navy-700/80 shadow-xs">
+                    <span className="hidden sm:inline">Duration: </span>0:45
+                  </span>
+                </div>
+
+                {/* Center Play Button Overlay */}
+                {!isPlaying && (
+                  <button
+                    type="button"
                     onClick={togglePlay}
+                    className="absolute inset-0 m-auto flex h-13 w-13 sm:h-16 sm:w-16 items-center justify-center rounded-full bg-brand/90 hover:bg-brand text-white shadow-2xl transition-all duration-300 hover:scale-110 cursor-pointer z-10"
+                    aria-label="Play video"
                   >
-                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4" />
-                    Your browser does not support HTML5 video.
-                  </video>
+                    <Play className="h-5 w-5 sm:h-7 sm:w-7 translate-x-0.5 fill-white text-white" />
+                  </button>
+                )}
 
-                  {/* Dark Vignette Overlay */}
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-navy-950/30" />
+                {/* Bottom Video Controls Bar — Responsive single-line layout */}
+                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-navy-950/95 via-navy-950/70 to-transparent pt-6 pb-2.5 px-3 sm:px-4 sm:pb-3 flex flex-col justify-end text-white text-xs z-10">
+                  <div className="flex items-center justify-between gap-2 pb-1.5">
+                    {/* Left: Play/Pause, Mute & Title */}
+                    <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                      <button
+                        type="button"
+                        onClick={togglePlay}
+                        className="flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-colors cursor-pointer"
+                        aria-label={isPlaying ? "Pause video" : "Play video"}
+                      >
+                        {isPlaying ? (
+                          <Pause className="h-3.5 w-3.5 sm:h-4 sm:w-4 fill-white" />
+                        ) : (
+                          <Play className="h-3.5 w-3.5 sm:h-4 sm:w-4 fill-white translate-x-0.5" />
+                        )}
+                      </button>
 
-                  {/* Top Badges — Responsive for mobile & desktop */}
-                  <div className="absolute top-2.5 inset-x-2.5 sm:top-4 sm:inset-x-4 flex items-center justify-between pointer-events-none z-10">
-                    <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full sm:rounded-md bg-brand px-2 py-0.5 sm:px-3 sm:py-1 text-[10px] sm:text-xs font-mono font-bold uppercase text-white shadow-md">
-                      <span className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-white animate-pulse" />
-                      <span>4K UHD<span className="hidden sm:inline"> • Shop Floor QA Video</span></span>
-                    </span>
-                    <span className="rounded-full sm:rounded-md bg-navy-900/90 backdrop-blur-xs px-2 py-0.5 sm:px-2.5 sm:py-1 text-[10px] sm:text-xs font-mono text-slate-200 border border-navy-700/80 shadow-xs">
-                      <span className="hidden sm:inline">Duration: </span>0:45
-                    </span>
-                  </div>
+                      <button
+                        type="button"
+                        onClick={toggleMute}
+                        className="flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-colors cursor-pointer"
+                        aria-label={isMuted ? "Unmute" : "Mute"}
+                      >
+                        {isMuted ? (
+                          <VolumeX className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                        ) : (
+                          <Volume2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                        )}
+                      </button>
 
-                  {/* Center Play Button Overlay (when paused) — proportional size */}
-                  {!isPlaying && (
-                    <button
-                      type="button"
-                      onClick={togglePlay}
-                      className="absolute inset-0 m-auto flex h-12 w-12 sm:h-16 sm:w-16 items-center justify-center rounded-full bg-brand/90 text-white shadow-2xl transition-all duration-300 hover:scale-110 hover:bg-brand cursor-pointer z-10"
-                      aria-label="Play video"
-                    >
-                      <Play className="h-5 w-5 sm:h-7 sm:w-7 translate-x-0.5 fill-white text-white" />
-                    </button>
-                  )}
-
-                  {/* Bottom Video Controls Bar — Responsive single-line layout */}
-                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-navy-950/95 via-navy-950/70 to-transparent pt-4 pb-2 px-3 sm:px-4 sm:pb-3 flex flex-col justify-end text-white text-xs z-10">
-                    <div className="flex items-center justify-between gap-2 pb-1.5">
-                      {/* Left: Play/Pause, Mute & Title */}
-                      <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-                        <button
-                          type="button"
-                          onClick={togglePlay}
-                          className="flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-colors cursor-pointer"
-                          aria-label={isPlaying ? "Pause video" : "Play video"}
-                        >
-                          {isPlaying ? (
-                            <Pause className="h-3.5 w-3.5 sm:h-4 sm:w-4 fill-white" />
-                          ) : (
-                            <Play className="h-3.5 w-3.5 sm:h-4 sm:w-4 fill-white translate-x-0.5" />
-                          )}
-                        </button>
-
-                        <button
-                          type="button"
-                          onClick={toggleMute}
-                          className="flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-colors cursor-pointer"
-                          aria-label={isMuted ? "Unmute" : "Mute"}
-                        >
-                          {isMuted ? (
-                            <VolumeX className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                          ) : (
-                            <Volume2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                          )}
-                        </button>
-
-                        <div className="font-mono text-[10px] sm:text-[11px] text-slate-300 truncate">
-                          <span className="hidden sm:inline">Live CNC Flange Machining &amp; Hydrotest</span>
-                          <span className="sm:hidden">CNC Machining &amp; Hydrotest</span>
-                        </div>
-                      </div>
-
-                      {/* Right: Quality Badge */}
-                      <div className="flex items-center gap-2 shrink-0">
-                        <span className="font-mono text-[9px] sm:text-[11px] px-1.5 py-0.5 rounded bg-white/10 text-slate-200 border border-white/15">
-                          1080p
-                        </span>
+                      <div className="font-mono text-[10px] sm:text-[11px] text-slate-300 truncate">
+                        <span className="hidden sm:inline">{detailData.videoTitle}</span>
+                        <span className="sm:hidden font-medium">{listing.title}</span>
                       </div>
                     </div>
 
-                    {/* Clean Full-Width Scrub / Progress Bar */}
-                    <div className="w-full h-1 bg-white/20 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-brand rounded-full transition-all duration-100"
-                        style={{ width: `${videoProgress}%` }}
-                      />
+                    {/* Right: Quality Badge */}
+                    <div className="flex items-center gap-2 shrink-0">
+                      <span className="font-mono text-[9px] sm:text-[11px] px-1.5 py-0.5 rounded bg-white/10 text-slate-200 border border-white/15">
+                        1080p
+                      </span>
                     </div>
                   </div>
-                </div>
-              </div>
 
-              {/* 2. 2-COLUMN IMAGE GALLERY (Exact layout as theartisanwalk.com) */}
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500">
-                    Component Visual Inspection Gallery (6 High-Resolution Views)
-                  </h3>
-                  <span className="text-[11px] text-slate-400">Click to expand</span>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
-                  {galleryImages.map((img, idx) => (
+                  {/* Clean Full-Width Scrub / Progress Bar */}
+                  <div className="w-full h-1 bg-white/20 rounded-full overflow-hidden">
                     <div
-                      key={idx}
-                      onClick={() => openLightbox(idx)}
-                      className="group relative aspect-4/5 w-full overflow-hidden rounded-xl border border-slate-200 bg-slate-100 shadow-xs hover:shadow-xl transition-all duration-300 cursor-zoom-in"
-                    >
-                      <Image
-                        src={img.src}
-                        alt={img.alt}
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 35vw"
-                        className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                      />
-                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
-
-                      {/* Zoom Hint Icon on Hover */}
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-navy-950/30 backdrop-blur-[2px]">
-                        <span className="inline-flex items-center gap-1.5 rounded-full bg-navy-950/90 text-white px-3.5 py-1.5 text-xs font-semibold shadow-lg border border-white/20">
-                          <ZoomIn className="h-4 w-4 text-brand" />
-                          <span>View Full Size</span>
-                        </span>
-                      </div>
-
-                      {/* Top Spec Badge */}
-                      <div className="absolute top-3 left-3 z-10">
-                        <span className="rounded bg-navy-950/90 backdrop-blur-xs px-2 py-0.5 text-[10px] font-mono font-semibold text-white border border-navy-700/80 shadow-xs">
-                          {img.badge}
-                        </span>
-                      </div>
-
-                      {/* Bottom Caption Overlay */}
-                      <div className="absolute bottom-3 inset-x-3 text-white z-10">
-                        <p className="text-xs font-medium text-slate-100 drop-shadow-xs line-clamp-1">
-                          {img.caption}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+                      className="h-full bg-brand rounded-full transition-all duration-100"
+                      style={{ width: `${videoProgress}%` }}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* ============================================================ */}
-            {/* RIGHT COLUMN: STICKY PRODUCT PURCHASE & SPECIFICATIONS PANEL */}
-            {/* ============================================================ */}
-            <div className="lg:col-span-5 xl:col-span-5 space-y-6">
-              
-              {/* Product Header & Title */}
+            {/* 2. 2-COLUMN IMAGE GALLERY */}
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500">
+                  Component Visual Inspection Gallery (6 High-Resolution Views)
+                </h3>
+                <span className="text-[11px] text-slate-400">Click to expand</span>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                {galleryImages.map((img, idx) => (
+                  <div
+                    key={img.caption + idx}
+                    onClick={() => openLightbox(idx)}
+                    className="group relative aspect-4/3 overflow-hidden rounded-xl border border-slate-200 bg-navy-950 cursor-zoom-in shadow-xs hover:shadow-xl hover:border-brand transition-all duration-200"
+                    title="Click to view high-resolution full size"
+                  >
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      sizes="(max-width: 768px) 50vw, 35vw"
+                      onError={(e) => {
+                        const target = e.currentTarget as HTMLImageElement;
+                        target.srcset = "";
+                        target.src = "/images/fallback-product.jpg";
+                      }}
+                    />
+
+                    {/* Badge Pill — z-20 above overlay so it never gets blurred */}
+                    <span className="absolute top-2.5 left-2.5 z-20 rounded bg-navy-950/90 px-2 py-0.5 text-[10px] font-mono font-bold uppercase text-white border border-white/20 shadow-xs pointer-events-none">
+                      {img.badge}
+                    </span>
+
+                    {/* Bottom Caption Overlay — z-20 above overlay so text is 100% crisp and readable */}
+                    <div className="absolute inset-x-0 bottom-0 z-20 bg-gradient-to-t from-navy-950/95 via-navy-950/70 to-transparent p-2.5 pt-6 text-white pointer-events-none">
+                      <p className="text-[11px] font-mono text-slate-100 font-medium truncate">
+                        {img.caption}
+                      </p>
+                    </div>
+
+                    {/* Hover Zoom Icon — z-10 behind text, NO backdrop-blur to prevent text blurring */}
+                    <div className="absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-navy-950/20 pointer-events-none">
+                      <span className="flex h-11 w-11 items-center justify-center rounded-full bg-brand/95 text-white shadow-xl transform transition-transform duration-200 group-hover:scale-110">
+                        <ZoomIn className="h-5 w-5" />
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Quick Audit Trust Ribbon */}
+            <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-2xs">
+              <div className="grid grid-cols-3 divide-x divide-slate-200 text-center text-xs">
+                <div className="px-2">
+                  <div className="font-bold text-navy font-heading text-sm sm:text-base">100% UT</div>
+                  <div className="text-[11px] text-slate-500 font-mono">Volumetric Scan</div>
+                </div>
+                <div className="px-2">
+                  <div className="font-bold text-emerald-700 font-heading text-sm sm:text-base">EN 10204 3.1</div>
+                  <div className="text-[11px] text-slate-500 font-mono">Digital Mill Test Cert</div>
+                </div>
+                <div className="px-2">
+                  <div className="font-bold text-brand font-heading text-sm sm:text-base">ISO 9001</div>
+                  <div className="text-[11px] text-slate-500 font-mono">Pre-Audited Plant</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ============================================================ */}
+          {/* RIGHT COLUMN: PRODUCT INFO & SPECIFICATIONS                   */}
+          {/* ============================================================ */}
+          <div className="lg:col-span-5 xl:col-span-5 space-y-6">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xs space-y-6">
+
+              {/* Header Info */}
               <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="inline-flex items-center gap-1 text-xs font-bold text-brand bg-red-50 border border-brand/20 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-red-50 text-brand border border-brand/20 px-2.5 py-0.5 text-xs font-bold uppercase tracking-wider">
                     <ShieldCheck className="h-3.5 w-3.5" />
                     Verified Foundry Lot
                   </span>
@@ -474,9 +423,9 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
 
               {/* Price Block */}
               <div className="border-t border-b border-slate-200 py-4">
-                <div className="flex items-baseline gap-3">
+                <div className="flex items-baseline gap-3 flex-wrap">
                   <span className="text-3xl font-extrabold font-heading text-navy">
-                    ${effectiveUnitPrice.toLocaleString()}.00 <span className="text-base font-bold text-slate-500">USD</span>
+                    ${effectiveUnitPrice.toLocaleString()}.00 <span className="text-base font-bold text-slate-500">{detailData.priceSuffix}</span>
                   </span>
                   <span className="text-lg font-medium text-slate-400 line-through">
                     ${listPrice.toLocaleString()}.00 USD
@@ -488,11 +437,11 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                   )}
                 </div>
                 <p className="mt-1 text-xs text-slate-500">
-                  Ex-Works / FOB Cleveland Port • Includes 3.1 Spectrometry MTR &amp; Hydrotest Certs
+                  Ex-Works / FOB {listing.location} • Includes 3.1 Spectrometry MTR &amp; QA Inspection Certs
                 </p>
               </div>
 
-              {/* Volume Discount Promotion Banner (Exact match to theartisanwalk.com) */}
+              {/* Volume Discount Promotion Banner */}
               <div className="rounded-lg bg-[#fdf2f2] border border-[#fecaca] p-3.5 text-xs text-slate-800">
                 <div className="flex items-start gap-2.5">
                   <Tag className="h-4 w-4 text-brand shrink-0 mt-0.5" />
@@ -512,16 +461,16 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                 </div>
               </div>
 
-              {/* Variant / Color Selector (Circular Swatches matching reference site) */}
+              {/* Variant / Alloy Selector */}
               <div>
                 <div className="flex items-center justify-between text-xs mb-2.5">
                   <span className="font-bold text-slate-900">
-                    Alloy Metallurgy: <span className="font-semibold text-brand">{selectedVariant.name}</span>
+                    Alloy / Grade: <span className="font-semibold text-brand">{selectedVariant.name}</span>
                   </span>
                   <span className="text-[11px] font-mono text-slate-500">{selectedVariant.badge}</span>
                 </div>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 flex-wrap">
                   {variants.map((v) => (
                     <button
                       key={v.id}
@@ -545,11 +494,11 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                 </div>
               </div>
 
-              {/* Size / Flange Rating Selector (Square Boxes matching reference site) */}
+              {/* Size / Dimension Tier Selector */}
               <div>
                 <div className="flex items-center justify-between text-xs mb-2.5">
                   <span className="font-bold text-slate-900">
-                    Port Flange Size: <span className="font-semibold text-navy">{selectedSize.label}</span>
+                    Specification Tier: <span className="font-semibold text-navy">{selectedSize.label}</span>
                   </span>
                   <a
                     href="#spec-table"
@@ -559,13 +508,13 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                   </a>
                 </div>
 
-                <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                   {sizes.map((s) => (
                     <button
                       key={s.id}
                       type="button"
                       onClick={() => setSelectedSize(s)}
-                      className={`rounded-lg py-2.5 px-3 text-center text-xs font-bold uppercase transition-all cursor-pointer border ${
+                      className={`rounded-lg py-2 px-3 text-center text-xs font-bold uppercase transition-all cursor-pointer border ${
                         selectedSize.id === s.id
                           ? "border-navy bg-navy text-white shadow-sm"
                           : "border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-50"
@@ -580,7 +529,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
               {/* Quantity Stepper & Stock Urgency Indicator */}
               <div>
                 <div className="text-xs font-bold text-slate-900 mb-2">Quantity</div>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 flex-wrap">
                   <div className="inline-flex items-center rounded-lg border border-slate-300 bg-white shadow-2xs">
                     <button
                       type="button"
@@ -605,14 +554,13 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
 
                   <div className="flex items-center gap-2 text-xs font-medium text-slate-600">
                     <span className="flex h-2 w-2 rounded-full bg-emerald-500" />
-                    <span>Only 3 ready-stock lots left in Cleveland, OH warehouse</span>
+                    <span>{listing.leadTime} • {listing.location}</span>
                   </div>
                 </div>
               </div>
 
-              {/* Action Buttons (Matching Reference Site layout) */}
+              {/* Action Buttons */}
               <div className="space-y-2.5 pt-2">
-                {/* 1. Add to Cart / RFQ */}
                 <button
                   type="button"
                   onClick={handleAddToCart}
@@ -622,7 +570,6 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                   <span className="font-mono text-xs opacity-75">(${totalPrice.toLocaleString()}.00)</span>
                 </button>
 
-                {/* 2. Buy Now / Instant Purchase */}
                 <Link
                   href="/#contact-form"
                   className="w-full rounded-lg bg-navy py-3.5 px-6 text-center text-xs sm:text-sm font-bold uppercase tracking-wider text-white hover:bg-navy-light transition-all shadow-md flex items-center justify-center gap-2"
@@ -631,7 +578,6 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                   <span>Request Instant Escrow Quote</span>
                 </Link>
 
-                {/* 3. Third-party Express / Wire (Yellow button matching PayPal in reference) */}
                 <a
                   href="http://foundrydrawings.com/"
                   target="_blank"
@@ -651,162 +597,97 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                 </div>
               )}
 
-              {/* Dispatch Estimate Banner (Matches Pink/Salmon banner on reference site) */}
+              {/* Dispatch Estimate Banner */}
               <div className="rounded-lg bg-[#fef2f2] border border-[#fecaca] p-3 text-xs text-slate-700 flex items-center gap-2.5">
                 <Clock className="h-4 w-4 text-brand shrink-0" />
                 <span>
-                  Order today, estimated dispatch: <strong>Nov 20 – Nov 28</strong> • Port FOB Cleveland / Flatbed Rail
+                  Status: <strong>{listing.status}</strong> • Origin: {listing.location} ({listing.vendorName})
                 </span>
               </div>
 
               {/* ========================================================== */}
-              {/* EDITORIAL CONTENT CARDS (Matching Right Column from Reference) */}
+              {/* EDITORIAL CONTENT CARDS (Specific to Product)              */}
               {/* ========================================================== */}
               
               {/* 1. Dark Editorial Guide Box */}
               <div className="rounded-xl bg-navy-950 text-white p-5 sm:p-6 shadow-md border border-navy-800">
                 <span className="inline-block rounded bg-amber-400 text-navy-950 px-2 py-0.5 text-[10px] font-mono font-extrabold uppercase tracking-wider mb-2">
-                  US Industrial Gear &amp; Metallurgy Guide
+                  {detailData.editorialBadge}
                 </span>
                 <h4 className="font-heading text-lg sm:text-xl font-bold uppercase text-white leading-snug">
-                  Why Mechanical Engineers &amp; Plant Operators Choose Cast Ductile Iron Over Bulky Welded Fabrications
+                  {detailData.editorialTitle}
                 </h4>
                 <p className="mt-2 text-xs text-slate-300 leading-relaxed font-sans">
-                  Unlike welded pipe assemblies with high heat-affected zone (HAZ) stress concentrations, single-piece ductile iron castings feature continuous smooth hydrodynamic radii that eliminate cavitation, dampen high-frequency pump vibrations by 40%, and resist fatigue cracking under 24/7 continuous operation.
+                  {detailData.editorialText}
                 </p>
               </div>
 
-              {/* 2. Problem-Solving Callout Box (Matches reference site's "FRUSTRATED..." box) */}
+              {/* 2. Problem-Solving Callout Box */}
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-5 sm:p-6 shadow-2xs">
                 <h4 className="font-heading text-base font-extrabold uppercase text-slate-900 tracking-tight mb-3">
-                  Frustrated With Foundry Castings That Don&apos;t Live Up to Factory Spec?
+                  {detailData.painPointsTitle}
                 </h4>
                 <ul className="space-y-3 text-xs text-slate-700">
-                  <li className="flex items-start gap-2.5">
-                    <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-brand/20 text-brand font-bold text-[10px] mt-0.5">✕</span>
-                    <div>
-                      <strong className="text-slate-900">Subsurface Gas Shrinkage &amp; Porosity:</strong> Low-cost foundries skip riser feeding calculations, resulting in internal voids during machining. Every lot on Foundry Exchange is pre-screened with ASTM E94 Level II Radiographic verification.
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-brand/20 text-brand font-bold text-[10px] mt-0.5">✕</span>
-                    <div>
-                      <strong className="text-slate-900">Missing or Inaccurate Mill Test Certs:</strong> Brokers often provide unverified paper certs. We enforce direct digital optical emission spectrometry (OES) reports with batch heat numbers.
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-brand/20 text-brand font-bold text-[10px] mt-0.5">✕</span>
-                    <div>
-                      <strong className="text-slate-900">Warped Datum Faces &amp; Bolt Misalignment:</strong> Manual machining results in leaking flanges. Our suppliers use automated 5-axis CNC machining centers holding ISO 8062 CT5 tolerances.
-                    </div>
-                  </li>
+                  {detailData.painPoints.map((pt, pIdx) => (
+                    <li key={pIdx} className="flex items-start gap-2.5">
+                      <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-brand/20 text-brand font-bold text-[10px] mt-0.5">✕</span>
+                      <div>
+                        <strong className="text-slate-900">{pt.title} </strong>
+                        {pt.text}
+                      </div>
+                    </li>
+                  ))}
                 </ul>
               </div>
 
-              {/* 3. Feature Deep-Dive Cards (Matches FEATURE 01, 02, 03 from reference) */}
+              {/* 3. Feature Deep-Dive Cards */}
               <div className="space-y-4">
-                {/* Feature 01 */}
-                <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-2xs">
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand block mb-1">
-                    FEATURE 01
-                  </span>
-                  <h5 className="font-heading text-sm sm:text-base font-bold uppercase text-slate-900">
-                    Certified Ductile Iron Spheroidal Graphite Microstructure
-                  </h5>
-                  <p className="mt-1 text-xs text-slate-600 leading-relaxed">
-                    Treated with precise magnesium ferrosilicon inoculation, transforming graphite flakes into spherical nodules (&gt;85% nodularity). Delivers 400 MPa tensile strength with 15% elongation.
-                  </p>
-                  <div
-                    onClick={() => openLightbox(0)}
-                    className="group/feat relative mt-3 h-44 w-full rounded-lg overflow-hidden border border-slate-200 cursor-zoom-in hover:shadow-md transition-all"
-                    title="Click to view full size in Fancybox"
-                  >
-                    <Image
-                      src="/images/gallery/volute-casing-machined.jpg"
-                      alt="Microstructure quality inspection"
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover/feat:scale-105"
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/feat:opacity-100 transition-opacity bg-navy-950/20 backdrop-blur-[1px]">
-                      <span className="inline-flex items-center gap-1 rounded-full bg-navy-950/80 text-white px-2.5 py-1 text-[11px] font-semibold">
-                        <ZoomIn className="h-3.5 w-3.5 text-brand" />
-                        <span>Enlarge</span>
-                      </span>
+                {detailData.features.map((feat, fIdx) => (
+                  <div key={feat.number} className="rounded-xl border border-slate-200 bg-white p-5 shadow-2xs">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand block mb-1">
+                      {feat.number}
+                    </span>
+                    <h5 className="font-heading text-sm sm:text-base font-bold uppercase text-slate-900">
+                      {feat.title}
+                    </h5>
+                    <p className="mt-1 text-xs text-slate-600 leading-relaxed">
+                      {feat.description}
+                    </p>
+                    <div
+                      onClick={() => openLightbox(fIdx % galleryImages.length)}
+                      className="group/feat relative mt-3 h-44 w-full rounded-lg overflow-hidden border border-slate-200 cursor-zoom-in hover:shadow-md transition-all"
+                      title="Click to view full size in Fancybox"
+                    >
+                      <Image
+                        src={feat.image}
+                        alt={feat.imageAlt}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover/feat:scale-105"
+                        onError={(e) => {
+                          const target = e.currentTarget as HTMLImageElement;
+                          target.srcset = "";
+                          target.src = "/images/fallback-product.jpg";
+                        }}
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/feat:opacity-100 transition-opacity bg-navy-950/20 pointer-events-none">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-navy-950/80 text-white px-2.5 py-1 text-[11px] font-semibold">
+                          <ZoomIn className="h-3.5 w-3.5 text-brand" />
+                          <span>Enlarge</span>
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-
-                {/* Feature 02 */}
-                <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-2xs">
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand block mb-1">
-                    FEATURE 02
-                  </span>
-                  <h5 className="font-heading text-sm sm:text-base font-bold uppercase text-slate-900">
-                    100% Hydrostatic Pressure Containment to 25 Bar
-                  </h5>
-                  <p className="mt-1 text-xs text-slate-600 leading-relaxed">
-                    Each casing is hydrostatically proof-tested at 1.5x working pressure for a minimum 15-minute hold time with zero pressure drop or weeping, verified by QA inspector stamp.
-                  </p>
-                  <div
-                    onClick={() => openLightbox(2)}
-                    className="group/feat relative mt-3 h-44 w-full rounded-lg overflow-hidden border border-slate-200 cursor-zoom-in hover:shadow-md transition-all"
-                    title="Click to view full size in Fancybox"
-                  >
-                    <Image
-                      src="/images/gallery/ndt-ultrasonic-testing.jpg"
-                      alt="Hydrotest and Ultrasonic QA Inspection"
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover/feat:scale-105"
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/feat:opacity-100 transition-opacity bg-navy-950/20 backdrop-blur-[1px]">
-                      <span className="inline-flex items-center gap-1 rounded-full bg-navy-950/80 text-white px-2.5 py-1 text-[11px] font-semibold">
-                        <ZoomIn className="h-3.5 w-3.5 text-brand" />
-                        <span>Enlarge</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Feature 03 */}
-                <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-2xs">
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand block mb-1">
-                    FEATURE 03
-                  </span>
-                  <h5 className="font-heading text-sm sm:text-base font-bold uppercase text-slate-900">
-                    Precision 5-Axis CNC Machined Flange Serrations
-                  </h5>
-                  <p className="mt-1 text-xs text-slate-600 leading-relaxed">
-                    Machined with phonographic spiral serration (Ra 3.2–6.3μm) matching ASME B16.5 gasket sealing requirements to ensure zero fluid bypass in high-pressure piping loops.
-                  </p>
-                  <div
-                    onClick={() => openLightbox(1)}
-                    className="group/feat relative mt-3 h-44 w-full rounded-lg overflow-hidden border border-slate-200 cursor-zoom-in hover:shadow-md transition-all"
-                    title="Click to view full size in Fancybox"
-                  >
-                    <Image
-                      src="/images/gallery/cnc-machining-operation.jpg"
-                      alt="Precision 5-Axis CNC Milling"
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover/feat:scale-105"
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/feat:opacity-100 transition-opacity bg-navy-950/20 backdrop-blur-[1px]">
-                      <span className="inline-flex items-center gap-1 rounded-full bg-navy-950/80 text-white px-2.5 py-1 text-[11px] font-semibold">
-                        <ZoomIn className="h-3.5 w-3.5 text-brand" />
-                        <span>Enlarge</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                ))}
               </div>
 
-              {/* 4. Engineering Specifications Table (Matches reference site's Size Guide table) */}
+              {/* 4. Engineering Specifications Table */}
               <div id="spec-table" className="rounded-xl border border-slate-200 bg-white p-5 shadow-2xs">
                 <div className="mb-3">
                   <h5 className="font-heading text-sm sm:text-base font-bold uppercase text-slate-900">
-                    Size Guide &amp; Engineering Specifications (US &amp; ISO Standard)
+                    Dimensional Capacity &amp; Engineering Specifications
                   </h5>
                   <p className="text-[11px] text-slate-500 mt-0.5">
-                    Standard ANSI Class 150 / ISO PN16 flange drillings. Custom CAD port geometries available on request.
+                    Governing Standards: {listing.standards.join(", ")}. Custom drawing adjustments available.
                   </p>
                 </div>
 
@@ -814,11 +695,11 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                   <table className="w-full text-left text-xs border-collapse">
                     <thead>
                       <tr className="bg-navy-950 text-white font-mono text-[10px] uppercase tracking-wider">
-                        <th className="py-2.5 px-3">Size</th>
-                        <th className="py-2.5 px-3">Bore (mm)</th>
-                        <th className="py-2.5 px-3">Flange PCD</th>
-                        <th className="py-2.5 px-3">Weight</th>
-                        <th className="py-2.5 px-3">Hydrotest</th>
+                        <th className="py-2.5 px-3">{detailData.sizeTableHeader[0]}</th>
+                        <th className="py-2.5 px-3">{detailData.sizeTableHeader[1]}</th>
+                        <th className="py-2.5 px-3">{detailData.sizeTableHeader[2]}</th>
+                        <th className="py-2.5 px-3">{detailData.sizeTableHeader[3]}</th>
+                        <th className="py-2.5 px-3">{detailData.sizeTableHeader[4]}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-200 font-sans text-slate-700">
@@ -828,18 +709,31 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                           className={`transition-colors ${selectedSize.id === s.id ? "bg-red-50/80 font-bold text-navy" : "hover:bg-slate-50"}`}
                         >
                           <td className="py-2 px-3 font-semibold text-slate-900">{s.label}</td>
-                          <td className="py-2 px-3 font-mono">{s.bore}</td>
-                          <td className="py-2 px-3 font-mono">{s.pcd}</td>
-                          <td className="py-2 px-3 font-mono">{s.weight}</td>
-                          <td className="py-2 px-3 font-mono text-emerald-700 font-bold">{s.test}</td>
+                          <td className="py-2 px-3 font-mono">{s.param1}</td>
+                          <td className="py-2 px-3 font-mono">{s.param2}</td>
+                          <td className="py-2 px-3 font-mono">{s.param3}</td>
+                          <td className="py-2 px-3 font-mono text-emerald-700 font-bold">{s.param4}</td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
                 </div>
 
+                {/* Detailed Technical Metadata Specs */}
+                <div className="mt-4 border-t border-slate-100 pt-3">
+                  <h6 className="text-[11px] font-mono font-bold uppercase text-slate-500 mb-2">Technical Lot Specifications</h6>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                    {detailData.specRows.map((row, rIdx) => (
+                      <div key={rIdx} className="p-2 rounded bg-slate-50 border border-slate-100">
+                        <div className="text-[10px] font-mono text-slate-400 uppercase">{row.label}</div>
+                        <div className={`font-semibold ${row.highlight ? "text-brand" : "text-navy"}`}>{row.value}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
                 <div className="mt-3 flex items-center justify-between text-[11px] text-slate-500">
-                  <span>Governing Standard: ASTM A536 / ISO 1083</span>
+                  <span>Vendor: {listing.vendorName}</span>
                   <a href="#contact-form" className="text-brand font-semibold hover:underline">
                     Request Custom Machining Tolerance
                   </a>
@@ -849,135 +743,147 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
               {/* Trust Badges Footer */}
               <div className="border-t border-slate-200 pt-5 grid grid-cols-2 gap-3 text-xs text-slate-600">
                 <div className="flex items-center gap-2">
-                  <ShieldCheck className="h-4 w-4 text-emerald-600 shrink-0" />
-                  <span>Escrow Buyer Protection</span>
+                  <Truck className="h-4 w-4 text-brand shrink-0" />
+                  <span>Insured Global Freight (FOB/CIF)</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Truck className="h-4 w-4 text-blue-600 shrink-0" />
-                  <span>Flatbed Rail &amp; Ocean Freight</span>
+                  <RotateCcw className="h-4 w-4 text-brand shrink-0" />
+                  <span>Dimensional Fit Guarantee</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <FileText className="h-4 w-4 text-navy shrink-0" />
-                  <span>EN 10204 3.1 Certified MTR</span>
+                  <FileText className="h-4 w-4 text-brand shrink-0" />
+                  <span>Full Heat Lot Traceability</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <RotateCcw className="h-4 w-4 text-amber-600 shrink-0" />
-                  <span>Non-Destructive NDT Testing</span>
+                  <ShieldCheck className="h-4 w-4 text-brand shrink-0" />
+                  <span>Verified Escrow Protection</span>
                 </div>
               </div>
 
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* ================================================================ */}
-      {/* FULL-SIZE IMAGE FANCYBOX / LIGHTBOX MODAL                        */}
-      {/* ================================================================ */}
+        </div>
+      </main>
+
+      {/* ============================================================ */}
+      {/* FANCYBOX / LIGHTBOX MODAL OVERLAY                            */}
+      {/* ============================================================ */}
       {activeModalIndex !== null && (
         <div
-          className="fixed inset-0 z-50 flex flex-col justify-between bg-navy-950/95 backdrop-blur-md p-3 sm:p-6 transition-all duration-200 select-none"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Full size inspection photo"
+          className="fixed inset-0 z-50 bg-navy-950/95 backdrop-blur-md flex flex-col justify-between animate-fadeIn"
           onClick={closeLightbox}
         >
-          {/* Top Control Bar */}
+          {/* Top Modal Bar */}
           <div
-            className="flex items-center justify-between z-20 pb-3 border-b border-white/10"
+            className="flex items-center justify-between px-6 py-4 border-b border-white/10 text-white select-none"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center gap-2.5 sm:gap-3">
-              <span className="rounded bg-brand px-2.5 py-1 text-[11px] font-mono font-bold text-white uppercase tracking-wider shadow-sm">
+            <div className="flex items-center gap-3">
+              <span className="rounded bg-brand px-2.5 py-0.5 text-xs font-mono font-bold uppercase tracking-wider text-white">
                 {galleryImages[activeModalIndex].badge}
               </span>
-              <span className="text-xs sm:text-sm font-semibold text-white font-mono truncate max-w-[200px] sm:max-w-md">
+              <span className="font-heading font-semibold text-sm sm:text-base text-slate-200">
                 {galleryImages[activeModalIndex].caption}
               </span>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               <span className="text-xs font-mono text-slate-400">
                 {activeModalIndex + 1} / {galleryImages.length}
               </span>
               <button
                 type="button"
                 onClick={closeLightbox}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 hover:bg-brand text-white transition-all cursor-pointer shadow-lg"
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
                 aria-label="Close full size view"
-                title="Press Esc to close"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
           </div>
 
-          {/* Main Stage: Full Size Photo + Prev/Next Controls */}
+          {/* Center Stage Image */}
           <div
-            className="relative flex-1 flex items-center justify-center p-2 sm:p-4 min-h-0"
+            className="relative flex-1 min-h-0 flex items-center justify-center p-4 sm:p-6"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Previous Button */}
             <button
               type="button"
               onClick={showPrevImage}
-              className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-navy-900/80 hover:bg-brand text-white transition-all border border-white/20 shadow-2xl cursor-pointer z-30"
+              className="absolute left-4 sm:left-8 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 hover:bg-brand text-white backdrop-blur-sm transition-all shadow-xl cursor-pointer"
               aria-label="Previous image"
-              title="Previous (Left Arrow)"
             >
-              <ChevronLeft className="h-6 w-6 sm:h-8 sm:w-8" />
+              <ChevronLeft className="h-6 w-6" />
             </button>
 
-            {/* Full-Size Image Container */}
-            <div className="relative h-full w-full max-h-[76vh] max-w-[88vw] flex items-center justify-center">
+            <div className="relative max-h-[calc(100vh-230px)] max-w-[94vw] sm:max-w-[85vw] w-[1100px] h-[620px] flex items-center justify-center">
               <Image
                 src={galleryImages[activeModalIndex].src}
                 alt={galleryImages[activeModalIndex].alt}
                 fill
-                sizes="95vw"
+                className="object-contain drop-shadow-2xl select-none"
                 priority
-                className="object-contain drop-shadow-2xl transition-all duration-300"
+                onError={(e) => {
+                  const target = e.currentTarget as HTMLImageElement;
+                  target.srcset = "";
+                  target.src = "/images/fallback-product.jpg";
+                }}
               />
             </div>
 
-            {/* Next Button */}
             <button
               type="button"
               onClick={showNextImage}
-              className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-navy-900/80 hover:bg-brand text-white transition-all border border-white/20 shadow-2xl cursor-pointer z-30"
+              className="absolute right-4 sm:right-8 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 hover:bg-brand text-white backdrop-blur-sm transition-all shadow-xl cursor-pointer"
               aria-label="Next image"
-              title="Next (Right Arrow)"
             >
-              <ChevronRight className="h-6 w-6 sm:h-8 sm:w-8" />
+              <ChevronRight className="h-6 w-6" />
             </button>
           </div>
 
-          {/* Bottom Bar: Detailed Spec Caption & Miniature Thumbnails */}
+          {/* Bottom Thumbnails Strip — Horizontally Centered Carousel with Active Pill & Captions */}
           <div
-            className="z-20 pt-3 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3"
+            className="border-t border-white/10 bg-navy-950/90 backdrop-blur-md px-6 py-3.5 flex flex-col items-center justify-center gap-2 select-none shrink-0"
             onClick={(e) => e.stopPropagation()}
           >
-            <p className="text-xs text-slate-300 font-sans text-center sm:text-left truncate min-w-0 flex-1 max-w-xl">
-              {galleryImages[activeModalIndex].alt} • Pre-audited Lot Certification
-            </p>
-
-            {/* Thumbnail Navigation Row */}
-            <div className="flex items-center gap-2 overflow-x-auto py-1 max-w-full shrink-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+            {/* Centered Thumbnails Row (Scrollable on mobile) */}
+            <div className="flex items-center justify-start sm:justify-center gap-2.5 sm:gap-3 overflow-x-auto max-w-full px-2 py-1.5 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
               {galleryImages.map((img, idx) => (
                 <button
-                  key={idx}
+                  key={img.caption + idx}
                   type="button"
                   onClick={() => setActiveModalIndex(idx)}
-                  className={`relative h-11 w-11 sm:h-13 sm:w-13 shrink-0 rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${
+                  className={`group relative h-13 w-20 sm:h-15 sm:w-24 shrink-0 rounded-lg overflow-hidden border-2 transition-all duration-200 cursor-pointer ${
                     activeModalIndex === idx
-                      ? "border-brand scale-105 ring-2 ring-brand/50 shadow-md"
-                      : "border-transparent opacity-60 hover:opacity-100"
+                      ? "border-brand ring-2 ring-brand/50 scale-105 shadow-xl opacity-100 z-10"
+                      : "border-white/20 opacity-50 hover:opacity-100 hover:border-white/60 hover:scale-102"
                   }`}
-                  aria-label={`Jump to ${img.caption}`}
+                  title={img.caption}
                 >
-                  <Image src={img.src} alt={img.alt} fill sizes="56px" className="object-cover" />
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    className="object-cover"
+                    onError={(e) => {
+                      const target = e.currentTarget as HTMLImageElement;
+                      target.srcset = "";
+                      target.src = "/images/fallback-product.jpg";
+                    }}
+                  />
+                  <span className="absolute bottom-0 inset-x-0 bg-navy-950/85 backdrop-blur-xs text-[9px] font-mono font-bold text-center text-slate-300 py-0.5 truncate px-1">
+                    {img.badge}
+                  </span>
                 </button>
               ))}
+            </div>
+
+            {/* Centered Caption & Pre-Audited Verification */}
+            <div className="text-[11px] sm:text-xs text-slate-400 font-mono text-center truncate max-w-3xl px-4">
+              <span className="text-slate-200 font-semibold">{galleryImages[activeModalIndex].caption}</span>
+              <span className="mx-2 text-slate-600 hidden md:inline">•</span>
+              <span className="text-emerald-400 font-semibold hidden md:inline">Pre-audited Lot Certification ✓</span>
             </div>
           </div>
         </div>
