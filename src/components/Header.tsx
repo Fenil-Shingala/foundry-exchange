@@ -150,7 +150,7 @@ export default function Header() {
         {/* Main Header Bar: Logo on Left, Search in Center, Nav on Right */}
         <div className="w-full flex h-20 sm:h-22 items-center justify-between gap-4 lg:gap-6 px-4 sm:px-6 lg:px-8 xl:px-10">
           {/* Left Zone: Brand Logo (Moved to Left where Search was) */}
-          <Link href="/" className="flex items-center shrink-0">
+          {/* <Link href="/" className="flex items-center shrink-0">
             <div className="relative flex items-center bg-white px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-xl shadow-md border border-white/40 transition-transform hover:scale-105">
               <Image
                 src="/foundry-logo.png"
@@ -161,7 +161,7 @@ export default function Header() {
                 className="h-10 sm:h-12 md:h-13 lg:h-14 w-auto object-contain"
               />
             </div>
-          </Link>
+          </Link> */}
 
           {/* Center Zone: Prominent Industrial Search Form */}
           <div className="flex-1 max-w-xl mx-2 lg:mx-6 hidden md:flex items-center">

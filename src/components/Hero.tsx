@@ -61,19 +61,23 @@ export default function Hero() {
       </div>
 
       <div className="relative w-full px-4 sm:px-6 lg:px-8 xl:px-10 text-center">
-        {/* Centered Brand Header Logo / Icon */}
-        {/* <div className="mx-auto mb-6 flex justify-center">
-          <div className="bg-white px-5 py-3 rounded-xl shadow-2xl border border-navy-700/60 inline-flex items-center justify-center transition-transform hover:scale-105">
+        {/* Centered Brand Header Logo */}
+        <div className="mx-auto mb-6 flex justify-center">
+          <Link
+            href="/"
+            aria-label="Foundry Exchange Home"
+            className="group inline-flex items-center justify-center bg-white px-6 sm:px-8 py-3 sm:py-4 rounded-2xl shadow-2xl border border-white/50 transition-all duration-300 hover:scale-105"
+          >
             <Image
               src="/foundry-logo.png"
               alt="Foundry Exchange Logo"
-              width={260}
-              height={78}
+              width={320}
+              height={96}
               priority
-              className="h-12 sm:h-14 md:h-16 w-auto object-contain"
+              className="h-12 sm:h-14 md:h-16 lg:h-18 w-auto object-contain"
             />
-          </div>
-        </div> */}
+          </Link>
+        </div>
 
         {/* USA Industrial Badge */}
         <div className="inline-flex items-center gap-2 rounded-full border border-navy-700 bg-navy-900/90 px-4 py-1.5 text-xs font-semibold tracking-wide text-zinc-200 shadow-inner mb-6 backdrop-blur-xs">
