@@ -284,7 +284,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                 </video>
 
                 {/* Dark Vignette Overlay */}
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-navy-950/30" />
+                <div className="pointer-events-none absolute inset-0 bg-navy-950/30" />
 
                 {/* Top Badges — Responsive for mobile & desktop */}
                 <div className="absolute top-3 inset-x-3 sm:top-4 sm:inset-x-4 flex items-center justify-between pointer-events-none z-10">
@@ -310,7 +310,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                 )}
 
                 {/* Bottom Video Controls Bar — Responsive single-line layout */}
-                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-navy-950/95 via-navy-950/70 to-transparent pt-6 pb-2.5 px-3 sm:px-4 sm:pb-3 flex flex-col justify-end text-white text-xs z-10">
+                <div className="absolute bottom-0 inset-x-0 bg-navy-950/90 border-t border-navy-800 py-2.5 px-3 sm:px-4 flex flex-col justify-end text-white text-xs z-10">
                   <div className="flex items-center justify-between gap-2 pb-1.5">
                     {/* Left: Play/Pause, Mute & Title */}
                     <div className="flex items-center gap-2 sm:gap-3 min-w-0">
@@ -401,7 +401,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                     </span>
 
                     {/* Bottom Caption Overlay — z-20 above overlay so text is 100% crisp and readable */}
-                    <div className="absolute inset-x-0 bottom-0 z-20 bg-gradient-to-t from-navy-950/95 via-navy-950/70 to-transparent p-2.5 pt-6 text-white pointer-events-none">
+                    <div className="absolute inset-x-0 bottom-0 z-20 bg-navy-950/90 border-t border-navy-800 p-2.5 text-white pointer-events-none">
                       <p className="text-[11px] font-mono text-slate-100 font-medium truncate">
                         {img.caption}
                       </p>
@@ -426,7 +426,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                   <div className="text-[11px] text-slate-500 font-mono">Volumetric Scan</div>
                 </div>
                 <div className="px-2">
-                  <div className="font-bold text-emerald-700 font-heading text-sm sm:text-base">EN 10204 3.1</div>
+                  <div className="font-bold text-cobalt font-heading text-sm sm:text-base">EN 10204 3.1</div>
                   <div className="text-[11px] text-slate-500 font-mono">Digital Mill Test Cert</div>
                 </div>
                 <div className="px-2">
@@ -460,9 +460,9 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                 {/* Rating & Review Counter */}
                 <div className="mt-2.5 flex items-center gap-2 text-xs flex-wrap">
                   <div className="flex items-center gap-1.5 shrink-0 whitespace-nowrap">
-                    <div className="flex items-center text-amber-400">
+                    <div className="flex items-center text-brand">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                        <Star key={i} className="h-4 w-4 fill-brand text-brand" />
                       ))}
                     </div>
                     <span className="font-bold text-slate-900 font-mono">4.9 / 5.0</span>
@@ -487,7 +487,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                     ${listPrice.toLocaleString()}.00 USD
                   </span>
                   {discountPercent > 0 && (
-                    <span className="rounded-md bg-emerald-100 text-emerald-800 px-2 py-0.5 text-xs font-mono font-bold whitespace-nowrap">
+                    <span className="rounded-md bg-red-50 text-brand border border-brand/20 px-2 py-0.5 text-xs font-mono font-bold whitespace-nowrap">
                       {discountPercent}% OFF APPLIED
                     </span>
                   )}
@@ -558,7 +558,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                           {v.badge}
                         </span>
                         {v.priceOffset > 0 && (
-                          <span className={`font-mono font-bold shrink-0 ${selectedVariant.id === v.id ? "text-amber-400" : "text-brand"}`}>
+                          <span className={`font-mono font-bold shrink-0 ${selectedVariant.id === v.id ? "text-white" : "text-brand"}`}>
                             +${v.priceOffset}
                           </span>
                         )}
@@ -627,7 +627,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                   </div>
 
                   <div className="flex items-center gap-2 text-xs font-medium text-slate-600">
-                    <span className="flex h-2 w-2 rounded-full bg-emerald-500" />
+                    <span className="flex h-2 w-2 rounded-full bg-brand" />
                     <span>{listing.leadTime} • {listing.location}</span>
                   </div>
                 </div>
@@ -656,7 +656,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                   href="http://foundrydrawings.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full rounded-lg bg-[#ffc439] hover:bg-[#f4bb34] py-3 px-6 text-center text-xs sm:text-sm font-extrabold text-navy-950 transition-all shadow-xs flex items-center justify-center gap-2"
+                  className="w-full rounded-lg bg-brand hover:bg-brand-hover py-3 px-6 text-center text-xs sm:text-sm font-extrabold text-white transition-all shadow-xs flex items-center justify-center gap-2"
                 >
                   <ExternalLink className="h-4 w-4" />
                   <span>Upload Custom Drawing (foundrydrawings.com)</span>
@@ -665,8 +665,8 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
 
               {/* Cart Feedback Toast */}
               {cartSuccess && (
-                <div className="rounded-lg bg-emerald-50 border border-emerald-300 p-3 text-xs text-emerald-800 flex items-center gap-2 animate-fadeIn">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
+                <div className="rounded-lg bg-blue-50 border border-blue-200 p-3 text-xs text-navy-900 flex items-center gap-2 animate-fadeIn">
+                  <CheckCircle2 className="h-4 w-4 text-cobalt shrink-0" />
                   <span>Successfully added {quantity}x lot ({selectedSize.label}) to your technical inquiry basket!</span>
                 </div>
               )}
@@ -685,7 +685,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
               
               {/* 1. Dark Editorial Guide Box */}
               <div className="rounded-xl bg-navy-950 text-white p-5 sm:p-6 shadow-md border border-navy-800">
-                <span className="inline-block rounded bg-amber-400 text-navy-950 px-2 py-0.5 text-[10px] font-mono font-extrabold uppercase tracking-wider mb-2">
+                <span className="inline-block rounded bg-brand text-white px-2 py-0.5 text-[10px] font-mono font-extrabold uppercase tracking-wider mb-2">
                   {detailData.editorialBadge}
                 </span>
                 <h4 className="font-heading text-lg sm:text-xl font-bold uppercase text-white leading-snug">
@@ -786,7 +786,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                           <td className="py-2 px-3 font-mono">{s.param1}</td>
                           <td className="py-2 px-3 font-mono">{s.param2}</td>
                           <td className="py-2 px-3 font-mono">{s.param3}</td>
-                          <td className="py-2 px-3 font-mono text-emerald-700 font-bold">{s.param4}</td>
+                          <td className="py-2 px-3 font-mono text-cobalt font-bold">{s.param4}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -848,10 +848,10 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200">
             <div>
               <div className="flex items-center gap-2 mb-1.5">
-                <span className="rounded bg-navy-950 text-amber-400 font-mono text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5">
+                <span className="rounded bg-navy-950 text-white border border-navy-700 font-mono text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5">
                   EN 10204 Type 3.1 Traceability
                 </span>
-                <span className="text-xs font-semibold text-emerald-600 flex items-center gap-1">
+                <span className="text-xs font-semibold text-cobalt flex items-center gap-1">
                   <CheckCircle className="h-3.5 w-3.5" /> 100% Heat Verified
                 </span>
               </div>
@@ -930,8 +930,8 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                         <td className="py-2.5 px-4 font-mono text-slate-600">{el.standardRange}</td>
                         <td className="py-2.5 px-4 font-mono font-bold text-slate-900">{el.actualValue}</td>
                         <td className="py-2.5 px-4 text-right">
-                          <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-0.5 text-[10px] font-mono font-bold uppercase">
-                            <CheckCircle className="h-3 w-3" /> PASS
+                          <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 text-navy-900 border border-blue-200 px-2.5 py-0.5 text-[10px] font-mono font-bold uppercase">
+                            <CheckCircle className="h-3 w-3 text-cobalt" /> PASS
                           </span>
                         </td>
                       </tr>
@@ -942,7 +942,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
 
               <div className="mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[11px] font-mono text-slate-500 bg-slate-50 p-3.5 rounded-lg border border-slate-200">
                 <div className="flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                  <span className="h-2 w-2 rounded-full bg-cobalt" />
                   <span>Spark Spectrometer: Thermo Fisher ARL 3460 (Argon Flush) • ASTM E415 Certified</span>
                 </div>
                 <div>Ladle Heat No: <strong className="text-navy">#FE-2026-HT8842-A</strong></div>
@@ -972,8 +972,8 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                         <td className="py-3 px-4 font-mono font-bold text-brand">{mech.actualValue}</td>
                         <td className="py-3 px-4 font-mono text-slate-500 text-[11px]">{mech.testMethod}</td>
                         <td className="py-3 px-4 text-right">
-                          <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-0.5 text-[10px] font-mono font-bold uppercase">
-                            <CheckCircle className="h-3 w-3" /> VERIFIED
+                          <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 text-navy-900 border border-blue-200 px-2.5 py-0.5 text-[10px] font-mono font-bold uppercase">
+                            <CheckCircle className="h-3 w-3 text-cobalt" /> VERIFIED
                           </span>
                         </td>
                       </tr>
@@ -1030,7 +1030,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
               </div>
 
               <div className="mt-4 flex items-center gap-2 text-[11px] font-mono text-slate-500 bg-slate-50 p-3 rounded-lg border border-slate-200">
-                <Sparkles className="h-3.5 w-3.5 text-amber-500" />
+                <Sparkles className="h-3.5 w-3.5 text-brand" />
                 <span>Optical metallography verified at 100x and 500x magnification after 2% Nital chemical etch per ASTM E3.</span>
               </div>
             </div>
@@ -1061,10 +1061,10 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
           {downloadToast && (
             <div className="mt-4 rounded-xl bg-navy-950 text-white p-3.5 px-4 text-xs font-mono flex items-center justify-between animate-fadeIn border border-navy-800 shadow-lg">
               <div className="flex items-center gap-2.5">
-                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="h-2 w-2 rounded-full bg-brand animate-pulse" />
                 <span>{downloadToast}</span>
               </div>
-              <span className="text-emerald-400 font-bold">100% Ready ✓</span>
+              <span className="text-white font-bold">100% Ready ✓</span>
             </div>
           )}
 
@@ -1110,11 +1110,11 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
       {/* POINT 4 SECTION 3: SUPPLIER & FACILITY AUDIT DOSSIER        */}
       {/* ============================================================ */}
       <section id="audit-dossier" className="w-full pt-8 sm:pt-10 scroll-mt-24">
-        <div className="rounded-2xl border-2 border-navy-900 bg-linear-to-br from-navy-950 via-navy-900 to-navy-950 text-white p-6 sm:p-8 lg:p-10 shadow-xl">
+        <div className="rounded-2xl border-2 border-navy-900 bg-navy-950 text-white p-6 sm:p-8 lg:p-10 shadow-xl">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-white/10">
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <span className="rounded bg-emerald-500 text-white px-2.5 py-0.5 text-[10px] font-mono font-extrabold uppercase tracking-wider flex items-center gap-1 shadow-sm">
+                <span className="rounded bg-brand text-white px-2.5 py-0.5 text-[10px] font-mono font-extrabold uppercase tracking-wider flex items-center gap-1 shadow-sm">
                   <ShieldCheck className="h-3.5 w-3.5" /> Pre-Audited &amp; Verified
                 </span>
                 <span className="text-xs font-mono text-slate-400">
@@ -1132,7 +1132,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                 <span>•</span>
                 <span>Est. {detailData.supplierDossier.established}</span>
                 <span>•</span>
-                <span className="text-amber-400 font-semibold">{detailData.supplierDossier.meltCapacity}</span>
+                <span className="text-white font-semibold">{detailData.supplierDossier.meltCapacity}</span>
               </div>
             </div>
 
@@ -1155,13 +1155,13 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
               </h5>
               <div className="space-y-3">
                 <div className="rounded-xl bg-white/5 border border-white/10 p-4">
-                  <div className="text-[11px] font-mono text-amber-400 uppercase font-bold mb-1">Induction Melting Deck</div>
+                  <div className="text-[11px] font-mono text-blue-300 uppercase font-bold mb-1">Induction Melting Deck</div>
                   <div className="text-xs text-slate-200 font-sans leading-relaxed">
                     {detailData.supplierDossier.furnaces}
                   </div>
                 </div>
                 <div className="rounded-xl bg-white/5 border border-white/10 p-4">
-                  <div className="text-[11px] font-mono text-amber-400 uppercase font-bold mb-1">Metallurgical QA &amp; NDT Equipment</div>
+                  <div className="text-[11px] font-mono text-blue-300 uppercase font-bold mb-1">Metallurgical QA &amp; NDT Equipment</div>
                   <div className="text-xs text-slate-200 font-sans leading-relaxed">
                     {detailData.supplierDossier.testingLab}
                   </div>
@@ -1177,7 +1177,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
               <div className="grid grid-cols-2 gap-2">
                 {detailData.supplierDossier.certifications.map((cert, cIdx) => (
                   <div key={cIdx} className="rounded-lg bg-white/10 border border-white/10 p-2.5 text-[11px] font-semibold text-slate-200 flex items-center gap-2">
-                    <Award className="h-3.5 w-3.5 text-amber-400 shrink-0" />
+                    <Award className="h-3.5 w-3.5 text-brand shrink-0" />
                     <span className="truncate">{cert}</span>
                   </div>
                 ))}
@@ -1334,9 +1334,9 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
       {/* POINT 4 SECTION 6: EMBEDDED CUSTOM RFQ INQUIRY BOX         */}
       {/* ============================================================ */}
       <section className="w-full pt-8 sm:pt-10">
-        <div className="rounded-2xl border border-slate-800 bg-linear-to-r from-navy-950 via-slate-900 to-navy-950 text-white p-6 sm:p-8 lg:p-10 shadow-xl">
+        <div className="rounded-2xl border border-slate-800 bg-navy-950 text-white p-6 sm:p-8 lg:p-10 shadow-xl">
           <div className="max-w-3xl">
-            <span className="rounded bg-amber-400 text-navy-950 px-2.5 py-0.5 text-[10px] font-mono font-extrabold uppercase tracking-wider inline-block mb-2">
+            <span className="rounded bg-brand text-white px-2.5 py-0.5 text-[10px] font-mono font-extrabold uppercase tracking-wider inline-block mb-2">
               Custom Heat &amp; Tooling Engineering
             </span>
             <h3 className="font-heading text-xl sm:text-3xl font-extrabold uppercase text-white tracking-tight">
@@ -1348,8 +1348,8 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
           </div>
 
           {rfqSubmitted ? (
-            <div className="mt-6 rounded-xl bg-emerald-950/80 border border-emerald-500/50 p-4 text-emerald-200 text-xs sm:text-sm flex items-center gap-3 animate-fadeIn">
-              <CheckCircle className="h-5 w-5 text-emerald-400 shrink-0" />
+            <div className="mt-6 rounded-xl bg-navy-900 border border-navy-700 p-4 text-slate-200 text-xs sm:text-sm flex items-center gap-3 animate-fadeIn">
+              <CheckCircle className="h-5 w-5 text-brand shrink-0" />
               <span>
                 Thank you! Your custom RFQ package for <strong>{listing.title}</strong> has been transmitted to {listing.vendorName}&apos;s Chief Metallurgist. An official quotation with MTR feasibility will be dispatched shortly.
               </span>
@@ -1522,7 +1522,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
             <div className="text-[11px] sm:text-xs text-slate-400 font-mono text-center truncate max-w-3xl px-4">
               <span className="text-slate-200 font-semibold">{galleryImages[activeModalIndex].caption}</span>
               <span className="mx-2 text-slate-600 hidden md:inline">•</span>
-              <span className="text-emerald-400 font-semibold hidden md:inline">Pre-audited Lot Certification ✓</span>
+              <span className="text-white font-semibold hidden md:inline">Pre-audited Lot Certification ✓</span>
             </div>
           </div>
         </div>

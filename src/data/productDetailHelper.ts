@@ -572,8 +572,8 @@ export function getProductDetailData(listing: ProductListing): ProductDetailData
     variants = [
       { id: "v1", name: "Standard Operational Configuration", short: "Standard OEM", badge: "Ready for Inspection", priceOffset: 0, image: listing.imageUrl, swatchColor: "#0f172a" },
       { id: "v2", name: "Turnkey Rigging & De-Installation Package", short: "Turnkey Extraction", badge: "Complete Logistics", priceOffset: 18500, image: listing.imageUrl, swatchColor: "#1e3a8a" },
-      { id: "v3", name: "Reconditioned with New Digital PLC Panel", short: "Modernized PLC", badge: "12-Mo Warranty", priceOffset: 34000, image: listing.imageUrl, swatchColor: "#047857" },
-      { id: "v4", name: "Includes Spare Tooling & Wear Cassettes", short: "With Spare Tooling", badge: "High Value Bundle", priceOffset: 12000, image: listing.imageUrl, swatchColor: "#7c2d12" },
+      { id: "v3", name: "Reconditioned with New Digital PLC Panel", short: "Modernized PLC", badge: "12-Mo Warranty", priceOffset: 34000, image: listing.imageUrl, swatchColor: "#1d4ed8" },
+      { id: "v4", name: "Includes Spare Tooling & Wear Cassettes", short: "With Spare Tooling", badge: "High Value Bundle", priceOffset: 12000, image: listing.imageUrl, swatchColor: "#0f172a" },
     ];
     sizeTableHeader = ["Model / Capacity", "Rated Tonnage", "Stroke Length", "Bed Area", "Operating Speed"];
     sizes = [

@@ -64,10 +64,10 @@ export default function AuctionSection() {
           </div>
 
           {/* Live Status Badge */}
-          <div className="flex items-center gap-2.5 rounded-lg border border-emerald-200 bg-emerald-50/80 px-3.5 py-2 text-xs font-semibold text-emerald-900 shrink-0 shadow-2xs">
+          <div className="flex items-center gap-2.5 rounded-lg border border-red-200 bg-red-50/80 px-3.5 py-2 text-xs font-semibold text-brand shrink-0 shadow-2xs">
             <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-600" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand" />
             </span>
             <span>
               <strong>3 Active Catalogs</strong> · 925+ Auction Lots Live
@@ -204,15 +204,15 @@ export default function AuctionSection() {
                     >
                       <div>
                         {/* Lot Image Preview */}
-                        <div className="relative h-28 w-full rounded-md bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100 mb-2.5">
+                        <div className="relative h-36 w-full rounded-md bg-slate-100 overflow-hidden border border-slate-200 mb-2.5">
                           <Image
                             src={lot.imageUrl}
                             alt={lot.title}
-                            width={160}
-                            height={90}
-                            className="max-h-20 w-auto object-contain transition-transform duration-200 group-hover/lot:scale-105"
+                            fill
+                            sizes="(max-width: 768px) 100vw, 260px"
+                            className="object-cover transition-transform duration-200 group-hover/lot:scale-105"
                           />
-                          <span className="absolute top-2 left-2 rounded bg-navy-950/90 text-white font-mono font-bold text-[10px] px-1.5 py-0.5 shadow-2xs">
+                          <span className="absolute top-2 left-2 rounded bg-navy-950/90 text-white font-mono font-bold text-[10px] px-1.5 py-0.5 shadow-2xs z-10">
                             {lot.lotNumber}
                           </span>
                         </div>
@@ -254,7 +254,7 @@ export default function AuctionSection() {
                   {event.riggingAvailable && (
                     <>
                       <span className="text-slate-300">|</span>
-                      <span className="flex items-center gap-1 text-emerald-700 font-medium">
+                      <span className="flex items-center gap-1 text-cobalt font-medium">
                         <Truck className="h-3.5 w-3.5" />
                         Rigging &amp; Loading Available On-Site
                       </span>
@@ -299,8 +299,8 @@ export default function AuctionSection() {
 
           {/* Quick Bid Feedback Alert */}
           {bidSuccessMessage && (
-            <div className="mb-4 rounded-lg bg-emerald-50 border border-emerald-300 p-3 text-xs font-bold text-emerald-900 flex items-center gap-2 shadow-sm transition-all">
-              <ShieldCheck className="h-4 w-4 text-emerald-600 shrink-0" />
+            <div className="mb-4 rounded-lg bg-blue-50 border border-blue-200 p-3 text-xs font-bold text-navy-900 flex items-center gap-2 shadow-sm transition-all">
+              <ShieldCheck className="h-4 w-4 text-cobalt shrink-0" />
               <span>{bidSuccessMessage}</span>
             </div>
           )}
@@ -313,18 +313,18 @@ export default function AuctionSection() {
               >
                 <div>
                   {/* Lot Image with Badges */}
-                  <div className="relative h-36 w-full rounded-lg bg-navy-950 p-4 flex items-center justify-center overflow-hidden mb-4 border border-navy-800">
+                  <div className="relative h-44 w-full rounded-lg bg-navy-950 overflow-hidden mb-4 border border-navy-800">
                     <Image
                       src={lot.imageUrl}
                       alt={lot.title}
-                      width={180}
-                      height={90}
-                      className="max-h-24 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 360px"
+                      className="object-cover transition-transform duration-200 group-hover:scale-105"
                     />
-                    <span className="absolute top-2.5 left-2.5 rounded bg-brand text-white font-mono font-bold text-[10px] px-2 py-0.5 shadow-2xs">
+                    <span className="absolute top-2.5 left-2.5 rounded bg-brand text-white font-mono font-bold text-[10px] px-2 py-0.5 shadow-2xs z-10">
                       {lot.lotNumber}
                     </span>
-                    <span className="absolute top-2.5 right-2.5 rounded bg-navy-900/90 text-slate-300 font-mono text-[10px] px-2 py-0.5 border border-navy-700">
+                    <span className="absolute top-2.5 right-2.5 rounded bg-navy-900/90 text-slate-300 font-mono text-[10px] px-2 py-0.5 border border-navy-700 z-10">
                       {lot.reserveStatus}
                     </span>
                   </div>

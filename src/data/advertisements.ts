@@ -12,7 +12,7 @@ export interface Advertisement {
 export const leftRailAds: Advertisement[] = [
   {
     id: "ad-left-1",
-    badge: "B2B EXCHANGE",
+    badge: "EXCHANGE",
     title: "PrecastXchange",
     subtitle: "Heavy Precast & Machinery",
     imageUrl: "/images/ads/precastxchange-logo.png",
@@ -85,7 +85,7 @@ export const rightRailAds: Advertisement[] = [
   },
   {
     id: "ad-right-4",
-    badge: "B2B EXCHANGE",
+    badge: "EXCHANGE",
     title: "PrecastXchange Network",
     subtitle: "Certified Equipment Clearing",
     imageUrl: "/images/ads/precastxchange-logo.png",

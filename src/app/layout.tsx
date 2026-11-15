@@ -30,7 +30,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://foundryexchange.com"),
-  title: "Foundry Exchange | The B2B Marketplace for Metal Casting & Foundry",
+  title: "Foundry Exchange | The Marketplace for Metal Casting & Foundry",
   description:
     "Everything Foundry. One Exchange. Buy, sell, trade, and source ferrous and non-ferrous castings, foundry equipment, raw materials, tooling, and testing services.",
   keywords: [
@@ -41,13 +41,13 @@ export const metadata: Metadata = {
     "die casting",
     "sand casting",
     "metallurgical supplies",
-    "B2B exchange",
+    "industrial exchange",
   ],
   icons: {
     icon: "/foundry-logo.png",
   },
   openGraph: {
-    title: "Foundry Exchange | B2B Metal Casting & Equipment Marketplace",
+    title: "Foundry Exchange | Metal Casting & Equipment Marketplace",
     description:
       "Buy, sell, trade, and source industrial castings, melt equipment, alloys, and foundry services.",
     url: "https://foundryexchange.com",

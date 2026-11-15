@@ -21,20 +21,8 @@ export default function CastingsForgingsDualSection() {
       id="castings-forgings"
       className="relative z-20 border-b border-navy-800 bg-navy-950 py-16 sm:py-20 text-white overflow-hidden"
     >
-      {/* Background Ambience Subtle Glows */}
+      {/* Background Ambience Subtle Grid */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-        <div
-          className="absolute -top-40 left-1/4 h-[400px] w-[500px] rounded-full opacity-15 blur-3xl"
-          style={{
-            background: "radial-gradient(circle, #c82425 0%, #062040 70%, transparent 100%)",
-          }}
-        />
-        <div
-          className="absolute -bottom-40 right-1/4 h-[400px] w-[500px] rounded-full opacity-15 blur-3xl"
-          style={{
-            background: "radial-gradient(circle, #1d4ed8 0%, #062040 70%, transparent 100%)",
-          }}
-        />
         <div
           className="absolute inset-0 opacity-[0.04]"
           style={{
@@ -84,7 +72,7 @@ export default function CastingsForgingsDualSection() {
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/20 to-transparent" />
+                <div className="pointer-events-none absolute inset-0 bg-navy-950/30" />
 
                 {/* Top Badge: Process Type */}
                 <div className="absolute top-4 left-4">
@@ -208,7 +196,7 @@ export default function CastingsForgingsDualSection() {
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/20 to-transparent" />
+                <div className="pointer-events-none absolute inset-0 bg-navy-950/30" />
 
                 {/* Top Badge: Process Type */}
                 <div className="absolute top-4 left-4">
@@ -430,7 +418,7 @@ export default function CastingsForgingsDualSection() {
               </div>
 
               {/* Box 3: Technical Engineering Assistance */}
-              <div className="rounded-xl border border-brand/40 bg-gradient-to-b from-brand/10 to-navy-950/90 p-5 flex flex-col justify-between">
+              <div className="rounded-xl border border-brand/40 bg-navy-900 p-5 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-2 mb-3">
                     <span className="flex h-6 w-6 items-center justify-center rounded-md bg-white/20 text-white">
@@ -487,18 +475,18 @@ export default function CastingsForgingsDualSection() {
                   </tr>
                   <tr className="hover:bg-navy-800/30 transition-colors">
                     <td className="py-3 px-4 font-semibold text-white">Internal Cavities &amp; Cores</td>
-                    <td className="py-3 px-4 text-emerald-400 font-medium">Virtually unlimited (sand core technology)</td>
+                    <td className="py-3 px-4 text-blue-300 font-medium">Virtually unlimited (sand core technology)</td>
                     <td className="py-3 px-4 text-slate-300">Limited (deep hollows require secondary machining)</td>
                   </tr>
                   <tr className="hover:bg-navy-800/30 transition-colors">
                     <td className="py-3 px-4 font-semibold text-white">Structural Fatigue Strength</td>
                     <td className="py-3 px-4 text-slate-300">Good (uniform multi-directional properties)</td>
-                    <td className="py-3 px-4 text-emerald-400 font-medium">Superior (15%–30% higher due to unbroken grain flow)</td>
+                    <td className="py-3 px-4 text-blue-300 font-medium">Superior (15%–30% higher due to unbroken grain flow)</td>
                   </tr>
                   <tr className="hover:bg-navy-800/30 transition-colors">
                     <td className="py-3 px-4 font-semibold text-white">Internal Porosity Risk</td>
                     <td className="py-3 px-4 text-slate-300">Managed via gating, risers &amp; NDT radiography</td>
-                    <td className="py-3 px-4 text-emerald-400 font-medium">Virtually zero (gas pockets compressed shut)</td>
+                    <td className="py-3 px-4 text-blue-300 font-medium">Virtually zero (gas pockets compressed shut)</td>
                   </tr>
                   <tr className="hover:bg-navy-800/30 transition-colors">
                     <td className="py-3 px-4 font-semibold text-white">Weight Range Capacity</td>

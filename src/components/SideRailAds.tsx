@@ -116,17 +116,11 @@ function RailColumn({ side, ads, visible, speed = 0.55 }: RailProps) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Scrollable Container with Top & Bottom Fade Masks */}
+      {/* Scrollable Container */}
       <div
         ref={scrollContainerRef}
         onWheel={handleWheel}
         className="flex-1 overflow-y-auto overflow-x-hidden [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden flex flex-col gap-2.5 pb-2"
-        style={{
-          maskImage:
-            "linear-gradient(to bottom, transparent 0%, black 14px, black calc(100% - 14px), transparent 100%)",
-          WebkitMaskImage:
-            "linear-gradient(to bottom, transparent 0%, black 14px, black calc(100% - 14px), transparent 100%)",
-        }}
       >
         {loopingAds.map((ad) => {
           const isExternal = ad.actionHref.startsWith("http");

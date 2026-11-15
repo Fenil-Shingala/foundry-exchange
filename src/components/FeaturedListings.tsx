@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, BadgeCheck, ArrowRight } from "lucide-react";
+import { MapPin, BadgeCheck, ArrowRight, Layers } from "lucide-react";
 import { featuredListings, ProductListing } from "@/data/listings";
 
 export default function FeaturedListings() {
@@ -13,6 +13,9 @@ export default function FeaturedListings() {
     activeFilter === "All"
       ? featuredListings
       : featuredListings.filter((l) => l.status === activeFilter);
+
+  // Show only 9 products in 2 rows + 1 "View All" card (10 cards total = exactly 2 rows on desktop)
+  const displayedListings = filteredListings.slice(0, 9);
 
   const filterTabs = [
     { name: "All", count: featuredListings.length },
@@ -33,13 +36,13 @@ export default function FeaturedListings() {
   const getStatusBadgeStyle = (status: ProductListing["status"]) => {
     switch (status) {
       case "Ready Stock":
-        return "bg-emerald-50 text-emerald-800 border-emerald-200";
+        return "bg-blue-50 text-navy-900 border-blue-200";
       case "Made to Order":
         return "bg-blue-50 text-cobalt border-blue-200";
       case "Surplus":
-        return "bg-indigo-50 text-indigo-900 border-indigo-200";
+        return "bg-slate-100 text-navy border-slate-300";
       case "Auction":
-        return "bg-purple-50 text-purple-800 border-purple-200";
+        return "bg-red-50 text-brand border-brand/30";
       default:
         return "bg-slate-100 text-navy border-slate-200";
     }
@@ -134,9 +137,9 @@ export default function FeaturedListings() {
           </div>
         </div>
 
-        {/* Product Cards Grid — 5 columns on large screens for balanced 4x5 layout */}
+        {/* Product Cards Grid — 5 columns on large screens for balanced 2x5 layout (9 products + 1 View All card) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 grid-cols-5-desktop gap-3 xl:gap-3.5">
-          {filteredListings.map((listing) => {
+          {displayedListings.map((listing) => {
             const priceData = parseListingPrice(listing.priceEstimate, listing.status);
 
             return (
@@ -253,7 +256,7 @@ export default function FeaturedListings() {
                         href={`/listings/${listing.id}`}
                         className="shrink-0 rounded bg-brand px-2 py-1 text-[10.5px] font-bold uppercase tracking-wider text-white hover:bg-brand-hover shadow-2xs hover:scale-105 transition-all text-center whitespace-nowrap"
                       >
-                        View Lot
+                        View Details
                       </Link>
                     </div>
                   </div>
@@ -261,15 +264,99 @@ export default function FeaturedListings() {
               </article>
             );
           })}
+
+          {/* 10th Card: View All Products Card */}
+          <article className="group flex flex-col justify-between rounded-xl border-2 border-brand/40 border-t-4 border-t-brand bg-white overflow-hidden shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-brand hover:shadow-xl">
+            {/* Visual Box */}
+            <Link
+              href="/products"
+              className="relative aspect-4/3 w-full bg-navy-950 flex flex-col items-center justify-center p-5 text-center border-b border-navy-800 block cursor-pointer group-hover:bg-navy-900 transition-colors"
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand text-white shadow-md mb-2 group-hover:scale-110 transition-transform duration-300">
+                <Layers className="h-6 w-6" />
+              </div>
+              <span className="font-heading text-base sm:text-lg font-bold uppercase tracking-tight text-white group-hover:text-brand transition-colors">
+                Explore Full Catalog
+              </span>
+              <span className="mt-1 text-xs font-mono font-bold text-slate-300">
+                +{featuredListings.length - displayedListings.length} More Certified Lots
+              </span>
+
+              {/* Status Badge */}
+              <span className="absolute top-2.5 left-2.5 rounded bg-brand text-white px-2 py-0.5 text-[10px] font-mono font-bold uppercase tracking-wider shadow-2xs">
+                Full Catalog
+              </span>
+
+              {/* Category Pill */}
+              <span className="absolute bottom-2.5 right-2.5 rounded bg-navy-900/90 border border-navy-700 px-2 py-0.5 text-[9.5px] font-mono font-bold uppercase text-slate-300">
+                {featuredListings.length} Total Lots
+              </span>
+            </Link>
+
+            {/* Card Info */}
+            <div className="p-3.5 xl:p-4 flex-1 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center gap-1.5 text-[11px] text-slate-500 mb-1">
+                  <MapPin className="h-3 w-3 text-brand shrink-0" />
+                  <span className="truncate">Global Foundries &amp; Warehouses</span>
+                </div>
+
+                <Link href="/products" className="block">
+                  <h3 className="font-heading text-sm xl:text-[15px] font-bold uppercase tracking-tight text-navy group-hover:text-brand transition-colors line-clamp-2 min-h-[2.4rem] leading-snug">
+                    View All Metal Castings, Forgings &amp; Melt Assets
+                  </h3>
+                </Link>
+
+                <p className="mt-1 text-xs font-semibold text-slate-700 line-clamp-1">
+                  Complete Certified Industrial Inventory
+                </p>
+
+                {/* Standard Spec Tags */}
+                <div className="mt-2.5 flex flex-wrap gap-1">
+                  <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-mono font-medium text-navy border border-slate-200/60">
+                    ASTM / DIN / ISO
+                  </span>
+                  <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-mono font-medium text-navy border border-slate-200/60">
+                    Ready Stock
+                  </span>
+                  <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-mono font-medium text-navy border border-slate-200/60">
+                    Made to Order
+                  </span>
+                </div>
+              </div>
+
+              <div className="mt-4 pt-2.5 border-t border-slate-100">
+                {/* Verification */}
+                <div className="flex items-center justify-between gap-1 text-slate-500 mb-2">
+                  <span className="truncate min-w-0 font-medium text-[11px] text-slate-600">
+                    100% Verified Foundries
+                  </span>
+                  <span className="shrink-0 inline-flex items-center gap-0.5 text-[9.5px] font-bold text-brand bg-red-50 px-1.5 py-0.5 rounded border border-brand/20 whitespace-nowrap">
+                    <BadgeCheck className="h-3 w-3 text-brand shrink-0" />
+                    Verified
+                  </span>
+                </div>
+
+                {/* Action Link Button */}
+                <Link
+                  href="/products"
+                  className="w-full rounded bg-brand py-2 px-3 text-xs font-bold uppercase tracking-wider text-white hover:bg-brand-hover shadow-2xs hover:scale-[1.02] transition-all flex items-center justify-center gap-1.5 text-center"
+                >
+                  <span>View All Products</span>
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </div>
+          </article>
         </div>
 
         {/* View All Bar */}
         <div className="mt-12 text-center">
           <Link
-            href="/#contact-form"
+            href="/products"
             className="inline-flex items-center gap-2 rounded-lg border-2 border-brand bg-white px-6 py-3 text-xs font-bold uppercase tracking-wider text-brand shadow-xs hover:bg-brand hover:text-white transition-all"
           >
-            <span>View All Marketplace Listings</span>
+            <span>View All Marketplace Listings ({featuredListings.length})</span>
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

@@ -49,15 +49,6 @@ export default function Hero() {
         className="pointer-events-none absolute inset-0 overflow-hidden"
         aria-hidden="true"
       >
-        {/* Molten Glow & Heavy Industrial Atmospheric Lighting */}
-        <div
-          className="absolute -top-40 left-1/2 -translate-x-1/2 h-[550px] w-[950px] rounded-full opacity-25 blur-3xl"
-          style={{
-            background:
-              "radial-gradient(ellipse at center, #c82425 0%, #0a3161 50%, rgba(6,32,64,0) 80%)",
-          }}
-        />
-
         {/* Industrial Blueprint Precision Grid Overlay */}
         <div
           className="absolute inset-0 opacity-[0.06]"
@@ -88,7 +79,7 @@ export default function Hero() {
         <div className="inline-flex items-center gap-2 rounded-full border border-navy-700 bg-navy-900/90 px-4 py-1.5 text-xs font-semibold tracking-wide text-zinc-200 shadow-inner mb-6 backdrop-blur-xs">
           <span className="flex h-2 w-2 rounded-full bg-brand animate-pulse" />
           <span className="text-white font-bold tracking-wider uppercase">
-            B2B Foundry & Forge Exchange
+            Foundry & Forge Exchange
           </span>
           <span className="text-slate-500">•</span>
           <span className="text-slate-300">

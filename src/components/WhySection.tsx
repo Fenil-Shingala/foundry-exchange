@@ -44,7 +44,7 @@ export default function WhySection() {
               Why Heavy Industry Chooses Foundry Exchange
             </h2>
             <p className="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed">
-              Generalist B2B marketplaces fail the casting industry because they treat a 500-ton heat-treated ductile iron casting like consumer goods. Foundry Exchange was built from the melt deck up to handle metallurgical rigor, tooling longevity, and heavy logistics.
+              Generalist marketplaces fail the casting industry because they treat a 500-ton heat-treated ductile iron casting like consumer goods. Foundry Exchange was built from the melt deck up to handle metallurgical rigor, tooling longevity, and heavy logistics.
             </p>
 
             <div className="mt-8 space-y-3">

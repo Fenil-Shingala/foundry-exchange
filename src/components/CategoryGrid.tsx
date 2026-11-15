@@ -16,7 +16,7 @@ import {
 import { foundryCategories } from "@/data/categories";
 
 function renderCategoryIcon(iconName: string) {
-  const iconProps = { className: "h-6 w-6 text-white" };
+  const iconProps = { className: "h-6 w-6 transition-colors duration-200" };
   switch (iconName) {
     case "Layers":
       return <Layers {...iconProps} />;
@@ -77,55 +77,62 @@ export default function CategoryGrid() {
           </Link>
         </div>
 
-        {/* 10-Card Grid with Bold Brand Red Top Border (5 columns on large screens) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-cols-5-desktop gap-5 xl:gap-6">
+        {/* 10-Card Grid with Bold Brand Red Top Border (4 cards per row on desktop) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 xl:gap-6">
           {foundryCategories.map((category) => (
             <Link
               key={category.id}
               href={category.href}
-              className="group relative flex flex-col justify-between rounded-xl border border-slate-200 border-t-4 border-t-brand bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-brand hover:shadow-lg"
+              className="group relative flex flex-col justify-between rounded-xl border border-slate-200 border-t-4 border-t-brand bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-brand hover:shadow-lg"
             >
-              <div>
+              <div className="flex flex-col flex-1">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand text-white shadow-xs group-hover:scale-105 group-hover:bg-brand-dark transition-all">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand text-white border border-brand shadow-xs transition-all duration-300 group-hover:scale-105 group-hover:bg-white group-hover:text-brand group-hover:border-brand group-hover:shadow-md">
                     {renderCategoryIcon(category.iconName)}
                   </div>
-                  <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-navy group-hover:bg-brand group-hover:text-white transition-colors">
+                  <span className="inline-flex items-center justify-center rounded-full bg-slate-100 border border-slate-200 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-navy transition-all duration-200 hover:bg-brand hover:text-white hover:border-brand hover:scale-105 group-hover:border-slate-300">
                     Explore
                   </span>
                 </div>
 
-                <h3 className="font-heading text-xl font-bold uppercase tracking-tight text-navy group-hover:text-brand transition-colors">
+                <h3 className="font-heading text-lg xl:text-xl font-bold uppercase tracking-tight text-navy group-hover:text-brand transition-colors min-h-[3.25rem] flex items-start">
                   {category.name}
                 </h3>
-                <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mt-0.5">
+                <p className="text-xs font-bold text-slate-500 uppercase tracking-wider min-h-[2rem] flex items-start mt-0.5">
                   {category.subheading}
                 </p>
 
-                <p className="mt-3 text-xs leading-relaxed text-[#C82425] line-clamp-3">
+                <p className="mt-2.5 text-xs leading-relaxed text-[#C82425] line-clamp-3 min-h-[3.25rem]">
                   {category.description}
                 </p>
               </div>
 
-              {/* Tag Chips */}
+              {/* Tag Chips & Footer Section - Uniform, pixel-aligned across all cards */}
               <div className="mt-6 pt-4 border-t border-slate-100">
-                <div className="flex flex-wrap gap-1.5">
-                  {category.featuredTags.slice(0, 2).map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded bg-slate-100 px-2 py-0.5 text-[11px] font-mono font-medium text-navy"
-                    >
-                      {tag}
+                <div className="h-[52px] flex flex-col justify-between">
+                  {/* Line 1: Primary Specification Tag */}
+                  <div className="flex items-center">
+                    <span className="rounded bg-slate-100 px-2 py-0.5 text-[11px] font-mono font-medium text-navy truncate max-w-full">
+                      {category.featuredTags[0]}
                     </span>
-                  ))}
-                  {category.featuredTags.length > 2 && (
-                    <span className="text-[11px] font-mono font-medium text-slate-400 self-center">
-                      +{category.featuredTags.length - 2} more
-                    </span>
-                  )}
+                  </div>
+
+                  {/* Line 2: Secondary Specification Tag + Count Badge */}
+                  <div className="flex items-center gap-1.5">
+                    {category.featuredTags[1] && (
+                      <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[10.5px] font-mono font-medium text-navy truncate">
+                        {category.featuredTags[1]}
+                      </span>
+                    )}
+                    {category.featuredTags.length > 2 && (
+                      <span className="shrink-0 rounded bg-slate-50 border border-slate-200/70 px-1.5 py-0.5 text-[10.5px] font-mono font-medium text-slate-500">
+                        +{category.featuredTags.length - 2} more
+                      </span>
+                    )}
+                  </div>
                 </div>
 
-                <div className="mt-3 flex items-center justify-between text-xs font-bold text-navy group-hover:text-brand transition-colors pt-1">
+                <div className="mt-3 flex items-center justify-between text-xs font-bold text-navy group-hover:text-brand transition-colors pt-2 border-t border-slate-100">
                   <span>Explore Listings</span>
                   <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                 </div>

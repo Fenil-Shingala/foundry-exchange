@@ -16,7 +16,7 @@ export default function Footer() {
             </div>
             <div>
               <h4 className="font-heading text-lg font-bold uppercase tracking-tight text-white">
-                B2B Digital Clearinghouse for the Metal Casting &amp; Tooling
+                Digital Clearinghouse for the Metal Casting &amp; Tooling
                 Industry
               </h4>
               <p className="text-xs text-slate-400">
@@ -59,7 +59,7 @@ export default function Footer() {
             </Link>
 
             <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-              The premier B2B industrial exchange built specifically for the
+              The premier industrial exchange built specifically for the
               metal casting and forging sectors. Connecting North American and global foundries,
               pattern shops, melt equipment builders, and OEMs.
             </p>
@@ -146,9 +146,9 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Eight Columns of Specialized Industrial Details (Instead of Four) */}
+        {/* Eight Columns of Specialized Industrial Details (12 Lines Content Per Column) */}
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-6 pt-10">
-          {/* Column 1: Ferrous Castings */}
+          {/* Column 1: Ferrous & Non-Ferrous Castings */}
           <div>
             <h4 className="font-heading text-xs font-bold uppercase tracking-wider text-white mb-3 flex items-center gap-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-brand" />
@@ -161,6 +161,12 @@ export default function Footer() {
               <li><Link href="/#marketplace" className="hover:text-white transition-colors">Carbon &amp; Alloy</Link></li>
               <li><Link href="/#marketplace" className="hover:text-white transition-colors">Chrome White Iron</Link></li>
               <li><Link href="/#marketplace" className="hover:text-white transition-colors">Ni-Resist Castings</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">Austempered (ADI)</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">Investment 316/304</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">Aluminum Die Cast</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">Manganese Bronze</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">Pump Volute Bodies</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">V-Process Castings</Link></li>
             </ul>
           </div>
 
@@ -177,6 +183,12 @@ export default function Footer() {
               <li><Link href="/#marketplace" className="hover:text-white transition-colors">A105 Flanges</Link></li>
               <li><Link href="/#marketplace" className="hover:text-white transition-colors">4140/4340 Pins</Link></li>
               <li><Link href="/#marketplace" className="hover:text-white transition-colors">Titanium Parts</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">Closed-Die Sweeps</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">Stepped Pinions</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">Frac Fluid Ends</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">A350 LF2 Discs</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">F51 Duplex Forging</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">Heavy Gear Blanks</Link></li>
             </ul>
           </div>
 
@@ -193,6 +205,12 @@ export default function Footer() {
               <li><Link href="/#marketplace" className="hover:text-white transition-colors">Core Blowers</Link></li>
               <li><Link href="/#marketplace" className="hover:text-white transition-colors">Heat Treat Ovens</Link></li>
               <li><Link href="/#marketplace" className="hover:text-white transition-colors">Shot Blast Units</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">Pouring Ladles</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">Furnace Power Leads</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">Induction Coils</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">Sand Mullers</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">Reclamation Kilns</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">Robotic Grinders</Link></li>
             </ul>
           </div>
 
@@ -209,6 +227,12 @@ export default function Footer() {
               <li><Link href="/#marketplace" className="hover:text-white transition-colors">Urethane Masters</Link></li>
               <li><Link href="/#marketplace" className="hover:text-white transition-colors">3D Sand Printing</Link></li>
               <li><Link href="/#marketplace" className="hover:text-white transition-colors">Tooling Escrow</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">H13 Die Blocks</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">Permanent Molds</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">Flaskless Jackets</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">Pattern Storage</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">Cope &amp; Drag Sets</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">Shell Core Inserts</Link></li>
             </ul>
           </div>
 
@@ -225,6 +249,12 @@ export default function Footer() {
               <li><Link href="/#marketplace" className="hover:text-white transition-colors">Inoculants</Link></li>
               <li><Link href="/#marketplace" className="hover:text-white transition-colors">Refractory Linings</Link></li>
               <li><Link href="/#marketplace" className="hover:text-white transition-colors">Ingot Feeds</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">AFS Silica Sand</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">Chromite Chill Sand</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">Low-Phos Briquettes</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">Ferro-Manganese</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">MgFeSi Nodulizers</Link></li>
+              <li><Link href="/#marketplace" className="hover:text-white transition-colors">Dry Vibe Alumina</Link></li>
             </ul>
           </div>
 
@@ -241,6 +271,12 @@ export default function Footer() {
               <li><Link href="/#contact-form" className="hover:text-white transition-colors">MPI Crack Tests</Link></li>
               <li><Link href="/#contact-form" className="hover:text-white transition-colors">Charpy Impact V</Link></li>
               <li><Link href="/#contact-form" className="hover:text-white transition-colors">PPAP L3 Packages</Link></li>
+              <li><Link href="/#contact-form" className="hover:text-white transition-colors">Brinell Hardness</Link></li>
+              <li><Link href="/#contact-form" className="hover:text-white transition-colors">Radiography (RT)</Link></li>
+              <li><Link href="/#contact-form" className="hover:text-white transition-colors">Ferrite / Pearlite</Link></li>
+              <li><Link href="/#contact-form" className="hover:text-white transition-colors">Hydrostatic Proof</Link></li>
+              <li><Link href="/#contact-form" className="hover:text-white transition-colors">CMM 3D Scans</Link></li>
+              <li><Link href="/#contact-form" className="hover:text-white transition-colors">Third-Party Audits</Link></li>
             </ul>
           </div>
 
@@ -257,6 +293,12 @@ export default function Footer() {
               <li><Link href="/#services" className="hover:text-white transition-colors">Insured Freight</Link></li>
               <li><Link href="/#services" className="hover:text-white transition-colors">Escrow Protection</Link></li>
               <li><Link href="/#services" className="hover:text-white transition-colors">Plant Audits</Link></li>
+              <li><Link href="/#services" className="hover:text-white transition-colors">Asset Valuations</Link></li>
+              <li><Link href="/#services" className="hover:text-white transition-colors">Rigging Logistics</Link></li>
+              <li><Link href="/#services" className="hover:text-white transition-colors">Pattern Clearing</Link></li>
+              <li><Link href="/#services" className="hover:text-white transition-colors">Alloy Advisory</Link></li>
+              <li><Link href="/#services" className="hover:text-white transition-colors">Melt Decommission</Link></li>
+              <li><Link href="/#services" className="hover:text-white transition-colors">Export Clearances</Link></li>
             </ul>
           </div>
 
@@ -273,6 +315,12 @@ export default function Footer() {
               <li><Link href="/#associations" className="hover:text-white transition-colors">Associations</Link></li>
               <li><Link href="/#contact-form" className="hover:text-white transition-colors">ASTM / DIN Specs</Link></li>
               <li><Link href="/#contact-form" className="hover:text-white transition-colors">Sourcing Desk</Link></li>
+              <li><Link href="/#categories" className="hover:text-white transition-colors">Taxonomy Index</Link></li>
+              <li><Link href="/#services" className="hover:text-white transition-colors">Fee Structure</Link></li>
+              <li><Link href="/about" className="hover:text-white transition-colors">Supplier Code</Link></li>
+              <li><Link href="/#services" className="hover:text-white transition-colors">Rigging Network</Link></li>
+              <li><Link href="/about" className="hover:text-white transition-colors">Foundry Careers</Link></li>
+              <li><Link href="/#contact-form" className="hover:text-white transition-colors">Contact Metallurgy</Link></li>
             </ul>
           </div>
         </div>

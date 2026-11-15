@@ -5,7 +5,7 @@ import { ArrowLeft, ShieldCheck, Factory } from "lucide-react";
 export const metadata: Metadata = {
   title: "About Us | Foundry Exchange",
   description:
-    "Learn more about Foundry Exchange, our metallurgical mission, verified vendor standards, and B2B industrial network.",
+    "Learn more about Foundry Exchange, our metallurgical mission, verified vendor standards, and industrial network.",
 };
 
 export default function AboutPage() {

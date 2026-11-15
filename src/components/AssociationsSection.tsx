@@ -127,13 +127,13 @@ export default function AssociationsSection() {
               </span>
             </div>
             <div className="flex items-center gap-2 text-xs text-slate-500">
-              <ShieldCheck className="h-4 w-4 text-emerald-600" />
+              <ShieldCheck className="h-4 w-4 text-cobalt" />
               <span>Verified Foundry Member Network</span>
             </div>
           </div>
 
           {/* Marquee Track */}
-          <div className="relative mt-6 overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)]">
+          <div className="relative mt-6 overflow-hidden">
             <div className="flex w-max items-center gap-8 py-2 animate-marquee">
               {/* Render twice for continuous infinite scroll */}
               {[...associations, ...associations].map((assoc, index) => (

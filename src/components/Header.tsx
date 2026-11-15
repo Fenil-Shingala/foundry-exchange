@@ -14,6 +14,11 @@ import {
   ChevronDown,
   Gavel,
   Clock,
+  Store,
+  ArrowLeftRight,
+  Wrench,
+  BookOpen,
+  Info,
 } from "lucide-react";
 import { siteConfig } from "@/data/siteConfig";
 import { auctionCategories } from "@/data/auctions";
@@ -55,12 +60,12 @@ export default function Header() {
   };
 
   const navItems = [
-    { num: "01", label: "Marketplace", href: "/#marketplace" },
-    { num: "02", label: "Auctions", href: "/#auctions" },
-    { num: "03", label: "Exchange", href: "/#exchange" },
-    { num: "04", label: "Services", href: "/#services" },
-    { num: "05", label: "Knowledge", href: "/#contact-form" },
-    { num: "06", label: "About", href: "/about" },
+    { num: "01", label: "Marketplace", href: "/#marketplace", icon: Store },
+    { num: "02", label: "Auctions", href: "/#auctions", icon: Gavel },
+    { num: "03", label: "Exchange", href: "/#exchange", icon: ArrowLeftRight },
+    { num: "04", label: "Services", href: "/#services", icon: Wrench },
+    { num: "05", label: "Knowledge", href: "/#contact-form", icon: BookOpen },
+    { num: "06", label: "About", href: "/about", icon: Info },
   ];
 
   return (
@@ -184,12 +189,15 @@ export default function Header() {
                   href={item.href}
                   className="group relative flex flex-col justify-center py-2 text-left transition-colors"
                 >
-                  <span className="font-mono text-[10px] text-brand font-bold leading-none mb-0.5">
+                  <span className="font-mono text-[10px] text-brand font-bold leading-none mb-0.5 group-hover:text-white transition-colors">
                     {item.num}
                   </span>
-                  <span className="text-xs xl:text-sm font-bold tracking-wide text-white group-hover:text-brand transition-colors">
-                    {item.label}
-                  </span>
+                  <div className="flex items-center gap-1.5">
+                    <item.icon className="h-3.5 w-3.5 text-slate-300 group-hover:text-brand transition-colors shrink-0" />
+                    <span className="text-xs xl:text-sm font-bold tracking-wide text-white group-hover:text-brand transition-colors">
+                      {item.label}
+                    </span>
+                  </div>
                   <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-brand transition-all duration-200 group-hover:w-full" />
                 </Link>
               ))}
@@ -348,13 +356,13 @@ export default function Header() {
                           </span>
                         </div>
 
-                        <div className="relative h-24 w-full rounded-lg bg-navy-900 flex items-center justify-center p-2 mb-3 border border-navy-800">
+                        <div className="relative h-44 sm:h-48 w-full rounded-lg bg-navy-900 overflow-hidden mb-3 border border-navy-800">
                           <Image
                             src={selectedCat.featuredLot.imageUrl}
                             alt={selectedCat.featuredLot.title}
-                            width={140}
-                            height={70}
-                            className="max-h-18 w-auto object-contain"
+                            fill
+                            sizes="(max-width: 768px) 100vw, 360px"
+                            className="object-cover transition-transform duration-300 hover:scale-105"
                           />
                         </div>
 
@@ -417,6 +425,7 @@ export default function Header() {
                     <span className="font-mono text-xs font-bold text-brand">
                       {item.num}
                     </span>
+                    <item.icon className="h-4 w-4 text-slate-300" />
                     <span>{item.label}</span>
                   </div>
                   <ArrowRight className="h-4 w-4 text-navy-600" />

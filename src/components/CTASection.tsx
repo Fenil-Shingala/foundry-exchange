@@ -5,16 +5,6 @@ import { ArrowRight, PhoneCall, ShieldCheck, Factory } from "lucide-react";
 export default function CTASection() {
   return (
     <section className="relative overflow-hidden bg-brand py-16 sm:py-20 text-white shadow-xl">
-      {/* Subtle industrial molten gradient */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-15"
-        style={{
-          background:
-            "radial-gradient(circle at 80% 50%, #ffffff 0%, #0c1a30 70%, transparent 100%)",
-        }}
-        aria-hidden="true"
-      />
-
       <div className="relative w-full px-4 sm:px-6 lg:px-8 xl:px-10">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
           <div className="max-w-2xl">

@@ -19,7 +19,7 @@ export const siteConfig = {
   shortName: "FE",
   tagline: "Everything Foundry & Forging In One Exchange",
   subline:
-    "The premier B2B marketplace to buy, sell, trade, and source ferrous & non-ferrous castings, precision forgings, foundry & forge equipment, patterns, raw materials, and metallurgical services.",
+    "The premier marketplace to buy, sell, trade, and source ferrous & non-ferrous castings, precision forgings, foundry & forge equipment, patterns, raw materials, and metallurgical services.",
   contactPhone: "+1 (800) 459-CAST",
   contactEmail: "foundryxchange@gmail.com",
   officeAddress: "Cleveland Metallurgical Hub, 1400 Industrial Pkwy, Cleveland, OH 44114",
@@ -30,7 +30,7 @@ export const siteConfig = {
       badge: "Ready Stock",
       description: "Purchase warehouse-verified castings, standard ingots, refractories, and spare parts with immediate dispatch.",
       iconName: "ShoppingCart",
-      colorClass: "from-blue-600 to-indigo-600",
+      colorClass: "bg-blue-600",
     },
     {
       id: "sell",
@@ -38,7 +38,7 @@ export const siteConfig = {
       badge: "Foundries & Vendors",
       description: "List recurring production runs, inventory stock, scrap parcels, or foundry supplies directly to qualified industrial buyers.",
       iconName: "Tag",
-      colorClass: "from-emerald-600 to-teal-600",
+      colorClass: "bg-cobalt",
     },
     {
       id: "rfq",
@@ -46,15 +46,15 @@ export const siteConfig = {
       badge: "Custom Castings",
       description: "Upload CAD 3D models and drawing specs; receive guaranteed quotes from verified foundries matching your metallurgy.",
       iconName: "FileText",
-      colorClass: "from-brand to-rose-600",
+      colorClass: "bg-brand",
     },
     {
       id: "trade",
       name: "Trade & Swap",
-      badge: "B2B Bilateral",
+      badge: "Foundry Bilateral",
       description: "Exchange surplus alloy inventory, scrap batches, or secondary materials directly between foundries.",
       iconName: "ArrowLeftRight",
-      colorClass: "from-blue-600 to-navy-700",
+      colorClass: "bg-navy-700",
     },
     {
       id: "barter",
@@ -62,7 +62,7 @@ export const siteConfig = {
       badge: "Resource Offset",
       description: "Trade excess melting capacity, heat treat hours, or pattern-making labor against essential consumables and raw metals.",
       iconName: "Repeat",
-      colorClass: "from-purple-600 to-violet-600",
+      colorClass: "bg-brand",
     },
     {
       id: "rent-lease",
@@ -70,7 +70,7 @@ export const siteConfig = {
       badge: "Plant Capital",
       description: "Lease capital melt equipment, backup coreless power units, test instruments, or mobile spectrometer trucks.",
       iconName: "Factory",
-      colorClass: "from-cyan-600 to-blue-700",
+      colorClass: "bg-blue-700",
     },
     {
       id: "auction",
@@ -78,7 +78,7 @@ export const siteConfig = {
       badge: "Live & Timed Bids",
       description: "Bid on full foundry lines, automated molding carousels, induction tilt furnaces, and plant liquidations.",
       iconName: "Gavel",
-      colorClass: "from-red-700 to-brand",
+      colorClass: "bg-brand",
     },
     {
       id: "surplus",
@@ -86,7 +86,7 @@ export const siteConfig = {
       badge: "Circular Economy",
       description: "Acquire idle patterns, matchplates, dies, and flasks from other foundries at a fraction of machining lead times.",
       iconName: "Archive",
-      colorClass: "from-indigo-600 to-navy-800",
+      colorClass: "bg-navy-800",
     },
   ] as ExchangeMode[],
   industries: [
