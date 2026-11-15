@@ -40,6 +40,56 @@ export interface DetailSpecRow {
   highlight?: boolean;
 }
 
+export interface DetailChemicalElement {
+  element: string;
+  name: string;
+  standardRange: string;
+  actualValue: string;
+  status: "pass" | "compliant";
+}
+
+export interface DetailMechanicalProperty {
+  property: string;
+  standardReq: string;
+  actualValue: string;
+  testMethod: string;
+}
+
+export interface DetailMicrostructure {
+  matrix: string;
+  nodularityOrGrain: string;
+  inclusionRating: string;
+  heatTreatmentCondition: string;
+}
+
+export interface DetailTechnicalDoc {
+  id: string;
+  title: string;
+  format: "PDF" | "STEP" | "DWG";
+  size: string;
+  type: "Inspection Report" | "Mill Test Certificate" | "CAD Model" | "Datasheet";
+  badge: string;
+  description: string;
+}
+
+export interface DetailSupplierDossier {
+  foundryName: string;
+  headquarters: string;
+  established: number;
+  meltCapacity: string;
+  certifications: string[];
+  inspectionAgencies: string[];
+  furnaces: string;
+  testingLab: string;
+  verifiedDate: string;
+  badge: string;
+}
+
+export interface DetailFAQ {
+  question: string;
+  answer: string;
+}
+
 export interface ProductDetailData {
   parsedBasePrice: number;
   priceSuffix: string;
@@ -57,6 +107,13 @@ export interface ProductDetailData {
   editorialText: string;
   painPointsTitle: string;
   painPoints: { title: string; text: string }[];
+  // Point 4: Expanded Technical Metallurgy, Documents & Trust Data
+  chemicalComposition: DetailChemicalElement[];
+  mechanicalProperties: DetailMechanicalProperty[];
+  microstructure: DetailMicrostructure;
+  technicalDocs: DetailTechnicalDoc[];
+  supplierDossier: DetailSupplierDossier;
+  faqs: DetailFAQ[];
 }
 
 export function getProductDetailData(listing: ProductListing): ProductDetailData {
@@ -745,6 +802,9 @@ export function getProductDetailData(listing: ProductListing): ProductDetailData
     { label: "Inspection & Certification", value: "EN 10204 3.1 MTR • 100% Volumetric Ultrasonic / Pressure Tested" },
   ];
 
+  // 4. Point 4: Generate Metallurgy, Documents, Supplier Dossier & FAQs
+  const metallurgyData = getMetallurgyAndTrustData(listing);
+
   return {
     parsedBasePrice,
     priceSuffix,
@@ -761,6 +821,257 @@ export function getProductDetailData(listing: ProductListing): ProductDetailData
     editorialTitle,
     editorialText,
     painPointsTitle,
-    painPoints
+    painPoints,
+    chemicalComposition: metallurgyData.chemicalComposition,
+    mechanicalProperties: metallurgyData.mechanicalProperties,
+    microstructure: metallurgyData.microstructure,
+    technicalDocs: metallurgyData.technicalDocs,
+    supplierDossier: metallurgyData.supplierDossier,
+    faqs: metallurgyData.faqs
+  };
+}
+
+// =========================================================================
+// POINT 4: METALLURGICAL MATRIX, TECHNICAL DOCS & SUPPLIER DOSSIER ENGINE
+// =========================================================================
+function getMetallurgyAndTrustData(listing: ProductListing) {
+  const cat = listing.category.toLowerCase();
+  const alloy = listing.alloySpec.toLowerCase();
+
+  let chemicalComposition: DetailChemicalElement[] = [];
+  let mechanicalProperties: DetailMechanicalProperty[] = [];
+  let microstructure: DetailMicrostructure;
+
+  // 1. DUCTILE / GREY CAST IRON
+  if (alloy.includes("ductile") || alloy.includes("a536") || alloy.includes("en-gjs") || alloy.includes("grey iron") || alloy.includes("ht250") || alloy.includes("a48")) {
+    chemicalComposition = [
+      { element: "C", name: "Carbon", standardRange: "3.40 – 3.85%", actualValue: "3.64%", status: "compliant" },
+      { element: "Si", name: "Silicon", standardRange: "2.30 – 2.80%", actualValue: "2.52%", status: "compliant" },
+      { element: "Mn", name: "Manganese", standardRange: "0.15 – 0.40%", actualValue: "0.27%", status: "compliant" },
+      { element: "P", name: "Phosphorus", standardRange: "≤ 0.040%", actualValue: "0.018%", status: "pass" },
+      { element: "S", name: "Sulfur", standardRange: "≤ 0.015%", actualValue: "0.007%", status: "pass" },
+      { element: "Mg", name: "Magnesium (Nodularizer)", standardRange: "0.035 – 0.055%", actualValue: "0.042%", status: "compliant" },
+      { element: "Cu", name: "Copper", standardRange: "≤ 0.20%", actualValue: "0.06%", status: "pass" },
+      { element: "Fe", name: "Iron Base", standardRange: "Balance", actualValue: "93.44%", status: "compliant" },
+    ];
+    mechanicalProperties = [
+      { property: "Tensile Strength (Rm)", standardReq: "≥ 400 MPa (58 ksi)", actualValue: "448 MPa (65.0 ksi)", testMethod: "ASTM E8M / ISO 6892-1" },
+      { property: "Yield Strength (Rp0.2)", standardReq: "≥ 250 MPa (36 ksi)", actualValue: "284 MPa (41.2 ksi)", testMethod: "ASTM E8M / ISO 6892-1" },
+      { property: "Elongation at Break (A5)", standardReq: "≥ 15.0%", actualValue: "18.4%", testMethod: "ASTM E8M Gauge L0=50mm" },
+      { property: "Brinell Hardness (HBW 10/3000)", standardReq: "130 – 180 HBW", actualValue: "158 HBW", testMethod: "ASTM E10 / ISO 6506-1" },
+      { property: "Charpy V-Notch Impact (-20°C)", standardReq: "≥ 12 Joules", actualValue: "15.8 Joules", testMethod: "ASTM E23 / ISO 148-1" },
+    ];
+    microstructure = {
+      matrix: "> 85% Ferrite, < 15% Pearlite (Ferritic-Pearlitic ductile matrix)",
+      nodularityOrGrain: "≥ 90% Nodularity (Type I & II Spheroidal Graphite per ASTM A247)",
+      inclusionRating: "JK Class A/B/C/D Severity ≤ 0.5 per ASTM E45 Method A",
+      heatTreatmentCondition: "As-cast with controlled mold-cooling & stress-relieving",
+    };
+  }
+  // 2. FORGED CARBON & ALLOY STEEL (4140, 4330V, A105, A182, F316L, 1045, etc.)
+  else if (cat.includes("forging") || alloy.includes("4140") || alloy.includes("4330") || alloy.includes("a105") || alloy.includes("a182") || alloy.includes("forged") || alloy.includes("shackle")) {
+    chemicalComposition = [
+      { element: "C", name: "Carbon", standardRange: "0.38 – 0.43%", actualValue: "0.41%", status: "compliant" },
+      { element: "Mn", name: "Manganese", standardRange: "0.75 – 1.00%", actualValue: "0.86%", status: "compliant" },
+      { element: "Cr", name: "Chromium", standardRange: "0.80 – 1.10%", actualValue: "0.98%", status: "compliant" },
+      { element: "Mo", name: "Molybdenum", standardRange: "0.15 – 0.25%", actualValue: "0.22%", status: "compliant" },
+      { element: "Si", name: "Silicon", standardRange: "0.15 – 0.35%", actualValue: "0.27%", status: "compliant" },
+      { element: "Ni", name: "Nickel", standardRange: "≤ 0.25%", actualValue: "0.12%", status: "pass" },
+      { element: "P", name: "Phosphorus", standardRange: "≤ 0.025%", actualValue: "0.011%", status: "pass" },
+      { element: "S", name: "Sulfur", standardRange: "≤ 0.015%", actualValue: "0.004%", status: "pass" },
+    ];
+    mechanicalProperties = [
+      { property: "Tensile Strength (Rm)", standardReq: "≥ 850 MPa (123 ksi)", actualValue: "945 MPa (137.1 ksi)", testMethod: "ASTM A370 / ISO 6892-1" },
+      { property: "Yield Strength (Rp0.2)", standardReq: "≥ 650 MPa (94 ksi)", actualValue: "735 MPa (106.6 ksi)", testMethod: "ASTM A370 / ISO 6892-1" },
+      { property: "Elongation (A5)", standardReq: "≥ 14.0%", actualValue: "17.2%", testMethod: "ASTM A370 Longitudinal" },
+      { property: "Reduction of Area (Z)", standardReq: "≥ 45.0%", actualValue: "53.5%", testMethod: "ASTM A370" },
+      { property: "Charpy V-Notch Impact (-40°C)", standardReq: "≥ 42 Joules", actualValue: "64 Joules", testMethod: "ASTM E23 Sub-zero Charpy" },
+      { property: "Surface Hardness", standardReq: "260 – 310 HBW", actualValue: "282 HBW", testMethod: "ASTM E10 Brinell" },
+    ];
+    microstructure = {
+      matrix: "Tempered Martensite with uniform fine-grain carbide dispersion",
+      nodularityOrGrain: "Prior Austenite Grain Size ASTM 7 – 8 per ASTM E112",
+      inclusionRating: "Non-metallic inclusions JK Thin ≤ 1.0, Heavy ≤ 0.5 per ASTM E45",
+      heatTreatmentCondition: "Normalized 880°C, Quenched 850°C Oil, Tempered 610°C",
+    };
+  }
+  // 3. HIGH CHROME / HADFIELD MANGANESE WEAR ALLOY
+  else if (alloy.includes("chrome") || alloy.includes("a532") || alloy.includes("manganese") || alloy.includes("a128") || alloy.includes("crusher")) {
+    chemicalComposition = [
+      { element: "Cr", name: "Chromium", standardRange: "24.0 – 28.0%", actualValue: "26.2%", status: "compliant" },
+      { element: "C", name: "Carbon", standardRange: "2.60 – 3.30%", actualValue: "2.95%", status: "compliant" },
+      { element: "Mo", name: "Molybdenum", standardRange: "1.00 – 2.50%", actualValue: "1.85%", status: "compliant" },
+      { element: "Mn", name: "Manganese", standardRange: "0.50 – 1.50%", actualValue: "0.92%", status: "compliant" },
+      { element: "Si", name: "Silicon", standardRange: "0.30 – 0.80%", actualValue: "0.58%", status: "compliant" },
+      { element: "Ni", name: "Nickel", standardRange: "≤ 1.50%", actualValue: "0.84%", status: "compliant" },
+      { element: "P", name: "Phosphorus", standardRange: "≤ 0.050%", actualValue: "0.024%", status: "pass" },
+      { element: "S", name: "Sulfur", standardRange: "≤ 0.040%", actualValue: "0.012%", status: "pass" },
+    ];
+    mechanicalProperties = [
+      { property: "Rockwell C Hardness (HRC)", standardReq: "62 – 66 HRC", actualValue: "64.2 HRC", testMethod: "ASTM E18 / ISO 6508" },
+      { property: "Compressive Strength", standardReq: "≥ 2,200 MPa", actualValue: "2,460 MPa", testMethod: "ASTM E9 Cylindrical" },
+      { property: "Transverse Rupture Strength", standardReq: "≥ 650 MPa", actualValue: "725 MPa", testMethod: "ISO 3327 3-Point Bend" },
+      { property: "Micro-Hardness (Eutectic Carbides)", standardReq: "1,400 – 1,800 HV0.1", actualValue: "1,620 HV0.1", testMethod: "ASTM E384 Vickers" },
+    ];
+    microstructure = {
+      matrix: "High-hardness martensitic matrix with discontinuous M7C3 eutectic carbides",
+      nodularityOrGrain: "Carbide Volume Fraction: 32 – 36% with titanium grain inoculant",
+      inclusionRating: "Deoxidized with calcium-silicon to prevent brittle boundary stringers",
+      heatTreatmentCondition: "Destabilization heat treatment at 980°C, forced air quench, double sub-critical temper",
+    };
+  }
+  // 4. STAINLESS STEEL / INVESTMENT CAST
+  else if (alloy.includes("cf8m") || alloy.includes("316") || alloy.includes("stainless") || alloy.includes("cf8")) {
+    chemicalComposition = [
+      { element: "Cr", name: "Chromium", standardRange: "18.0 – 21.0%", actualValue: "19.35%", status: "compliant" },
+      { element: "Ni", name: "Nickel", standardRange: "9.0 – 12.0%", actualValue: "10.45%", status: "compliant" },
+      { element: "Mo", name: "Molybdenum", standardRange: "2.0 – 3.0%", actualValue: "2.42%", status: "compliant" },
+      { element: "C", name: "Carbon", standardRange: "≤ 0.080%", actualValue: "0.038%", status: "pass" },
+      { element: "Mn", name: "Manganese", standardRange: "≤ 1.50%", actualValue: "1.10%", status: "compliant" },
+      { element: "Si", name: "Silicon", standardRange: "≤ 1.50%", actualValue: "0.82%", status: "compliant" },
+      { element: "P", name: "Phosphorus", standardRange: "≤ 0.040%", actualValue: "0.021%", status: "pass" },
+      { element: "S", name: "Sulfur", standardRange: "≤ 0.020%", actualValue: "0.008%", status: "pass" },
+    ];
+    mechanicalProperties = [
+      { property: "Tensile Strength (Rm)", standardReq: "≥ 485 MPa (70 ksi)", actualValue: "565 MPa (81.9 ksi)", testMethod: "ASTM A370 / ASTM E8" },
+      { property: "Yield Strength (Rp0.2)", standardReq: "≥ 205 MPa (30 ksi)", actualValue: "252 MPa (36.5 ksi)", testMethod: "ASTM A370 0.2% Offset" },
+      { property: "Elongation (A5)", standardReq: "≥ 30.0%", actualValue: "44.5%", testMethod: "ASTM A370" },
+      { property: "Brinell Hardness", standardReq: "≤ 180 HBW", actualValue: "155 HBW", testMethod: "ASTM E10" },
+      { property: "Intergranular Corrosion Test", standardReq: "No sensitization", actualValue: "Passed Practice E (168h CuSO4)", testMethod: "ASTM A262 Practice E" },
+    ];
+    microstructure = {
+      matrix: "Austenitic matrix with 8 – 12% delta ferrite for hot-cracking prevention",
+      nodularityOrGrain: "Grain size ASTM 5 – 7 uniform equiaxed investment shell structure",
+      inclusionRating: "Vacuum induction degassed, low sulfur/phosphorus clean melt",
+      heatTreatmentCondition: "Solution Annealed at 1080°C followed by rapid water quench",
+    };
+  }
+  // 5. EQUIPMENT & MACHINERY METALLURGICAL / STRUCTURAL DEFAULTS
+  else {
+    chemicalComposition = [
+      { element: "Fe", name: "Structural Iron/Steel Base", standardRange: "Machinery Spec", actualValue: "Verified Heat", status: "compliant" },
+      { element: "C", name: "Carbon", standardRange: "0.20 – 0.45%", actualValue: "0.32%", status: "compliant" },
+      { element: "Mn", name: "Manganese", standardRange: "0.60 – 1.20%", actualValue: "0.88%", status: "compliant" },
+      { element: "Si", name: "Silicon", standardRange: "0.20 – 0.60%", actualValue: "0.35%", status: "compliant" },
+      { element: "Cr", name: "Chromium / Alloy Additions", standardRange: "OEM Certified", actualValue: "0.65%", status: "compliant" },
+      { element: "P", name: "Phosphorus", standardRange: "≤ 0.035%", actualValue: "0.016%", status: "pass" },
+      { element: "S", name: "Sulfur", standardRange: "≤ 0.035%", actualValue: "0.012%", status: "pass" },
+    ];
+    mechanicalProperties = [
+      { property: "Design Working Pressure / Load Capacity", standardReq: "Governing Machine Rating", actualValue: "100% Certified FAT Load", testMethod: "Factory Acceptance Test (FAT)" },
+      { property: "Structural Weldment Integrity", standardReq: "AWS D1.1 / ISO 5817 Level B", actualValue: "100% UT / Magnetic Particle Inspected", testMethod: "ASTM E164 Ultrasonic" },
+      { property: "Dynamic Vibration Damping", standardReq: "ISO 10816-1 Class I/II", actualValue: "< 1.2 mm/s RMS (Precision Smooth)", testMethod: "Tri-axial FFT Spectral Sensor" },
+      { property: "Thermal Uniformity Survey (TUS)", standardReq: "AMS 2750G / CQI-9 Class 2", actualValue: "± 4.5°C across all hearth zones", testMethod: "9-Point Thermocouple Grid" },
+    ];
+    microstructure = {
+      matrix: "Stress-relieved Normalized Pearlitic-Ferritic machine structure",
+      nodularityOrGrain: "Vibration-absorbing graphite flake network / fine-grain steel weldment",
+      inclusionRating: "Certified structural steel grade per EN 10025-2 S355J2 / ASTM A36",
+      heatTreatmentCondition: "Vibratory / Thermal stress relief at 580°C for dimensional stability",
+    };
+  }
+
+  // TECHNICAL DOWNLOAD DOCUMENTS
+  const technicalDocs: DetailTechnicalDoc[] = [
+    {
+      id: "doc-mtr",
+      title: "Certified Mill Test Report (EN 10204 3.1 MTR)",
+      format: "PDF",
+      size: "1.4 MB",
+      type: "Mill Test Certificate",
+      badge: "Heat Traceable",
+      description: "Direct Optical Emission Spectrometry (OES) chemical assay, tensile/yield test bars, Charpy impact pulls, and raw ladle heat numbers."
+    },
+    {
+      id: "doc-cmm",
+      title: "First Article CMM Laser Metrology & Inspection Report",
+      format: "PDF",
+      size: "2.8 MB",
+      type: "Inspection Report",
+      badge: "ISO 8062 CT5",
+      description: "Full 3D coordinate measuring machine (Zeiss CMM) datum inspection, true position tolerances, concentricity, and flange face flatness."
+    },
+    {
+      id: "doc-cad",
+      title: "3D Solid Neutral CAD Engineering Model",
+      format: "STEP",
+      size: "14.2 MB",
+      type: "CAD Model",
+      badge: "STEP AP242",
+      description: "Production-ready 3D boundary model with exact machining allowances, draft angles, shrinkage compensations, and datum planes."
+    },
+    {
+      id: "doc-spec",
+      title: "Technical Engineering Datasheet & Tolerancing Manual",
+      format: "PDF",
+      size: "950 KB",
+      type: "Datasheet",
+      badge: "ASTM / ISO",
+      description: "Complete design guide covering hydrotest pressure envelope, bolt torquing patterns, rigging points, and mating flange specs."
+    }
+  ];
+
+  // SUPPLIER & FACILITY DOSSIER
+  const supplierDossier: DetailSupplierDossier = {
+    foundryName: listing.vendorName,
+    headquarters: listing.location,
+    established: 1984,
+    meltCapacity: "45,000 MT Annual Melt Capacity",
+    certifications: [
+      "ISO 9001:2015 Quality Management",
+      "IATF 16949:2016 Automotive Standard",
+      "PED 2014/68/EU Pressure Equipment Directive",
+      "AD 2000-Merkblatt W0 Technical Spec",
+      "ISO 14001:2015 Environmental System",
+      "ISO 45001 Occupational Health & Safety"
+    ],
+    inspectionAgencies: [
+      "TÜV SÜD",
+      "SGS Industrial Services",
+      "Lloyd's Register",
+      "DNV GL",
+      "Bureau Veritas"
+    ],
+    furnaces: "2x 5.0 MT Medium Frequency Coreless Induction Furnaces (Inductotherm VIP Power-Trak)",
+    testingLab: "Thermo Fisher 32-Channel Spark OES Spectrometer, 1000 kN Schenck Tensile Pull Frame, Krautkramer USM 36 Ultrasonic Detector, Zeiss Accura 3D CMM",
+    verifiedDate: "Verified Q4 2026 (Foundry Exchange Compliance On-Site Audit)",
+    badge: "Verified Tier-1 Casting & Forge Facility"
+  };
+
+  // TECHNICAL PROCUREMENT FAQS
+  const faqs: DetailFAQ[] = [
+    {
+      question: "What is the Minimum Order Quantity (MOQ) and sample lot policy?",
+      answer: "For Ready Stock inventory, the MOQ is 1 unit (single lot trial). For repeat Made-to-Order foundry heats or closed-die forging runs, minimum economical batch sizes start at 5 units or 1,500 kg total heat weight. Pre-series prototype sample castings can be poured prior to full production release."
+    },
+    {
+      question: "Are Material Test Reports (MTR 3.1) and heat numbers supplied with every order?",
+      answer: "Yes. Every shipment is accompanied by a certified EN 10204 Type 3.1 Inspection Certificate. Chemical composition is verified via Optical Emission Spectrometry (OES), and physical test coupons are poured from the identical ladle heat and tested for tensile, yield, elongation, and Charpy impact."
+    },
+    {
+      question: "Who owns the foundry pattern tooling or forging dies after fabrication?",
+      answer: "Tooling is 100% customer-owned upon payment of the tooling invoice. Tooling matchplates and dies are stamped with your corporate asset serial number, maintained with preventative repair, and stored free of charge in our climate-controlled tooling vault for up to 3 years between production orders."
+    },
+    {
+      question: "Can we appoint an independent third-party inspection (TPI) agency before dispatch?",
+      answer: "Absolutely. We routinely host pre-shipment witness testing and factory acceptance audits by TÜV, SGS, DNV, Lloyd's Register, or your internal QA team. Inspection scopes can include dimensional CMM verification, magnetic particle testing (MPI), liquid penetrant (PT), ultrasonic testing (UT), or hydrostatic pressure tests."
+    },
+    {
+      question: "How does the Foundry Exchange Escrow and Quality Guarantee protect buyers?",
+      answer: "Your payment is deposited into secure neutral escrow at the time of purchase. Funds are never released to the foundry or forge until the material arrives at your facility and your quality control team inspects and approves the dimensional CMM report and MTR certifications within the agreed acceptance window."
+    },
+    {
+      question: "What export packing and shipping incoterms are available?",
+      answer: "All orders are packaged in ISPM-15 certified heat-treated timber crates with VCI (Vapor Corrosion Inhibitor) plastic encapsulation and moisture-absorbing desiccant packs. Standard quotes are FOB Port of Origin, with optional turnkey CIF destination port or DDP to your plant receiving dock."
+    }
+  ];
+
+  return {
+    chemicalComposition,
+    mechanicalProperties,
+    microstructure,
+    technicalDocs,
+    supplierDossier,
+    faqs
   };
 }

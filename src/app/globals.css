@@ -123,4 +123,44 @@ a, button {
   }
 }
 
+/* Product Detail Page Content Wrapper (Tight, elegant 13px gutter around side-rail ads) */
+.product-detail-wrapper {
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .product-detail-wrapper {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-detail-wrapper {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1360px) {
+  /* Side rail ads: 155px width + 8px viewport inset = 163px outer edge.
+     175px padding creates an exact, balanced 12px gutter matching the homepage with zero collision. */
+  .product-detail-wrapper {
+    padding-left: 175px !important;
+    padding-right: 175px !important;
+  }
+}
+
+@media (min-width: 1660px) {
+  /* Side rail ads: 175px width + 8px viewport inset = 183px outer edge.
+     195px padding maintains the exact 12px gutter matching the homepage on wide screens. */
+  .product-detail-wrapper {
+    padding-left: 195px !important;
+    padding-right: 195px !important;
+  }
+}
+
 

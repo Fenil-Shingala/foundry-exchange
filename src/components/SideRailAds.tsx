@@ -215,8 +215,12 @@ function RailColumn({ side, ads, visible, speed = 0.55 }: RailProps) {
   );
 }
 
-export default function SideRailAds() {
-  const [visible, setVisible] = useState(false);
+interface SideRailAdsProps {
+  alwaysVisible?: boolean;
+}
+
+export default function SideRailAds({ alwaysVisible = false }: SideRailAdsProps) {
+  const [visible, setVisible] = useState(alwaysVisible);
 
   useEffect(() => {
     let animFrame = 0;
@@ -224,7 +228,7 @@ export default function SideRailAds() {
     const checkVisibility = () => {
       const scrollY = window.scrollY;
 
-      // 1. Hero Check: Rails are ONLY visible AFTER the hero section has ended
+      // 1. Hero Check: Rails are visible after hero ends, or immediately if alwaysVisible / no hero on page
       const hero = document.getElementById("hero-section");
       let hasHeroEnded = false;
       if (hero) {
@@ -232,7 +236,7 @@ export default function SideRailAds() {
         // Hero has ended when its bottom edge reaches or passes the top sticky header area
         hasHeroEnded = heroBottom <= 165;
       } else {
-        hasHeroEnded = scrollY > 600;
+        hasHeroEnded = alwaysVisible ? true : scrollY > 300;
       }
 
       // 2. Footer Collision Prevention: Hide completely when footer enters view
@@ -243,7 +247,7 @@ export default function SideRailAds() {
         isFooterInView = footerTop <= window.innerHeight + 30;
       }
 
-      // The ads are strictly visible ONLY after hero and before footer
+      // The ads are strictly visible ONLY after hero (or immediately on detail page) and before footer
       const shouldBeVisible = hasHeroEnded && !isFooterInView;
       setVisible(shouldBeVisible);
 
@@ -259,7 +263,7 @@ export default function SideRailAds() {
       window.removeEventListener("scroll", checkVisibility);
       window.removeEventListener("resize", checkVisibility);
     };
-  }, []);
+  }, [alwaysVisible]);
 
   return (
     <>

@@ -27,9 +27,25 @@ import {
   MapPin,
   Building2,
   Award,
+  Download,
+  FileCheck,
+  Layers,
+  Microscope,
+  Scale,
+  Building,
+  CheckCircle,
+  ChevronDown,
+  ChevronUp,
+  HelpCircle,
+  Send,
+  FileSpreadsheet,
+  Boxes,
+  FileCode,
+  Sparkles,
 } from "lucide-react";
 import { ProductListing, featuredListings } from "@/data/listings";
 import { getProductDetailData, DetailVariant, DetailSizeOption } from "@/data/productDetailHelper";
+import SideRailAds from "@/components/SideRailAds";
 
 interface ProductDetailPageProps {
   initialListing?: ProductListing;
@@ -48,6 +64,36 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
   const [selectedSize, setSelectedSize] = useState<DetailSizeOption>(sizes[0]);
   const [quantity, setQuantity] = useState(1);
   const [cartSuccess, setCartSuccess] = useState(false);
+
+  // Point 4: State for metallurgy tabs, technical docs, FAQs and RFQ form
+  const [activeMetaTab, setActiveMetaTab] = useState<"chemical" | "mechanical" | "microstructure">("chemical");
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+  const [downloadToast, setDownloadToast] = useState<string | null>(null);
+  const [rfqSubmitted, setRfqSubmitted] = useState(false);
+  const [rfqForm, setRfqForm] = useState({
+    targetQty: "5 units",
+    deliveryPort: "Rotterdam / Houston (CIF)",
+    customSpec: "",
+    contactEmail: "",
+  });
+
+  const handleDownloadDoc = (docTitle: string, docFormat: string) => {
+    setDownloadToast(`Preparing certified ${docFormat} package: "${docTitle}"`);
+    setTimeout(() => {
+      setDownloadToast(null);
+    }, 4000);
+  };
+
+  const handleRfqSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setRfqSubmitted(true);
+    setTimeout(() => setRfqSubmitted(false), 5000);
+  };
+
+  // Deterministic 4 companion/related products
+  const sameCategory = featuredListings.filter((l) => l.id !== listing.id && l.category === listing.category);
+  const otherCategories = featuredListings.filter((l) => l.id !== listing.id && l.category !== listing.category);
+  const relatedListings = [...sameCategory, ...otherCategories].slice(0, 4);
 
   // When listing changes, update selected variant and size
   useEffect(() => {
@@ -184,35 +230,40 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
 
   return (
     <div className="bg-[#f7f8fa] min-h-screen text-slate-800 antialiased font-sans pb-24">
-      {/* ============================================================ */}
-      {/* TOP NAVIGATION / BREADCRUMB BAR                              */}
-      {/* ============================================================ */}
-      <div className="bg-white border-b border-slate-200">
-        <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-3">
-          <nav className="flex items-center gap-2 text-xs text-slate-500 font-medium overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            <Link href="/" className="hover:text-brand transition-colors shrink-0">Home</Link>
-            <ChevronRight className="h-3 w-3 text-slate-400 shrink-0" />
-            <Link href="/#marketplace" className="hover:text-brand transition-colors shrink-0">Marketplace</Link>
-            <ChevronRight className="h-3 w-3 text-slate-400 shrink-0" />
-            <span className="text-slate-400 shrink-0">{listing.category}</span>
-            <ChevronRight className="h-3 w-3 text-slate-400 shrink-0" />
-            <span className="text-slate-900 font-semibold truncate max-w-[280px] sm:max-w-md">{listing.title}</span>
-          </nav>
-        </div>
-      </div>
+      {/* Floating Side-Rail Advertisements (Detail Page) */}
+      <SideRailAds alwaysVisible />
 
-      {/* ============================================================ */}
-      {/* MAIN TWO-COLUMN CONTAINER                                    */}
-      {/* ============================================================ */}
-      <main className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 pt-6 sm:pt-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-start">
+      {/* Main Content Column with tight, clean side margins around side-rail ads */}
+      <div className="w-full product-detail-wrapper transition-all duration-300">
+        {/* ============================================================ */}
+        {/* TOP NAVIGATION / BREADCRUMB BAR                              */}
+        {/* ============================================================ */}
+        <div className="bg-white border-b border-slate-200">
+          <div className="w-full py-3">
+            <nav className="flex items-center gap-2 text-xs text-slate-500 font-medium overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              <Link href="/" className="hover:text-brand transition-colors shrink-0">Home</Link>
+              <ChevronRight className="h-3 w-3 text-slate-400 shrink-0" />
+              <Link href="/#marketplace" className="hover:text-brand transition-colors shrink-0">Marketplace</Link>
+              <ChevronRight className="h-3 w-3 text-slate-400 shrink-0" />
+              <span className="text-slate-400 shrink-0">{listing.category}</span>
+              <ChevronRight className="h-3 w-3 text-slate-400 shrink-0" />
+              <span className="text-slate-900 font-semibold truncate max-w-[280px] sm:max-w-md">{listing.title}</span>
+            </nav>
+          </div>
+        </div>
+
+        {/* ============================================================ */}
+        {/* MAIN TWO-COLUMN CONTAINER                                    */}
+        {/* ============================================================ */}
+        <main className="w-full pt-6 sm:pt-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 xl:gap-8 items-start">
 
           {/* ============================================================ */}
           {/* LEFT COLUMN: VIDEO AT TOP + 2-COLUMN IMAGE GALLERY           */}
           {/* ============================================================ */}
           <div
             ref={leftColRef}
-            className="lg:col-span-7 xl:col-span-7 space-y-4 sm:space-y-6 lg:sticky"
+            className="lg:col-span-6 xl:col-span-6 min-[1540px]:col-span-7 space-y-4 sm:space-y-6 lg:sticky"
             style={{ top: stickyTop }}
           >
             {/* 1. VIDEO BEFORE THE IMAGES (Full-width in Left Column) */}
@@ -389,8 +440,8 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
           {/* ============================================================ */}
           {/* RIGHT COLUMN: PRODUCT INFO & SPECIFICATIONS                   */}
           {/* ============================================================ */}
-          <div className="lg:col-span-5 xl:col-span-5 space-y-6">
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xs space-y-6">
+          <div className="lg:col-span-6 xl:col-span-6 min-[1540px]:col-span-5 space-y-6">
+            <div className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7 shadow-xs space-y-6">
 
               {/* Header Info */}
               <div>
@@ -407,88 +458,111 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                 </h1>
 
                 {/* Rating & Review Counter */}
-                <div className="mt-2.5 flex items-center gap-2 text-xs">
-                  <div className="flex items-center text-amber-500">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
-                    ))}
+                <div className="mt-2.5 flex items-center gap-2 text-xs flex-wrap">
+                  <div className="flex items-center gap-1.5 shrink-0 whitespace-nowrap">
+                    <div className="flex items-center text-amber-400">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                      ))}
+                    </div>
+                    <span className="font-bold text-slate-900 font-mono">4.9 / 5.0</span>
                   </div>
-                  <span className="font-bold text-slate-800">4.9 / 5.0</span>
-                  <span className="text-slate-400">•</span>
-                  <span className="text-slate-500 underline cursor-pointer hover:text-navy">
+                  <span className="text-slate-300 shrink-0">•</span>
+                  <a
+                    href="#audit-dossier"
+                    className="text-slate-500 hover:text-brand hover:underline transition-colors shrink-0"
+                  >
                     38 Certified Foundry Audits &amp; QA Reports
-                  </span>
+                  </a>
                 </div>
               </div>
 
               {/* Price Block */}
               <div className="border-t border-b border-slate-200 py-4">
                 <div className="flex items-baseline gap-3 flex-wrap">
-                  <span className="text-3xl font-extrabold font-heading text-navy">
+                  <span className="text-2xl sm:text-3xl font-extrabold font-heading text-navy whitespace-nowrap">
                     ${effectiveUnitPrice.toLocaleString()}.00 <span className="text-base font-bold text-slate-500">{detailData.priceSuffix}</span>
                   </span>
-                  <span className="text-lg font-medium text-slate-400 line-through">
+                  <span className="text-base sm:text-lg font-medium text-slate-400 line-through whitespace-nowrap">
                     ${listPrice.toLocaleString()}.00 USD
                   </span>
                   {discountPercent > 0 && (
-                    <span className="rounded-md bg-emerald-100 text-emerald-800 px-2 py-0.5 text-xs font-mono font-bold">
+                    <span className="rounded-md bg-emerald-100 text-emerald-800 px-2 py-0.5 text-xs font-mono font-bold whitespace-nowrap">
                       {discountPercent}% OFF APPLIED
                     </span>
                   )}
                 </div>
-                <p className="mt-1 text-xs text-slate-500">
+                <p className="mt-1.5 text-xs text-slate-500">
                   Ex-Works / FOB {listing.location} • Includes 3.1 Spectrometry MTR &amp; QA Inspection Certs
                 </p>
               </div>
 
               {/* Volume Discount Promotion Banner */}
-              <div className="rounded-lg bg-[#fdf2f2] border border-[#fecaca] p-3.5 text-xs text-slate-800">
-                <div className="flex items-start gap-2.5">
-                  <Tag className="h-4 w-4 text-brand shrink-0 mt-0.5" />
-                  <div>
-                    <div className="flex items-center gap-2 flex-wrap font-bold text-brand">
-                      <span>Buy 2+ lots get 10% OFF</span>
-                      <span className="text-slate-300">|</span>
-                      <span>Buy 4+ lots get 15% OFF</span>
-                      <span className="rounded bg-brand text-white px-1.5 py-0.2 text-[10px] font-mono">
-                        Tier v
-                      </span>
-                    </div>
-                    <p className="mt-1 text-[11px] text-slate-600">
-                      Volume discount tier automatically applied in quote summary below.
-                    </p>
+              <div className="rounded-xl bg-red-50/80 border border-red-200/90 p-3 sm:p-3.5 text-xs text-slate-800">
+                <div className="flex items-center gap-2 font-bold text-brand mb-2">
+                  <Tag className="h-4 w-4 shrink-0" />
+                  <span className="uppercase tracking-wider text-[11px] font-mono font-extrabold">Volume Discount Pricing</span>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="rounded-lg bg-white border border-red-200/80 px-2.5 py-1.5 text-center shadow-2xs">
+                    <div className="text-[10px] font-mono text-slate-500 uppercase font-semibold">Buy 2+ lots</div>
+                    <div className="text-xs font-bold text-brand font-mono">10% OFF</div>
+                  </div>
+                  <div className="rounded-lg bg-white border border-red-200/80 px-2.5 py-1.5 text-center shadow-2xs">
+                    <div className="text-[10px] font-mono text-slate-500 uppercase font-semibold">Buy 4+ lots</div>
+                    <div className="text-xs font-bold text-brand font-mono">15% OFF</div>
                   </div>
                 </div>
+                <p className="mt-2 text-[11px] text-slate-600 font-sans">
+                  Volume discount tier automatically calculated in quote summary below.
+                </p>
               </div>
 
               {/* Variant / Alloy Selector */}
               <div>
-                <div className="flex items-center justify-between text-xs mb-2.5">
-                  <span className="font-bold text-slate-900">
-                    Alloy / Grade: <span className="font-semibold text-brand">{selectedVariant.name}</span>
+                <div className="flex items-center justify-between gap-2 text-xs mb-1.5">
+                  <span className="font-bold text-slate-900 uppercase tracking-wider text-[11px] font-mono">
+                    Alloy / Metallurgy Grade
                   </span>
-                  <span className="text-[11px] font-mono text-slate-500">{selectedVariant.badge}</span>
+                  {selectedVariant.badge && (
+                    <span className="rounded-full bg-slate-100 border border-slate-200 px-2.5 py-0.5 text-[10px] font-mono font-bold text-slate-700 shrink-0 whitespace-nowrap">
+                      {selectedVariant.badge}
+                    </span>
+                  )}
+                </div>
+                <div className="text-xs font-semibold text-brand leading-snug mb-3">
+                  {selectedVariant.name}
                 </div>
 
-                <div className="flex items-center gap-3 flex-wrap">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   {variants.map((v) => (
                     <button
                       key={v.id}
                       type="button"
                       onClick={() => setSelectedVariant(v)}
-                      className={`group relative flex h-11 w-11 items-center justify-center rounded-full p-0.5 transition-all cursor-pointer ${
+                      className={`rounded-xl p-2.5 text-left transition-all cursor-pointer border flex flex-col justify-between ${
                         selectedVariant.id === v.id
-                          ? "ring-2 ring-navy ring-offset-2 scale-105"
-                          : "ring-1 ring-slate-300 hover:ring-slate-400 opacity-80 hover:opacity-100"
+                          ? "border-navy bg-navy text-white shadow-sm ring-1 ring-navy"
+                          : "border-slate-200 bg-slate-50/60 hover:bg-white hover:border-slate-300 text-slate-800"
                       }`}
-                      title={v.name}
                     >
-                      <span
-                        className="h-full w-full rounded-full border border-white/40 shadow-inner flex items-center justify-center text-[10px] font-bold text-white font-mono"
-                        style={{ backgroundColor: v.swatchColor }}
-                      >
-                        {v.short.split(" ")[0].slice(0, 2)}
-                      </span>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span
+                          className="h-3 w-3 rounded-full shrink-0 border border-white/40 shadow-2xs"
+                          style={{ backgroundColor: v.swatchColor }}
+                        />
+                        <span className="font-bold text-xs font-mono truncate">{v.short}</span>
+                      </div>
+                      <div className="flex items-center justify-between gap-1 text-[10px]">
+                        <span className={`truncate ${selectedVariant.id === v.id ? "text-slate-300" : "text-slate-500"}`}>
+                          {v.badge}
+                        </span>
+                        {v.priceOffset > 0 && (
+                          <span className={`font-mono font-bold shrink-0 ${selectedVariant.id === v.id ? "text-amber-400" : "text-brand"}`}>
+                            +${v.priceOffset}
+                          </span>
+                        )}
+                      </div>
                     </button>
                   ))}
                 </div>
@@ -496,9 +570,9 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
 
               {/* Size / Dimension Tier Selector */}
               <div>
-                <div className="flex items-center justify-between text-xs mb-2.5">
-                  <span className="font-bold text-slate-900">
-                    Specification Tier: <span className="font-semibold text-navy">{selectedSize.label}</span>
+                <div className="flex items-center justify-between gap-2 text-xs mb-2">
+                  <span className="font-bold text-slate-900 uppercase tracking-wider text-[11px] font-mono">
+                    Specification Tier: <span className="text-navy font-bold">{selectedSize.label}</span>
                   </span>
                   <a
                     href="#spec-table"
@@ -765,6 +839,571 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
 
         </div>
       </main>
+
+      {/* ============================================================ */}
+      {/* POINT 4 SECTION 1: METALLURGY & CHEMICAL/MECHANICAL MATRIX  */}
+      {/* ============================================================ */}
+      <section className="w-full pt-8">
+        <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+            <div>
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className="rounded bg-navy-950 text-amber-400 font-mono text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5">
+                  EN 10204 Type 3.1 Traceability
+                </span>
+                <span className="text-xs font-semibold text-emerald-600 flex items-center gap-1">
+                  <CheckCircle className="h-3.5 w-3.5" /> 100% Heat Verified
+                </span>
+              </div>
+              <h3 className="font-heading text-lg sm:text-2xl font-bold uppercase text-slate-900 tracking-tight">
+                Certified Chemical Metallurgy &amp; Mechanical Properties
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-500 mt-1 max-w-3xl">
+                Optical Emission Spectrometry (OES) melt analysis, calibrated tensile pull bars, and microscopic phase structure for <strong className="text-slate-900">{listing.title}</strong>.
+              </p>
+            </div>
+
+            {/* Tab Selector */}
+            <div className="inline-flex rounded-xl bg-slate-100 p-1 border border-slate-200 shrink-0 self-start md:self-auto">
+              <button
+                type="button"
+                onClick={() => setActiveMetaTab("chemical")}
+                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                  activeMetaTab === "chemical"
+                    ? "bg-white text-navy shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <Microscope className="h-3.5 w-3.5 text-brand" />
+                <span>Chemical Matrix</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveMetaTab("mechanical")}
+                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                  activeMetaTab === "mechanical"
+                    ? "bg-white text-navy shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <Scale className="h-3.5 w-3.5 text-brand" />
+                <span>Mechanicals &amp; Impact</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveMetaTab("microstructure")}
+                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                  activeMetaTab === "microstructure"
+                    ? "bg-white text-navy shadow-xs font-extrabold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <Layers className="h-3.5 w-3.5 text-brand" />
+                <span>Microstructure</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Tab 1: Chemical Composition */}
+          {activeMetaTab === "chemical" && (
+            <div className="pt-6 animate-fadeIn">
+              <div className="overflow-x-auto border border-slate-200 rounded-xl">
+                <table className="w-full text-left text-xs border-collapse">
+                  <thead>
+                    <tr className="bg-navy-950 text-white font-mono text-[10px] uppercase tracking-wider">
+                      <th className="py-3 px-4">Element Symbol</th>
+                      <th className="py-3 px-4">Element Name</th>
+                      <th className="py-3 px-4">Governing Standard Range</th>
+                      <th className="py-3 px-4">Actual Certified Heat Value</th>
+                      <th className="py-3 px-4 text-right">Ladle Heat Status</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-200 font-sans text-slate-700">
+                    {detailData.chemicalComposition.map((el, eIdx) => (
+                      <tr key={eIdx} className="hover:bg-slate-50 transition-colors">
+                        <td className="py-2.5 px-4 font-mono font-bold text-navy">
+                          <span className="inline-flex items-center justify-center h-6 w-6 rounded bg-slate-100 border border-slate-300 text-slate-900 text-xs">
+                            {el.element}
+                          </span>
+                        </td>
+                        <td className="py-2.5 px-4 font-semibold text-slate-900">{el.name}</td>
+                        <td className="py-2.5 px-4 font-mono text-slate-600">{el.standardRange}</td>
+                        <td className="py-2.5 px-4 font-mono font-bold text-slate-900">{el.actualValue}</td>
+                        <td className="py-2.5 px-4 text-right">
+                          <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-0.5 text-[10px] font-mono font-bold uppercase">
+                            <CheckCircle className="h-3 w-3" /> PASS
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[11px] font-mono text-slate-500 bg-slate-50 p-3.5 rounded-lg border border-slate-200">
+                <div className="flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                  <span>Spark Spectrometer: Thermo Fisher ARL 3460 (Argon Flush) • ASTM E415 Certified</span>
+                </div>
+                <div>Ladle Heat No: <strong className="text-navy">#FE-2026-HT8842-A</strong></div>
+              </div>
+            </div>
+          )}
+
+          {/* Tab 2: Mechanical Properties */}
+          {activeMetaTab === "mechanical" && (
+            <div className="pt-6 animate-fadeIn">
+              <div className="overflow-x-auto border border-slate-200 rounded-xl">
+                <table className="w-full text-left text-xs border-collapse">
+                  <thead>
+                    <tr className="bg-navy-950 text-white font-mono text-[10px] uppercase tracking-wider">
+                      <th className="py-3 px-4">Mechanical Test Parameter</th>
+                      <th className="py-3 px-4">Required Specification Standard</th>
+                      <th className="py-3 px-4">Certified Heat Result</th>
+                      <th className="py-3 px-4">Governing Test Method</th>
+                      <th className="py-3 px-4 text-right">Acceptance</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-200 font-sans text-slate-700">
+                    {detailData.mechanicalProperties.map((mech, mIdx) => (
+                      <tr key={mIdx} className="hover:bg-slate-50 transition-colors">
+                        <td className="py-3 px-4 font-bold text-slate-900">{mech.property}</td>
+                        <td className="py-3 px-4 font-mono text-slate-600">{mech.standardReq}</td>
+                        <td className="py-3 px-4 font-mono font-bold text-brand">{mech.actualValue}</td>
+                        <td className="py-3 px-4 font-mono text-slate-500 text-[11px]">{mech.testMethod}</td>
+                        <td className="py-3 px-4 text-right">
+                          <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-0.5 text-[10px] font-mono font-bold uppercase">
+                            <CheckCircle className="h-3 w-3" /> VERIFIED
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[11px] font-mono text-slate-500 bg-slate-50 p-3.5 rounded-lg border border-slate-200">
+                <div className="flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-brand" />
+                  <span>Tensile Testing: Schenck 1000 kN Universal Servo Frame with Class 0.5 Extensometer</span>
+                </div>
+                <div>Specimen Type: <strong className="text-navy">ASTM E8M Round Bar (d=12.5mm, L0=50mm)</strong></div>
+              </div>
+            </div>
+          )}
+
+          {/* Tab 3: Microstructure & Heat Treatment */}
+          {activeMetaTab === "microstructure" && (
+            <div className="pt-6 animate-fadeIn">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="p-4 rounded-xl border border-slate-200 bg-slate-50">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand block mb-1">01 / Matrix Phase</span>
+                  <div className="font-heading font-bold text-slate-900 text-sm mb-1.5">Constituent Phases</div>
+                  <div className="text-xs text-slate-600 font-sans leading-relaxed">
+                    {detailData.microstructure.matrix}
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-xl border border-slate-200 bg-slate-50">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand block mb-1">02 / Morphology</span>
+                  <div className="font-heading font-bold text-slate-900 text-sm mb-1.5">Nodularity / Grain</div>
+                  <div className="text-xs text-slate-600 font-sans leading-relaxed">
+                    {detailData.microstructure.nodularityOrGrain}
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-xl border border-slate-200 bg-slate-50">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand block mb-1">03 / Cleanliness</span>
+                  <div className="font-heading font-bold text-slate-900 text-sm mb-1.5">Inclusion Rating</div>
+                  <div className="text-xs text-slate-600 font-sans leading-relaxed">
+                    {detailData.microstructure.inclusionRating}
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-xl border border-slate-200 bg-slate-50">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand block mb-1">04 / Condition</span>
+                  <div className="font-heading font-bold text-slate-900 text-sm mb-1.5">Thermal Cycle</div>
+                  <div className="text-xs text-slate-600 font-sans leading-relaxed">
+                    {detailData.microstructure.heatTreatmentCondition}
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4 flex items-center gap-2 text-[11px] font-mono text-slate-500 bg-slate-50 p-3 rounded-lg border border-slate-200">
+                <Sparkles className="h-3.5 w-3.5 text-amber-500" />
+                <span>Optical metallography verified at 100x and 500x magnification after 2% Nital chemical etch per ASTM E3.</span>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* POINT 4 SECTION 2: TECHNICAL SPEC SHEET & CAD DOWNLOADS     */}
+      {/* ============================================================ */}
+      <section className="w-full pt-8 sm:pt-10">
+        <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+            <div>
+              <span className="rounded bg-brand/10 text-brand font-mono text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 inline-block mb-1.5">
+                Instant Engineering Portal
+              </span>
+              <h3 className="font-heading text-lg sm:text-2xl font-bold uppercase text-slate-900 tracking-tight">
+                Technical Documentation &amp; 3D CAD Center
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-500 mt-1">
+                Download certified quality test packages, First-Article inspection reports, and native 3D STEP models.
+              </p>
+            </div>
+          </div>
+
+          {/* Download Toast Notification */}
+          {downloadToast && (
+            <div className="mt-4 rounded-xl bg-navy-950 text-white p-3.5 px-4 text-xs font-mono flex items-center justify-between animate-fadeIn border border-navy-800 shadow-lg">
+              <div className="flex items-center gap-2.5">
+                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>{downloadToast}</span>
+              </div>
+              <span className="text-emerald-400 font-bold">100% Ready ✓</span>
+            </div>
+          )}
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+            {detailData.technicalDocs.map((doc) => (
+              <div
+                key={doc.id}
+                className="rounded-xl border border-slate-200 bg-slate-50/70 p-5 flex flex-col justify-between hover:border-slate-400 hover:bg-white hover:shadow-md transition-all group"
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <span className="rounded bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-mono font-bold uppercase text-navy">
+                      {doc.format} • {doc.size}
+                    </span>
+                    <span className="rounded bg-navy-950 text-white px-2 py-0.5 text-[10px] font-mono font-bold uppercase">
+                      {doc.badge}
+                    </span>
+                  </div>
+
+                  <h5 className="font-heading text-sm font-bold text-slate-900 group-hover:text-brand transition-colors line-clamp-2">
+                    {doc.title}
+                  </h5>
+                  <p className="mt-2 text-xs text-slate-600 leading-relaxed line-clamp-3">
+                    {doc.description}
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => handleDownloadDoc(doc.title, doc.format)}
+                  className="mt-4 w-full rounded-lg bg-white border border-slate-300 py-2.5 px-3 text-xs font-bold text-slate-800 hover:bg-navy hover:text-white hover:border-navy transition-all flex items-center justify-center gap-2 cursor-pointer shadow-2xs"
+                >
+                  <Download className="h-3.5 w-3.5 text-brand group-hover:text-white transition-colors" />
+                  <span>Download {doc.format}</span>
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* POINT 4 SECTION 3: SUPPLIER & FACILITY AUDIT DOSSIER        */}
+      {/* ============================================================ */}
+      <section id="audit-dossier" className="w-full pt-8 sm:pt-10 scroll-mt-24">
+        <div className="rounded-2xl border-2 border-navy-900 bg-linear-to-br from-navy-950 via-navy-900 to-navy-950 text-white p-6 sm:p-8 lg:p-10 shadow-xl">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-white/10">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <span className="rounded bg-emerald-500 text-white px-2.5 py-0.5 text-[10px] font-mono font-extrabold uppercase tracking-wider flex items-center gap-1 shadow-sm">
+                  <ShieldCheck className="h-3.5 w-3.5" /> Pre-Audited &amp; Verified
+                </span>
+                <span className="text-xs font-mono text-slate-400">
+                  {detailData.supplierDossier.verifiedDate}
+                </span>
+              </div>
+              <h3 className="font-heading text-xl sm:text-3xl font-extrabold uppercase text-white tracking-tight">
+                {detailData.supplierDossier.foundryName}
+              </h3>
+              <div className="text-xs sm:text-sm text-slate-300 mt-1 flex items-center gap-2 flex-wrap">
+                <span className="flex items-center gap-1 text-slate-200">
+                  <MapPin className="h-3.5 w-3.5 text-brand" />
+                  <span>Plant HQ: <strong>{detailData.supplierDossier.headquarters}</strong></span>
+                </span>
+                <span>•</span>
+                <span>Est. {detailData.supplierDossier.established}</span>
+                <span>•</span>
+                <span className="text-amber-400 font-semibold">{detailData.supplierDossier.meltCapacity}</span>
+              </div>
+            </div>
+
+            <div className="shrink-0 flex items-center gap-2">
+              <Link
+                href="/#contact-form"
+                className="rounded-lg bg-brand hover:bg-brand-dark text-white px-5 py-2.5 text-xs font-bold uppercase tracking-wider transition-all shadow-md flex items-center gap-2"
+              >
+                <Building2 className="h-4 w-4" />
+                <span>Request Plant Audit / Visit</span>
+              </Link>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-6">
+            {/* Left Column: Equipment & QA Capabilities */}
+            <div className="lg:col-span-7 space-y-4">
+              <h5 className="font-heading text-sm font-bold uppercase text-slate-200 tracking-wider">
+                Melt Shop &amp; In-House Laboratory Capabilities
+              </h5>
+              <div className="space-y-3">
+                <div className="rounded-xl bg-white/5 border border-white/10 p-4">
+                  <div className="text-[11px] font-mono text-amber-400 uppercase font-bold mb-1">Induction Melting Deck</div>
+                  <div className="text-xs text-slate-200 font-sans leading-relaxed">
+                    {detailData.supplierDossier.furnaces}
+                  </div>
+                </div>
+                <div className="rounded-xl bg-white/5 border border-white/10 p-4">
+                  <div className="text-[11px] font-mono text-amber-400 uppercase font-bold mb-1">Metallurgical QA &amp; NDT Equipment</div>
+                  <div className="text-xs text-slate-200 font-sans leading-relaxed">
+                    {detailData.supplierDossier.testingLab}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Plant Certifications & Inspection Badges */}
+            <div className="lg:col-span-5 space-y-4">
+              <h5 className="font-heading text-sm font-bold uppercase text-slate-200 tracking-wider">
+                Facility Accreditations &amp; TPI Partners
+              </h5>
+              <div className="grid grid-cols-2 gap-2">
+                {detailData.supplierDossier.certifications.map((cert, cIdx) => (
+                  <div key={cIdx} className="rounded-lg bg-white/10 border border-white/10 p-2.5 text-[11px] font-semibold text-slate-200 flex items-center gap-2">
+                    <Award className="h-3.5 w-3.5 text-amber-400 shrink-0" />
+                    <span className="truncate">{cert}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-4 pt-4 border-t border-white/10">
+                <div className="text-[10px] font-mono uppercase text-slate-400 mb-2 font-bold">
+                  Approved Third-Party Inspection (TPI) Agencies:
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {detailData.supplierDossier.inspectionAgencies.map((agency, aIdx) => (
+                    <span key={aIdx} className="rounded-md bg-navy-800 border border-navy-700 px-2.5 py-1 text-[11px] font-bold text-slate-300">
+                      {agency}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* POINT 4 SECTION 4: TECHNICAL & PROCUREMENT FAQS             */}
+      {/* ============================================================ */}
+      <section className="w-full pt-8 sm:pt-10">
+        <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
+          <div className="pb-6 border-b border-slate-200">
+            <span className="rounded bg-slate-100 text-slate-700 font-mono text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 inline-block mb-1.5">
+              Buyer Knowledge Base
+            </span>
+            <h3 className="font-heading text-lg sm:text-2xl font-bold uppercase text-slate-900 tracking-tight">
+              Technical Procurement &amp; Engineering FAQs
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-500 mt-1">
+              Everything you need to know regarding minimum orders, pattern tooling ownership, MTR heat certifications, and escrow terms.
+            </p>
+          </div>
+
+          <div className="divide-y divide-slate-200 mt-2">
+            {detailData.faqs.map((faq, fIdx) => (
+              <div key={fIdx} className="py-4">
+                <button
+                  type="button"
+                  onClick={() => setOpenFaqIndex(openFaqIndex === fIdx ? null : fIdx)}
+                  className="w-full flex items-center justify-between text-left gap-4 cursor-pointer group"
+                >
+                  <span className="font-heading font-bold text-sm sm:text-base text-slate-900 group-hover:text-brand transition-colors">
+                    {faq.question}
+                  </span>
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 group-hover:bg-slate-200 text-slate-700 transition-colors">
+                    {openFaqIndex === fIdx ? (
+                      <ChevronUp className="h-4 w-4" />
+                    ) : (
+                      <ChevronDown className="h-4 w-4" />
+                    )}
+                  </span>
+                </button>
+
+                {openFaqIndex === fIdx && (
+                  <div className="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed pr-8 animate-fadeIn font-sans">
+                    {faq.answer}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* POINT 4 SECTION 5: RELATED INDUSTRIAL LOTS & COMPANIONS      */}
+      {/* ============================================================ */}
+      <section className="w-full pt-8 sm:pt-10">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div>
+            <span className="rounded bg-brand/10 text-brand font-mono text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 inline-block mb-1.5">
+              Companion Components &amp; Tooling
+            </span>
+            <h3 className="font-heading text-lg sm:text-2xl font-bold uppercase text-slate-900 tracking-tight">
+              Related Industrial Lots
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+              Engineered castings, forgings, and foundry equipment frequently procured alongside this lot.
+            </p>
+          </div>
+          <Link
+            href="/#marketplace"
+            className="text-xs font-bold uppercase tracking-wider text-brand hover:underline flex items-center gap-1 shrink-0"
+          >
+            <span>View All 24 Listings</span>
+            <ChevronRight className="h-3.5 w-3.5" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {relatedListings.map((rel) => (
+            <div
+              key={rel.id}
+              className="group rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-xs hover:shadow-lg transition-all flex flex-col justify-between"
+            >
+              <div>
+                <div className="relative aspect-4/3 w-full bg-slate-100 overflow-hidden">
+                  <Image
+                    src={rel.imageUrl}
+                    alt={rel.title}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    onError={(e) => {
+                      const target = e.currentTarget as HTMLImageElement;
+                      target.srcset = "";
+                      target.src = "/images/fallback-product.jpg";
+                    }}
+                  />
+                  <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+                    <span className="rounded bg-navy-950/90 backdrop-blur-xs text-white px-2 py-0.5 text-[10px] font-mono font-bold uppercase">
+                      {rel.category}
+                    </span>
+                    <span className="rounded bg-brand text-white px-2 py-0.5 text-[10px] font-mono font-bold uppercase">
+                      {rel.status}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-4 sm:p-5">
+                  <div className="text-[11px] font-mono text-slate-400 mb-1">{rel.id}</div>
+                  <h5 className="font-heading text-sm font-bold uppercase text-slate-900 group-hover:text-brand transition-colors line-clamp-2 leading-snug">
+                    {rel.title}
+                  </h5>
+                  <p className="mt-1 text-xs text-slate-500 font-mono truncate">
+                    {rel.alloySpec}
+                  </p>
+                  <div className="mt-3 flex items-center justify-between text-xs border-t border-slate-100 pt-3">
+                    <div className="font-mono font-bold text-slate-900">{rel.priceEstimate}</div>
+                    <div className="text-[11px] text-slate-500 truncate max-w-[120px]">{rel.location}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-4 pt-0">
+                <Link
+                  href={`/listings/${rel.id}`}
+                  className="w-full rounded-lg bg-slate-100 hover:bg-navy hover:text-white text-slate-800 py-2 px-3 text-center text-xs font-bold uppercase tracking-wider transition-all block"
+                >
+                  View Lot Specs →
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* POINT 4 SECTION 6: EMBEDDED CUSTOM RFQ INQUIRY BOX         */}
+      {/* ============================================================ */}
+      <section className="w-full pt-8 sm:pt-10">
+        <div className="rounded-2xl border border-slate-800 bg-linear-to-r from-navy-950 via-slate-900 to-navy-950 text-white p-6 sm:p-8 lg:p-10 shadow-xl">
+          <div className="max-w-3xl">
+            <span className="rounded bg-amber-400 text-navy-950 px-2.5 py-0.5 text-[10px] font-mono font-extrabold uppercase tracking-wider inline-block mb-2">
+              Custom Heat &amp; Tooling Engineering
+            </span>
+            <h3 className="font-heading text-xl sm:text-3xl font-extrabold uppercase text-white tracking-tight">
+              Need Non-Standard Machining or Modified Metallurgy?
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">
+              Send your 2D PDF drawing or 3D CAD (.STEP) model for direct factory evaluation. Our metallurgical engineering group will return a certified fixed-price quotation within 4 business hours.
+            </p>
+          </div>
+
+          {rfqSubmitted ? (
+            <div className="mt-6 rounded-xl bg-emerald-950/80 border border-emerald-500/50 p-4 text-emerald-200 text-xs sm:text-sm flex items-center gap-3 animate-fadeIn">
+              <CheckCircle className="h-5 w-5 text-emerald-400 shrink-0" />
+              <span>
+                Thank you! Your custom RFQ package for <strong>{listing.title}</strong> has been transmitted to {listing.vendorName}&apos;s Chief Metallurgist. An official quotation with MTR feasibility will be dispatched shortly.
+              </span>
+            </div>
+          ) : (
+            <form onSubmit={handleRfqSubmit} className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div>
+                <label className="text-[11px] font-mono text-slate-400 uppercase block mb-1.5 font-bold">Target Quantity</label>
+                <input
+                  type="text"
+                  value={rfqForm.targetQty}
+                  onChange={(e) => setRfqForm({ ...rfqForm, targetQty: e.target.value })}
+                  className="w-full rounded-lg border border-navy-700 bg-navy-900/90 px-3.5 py-2.5 text-xs text-white placeholder:text-slate-500 focus:border-brand focus:outline-hidden"
+                  placeholder="e.g. 10 units / 5,000 kg"
+                />
+              </div>
+
+              <div>
+                <label className="text-[11px] font-mono text-slate-400 uppercase block mb-1.5 font-bold">Delivery Port (Incoterm)</label>
+                <input
+                  type="text"
+                  value={rfqForm.deliveryPort}
+                  onChange={(e) => setRfqForm({ ...rfqForm, deliveryPort: e.target.value })}
+                  className="w-full rounded-lg border border-navy-700 bg-navy-900/90 px-3.5 py-2.5 text-xs text-white placeholder:text-slate-500 focus:border-brand focus:outline-hidden"
+                  placeholder="e.g. Houston / Rotterdam (CIF)"
+                />
+              </div>
+
+              <div>
+                <label className="text-[11px] font-mono text-slate-400 uppercase block mb-1.5 font-bold">Corporate Work Email</label>
+                <input
+                  type="email"
+                  required
+                  value={rfqForm.contactEmail}
+                  onChange={(e) => setRfqForm({ ...rfqForm, contactEmail: e.target.value })}
+                  className="w-full rounded-lg border border-navy-700 bg-navy-900/90 px-3.5 py-2.5 text-xs text-white placeholder:text-slate-500 focus:border-brand focus:outline-hidden"
+                  placeholder="engineer@company.com"
+                />
+              </div>
+
+              <div className="flex items-end">
+                <button
+                  type="submit"
+                  className="w-full rounded-lg bg-brand hover:bg-brand-dark text-white py-2.5 px-5 text-xs font-bold uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer h-[38px]"
+                >
+                  <Send className="h-3.5 w-3.5" />
+                  <span>Submit Instant RFQ</span>
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
+      </section>
+      </div>
 
       {/* ============================================================ */}
       {/* FANCYBOX / LIGHTBOX MODAL OVERLAY                            */}
