@@ -142,100 +142,76 @@ export default function Header() {
 
       {/* 2. Main Sticky Navigation — PrecastXchange Signature Navy-900 with Red Underline Bar */}
       <div className="bg-navy-900 text-white border-b-2 border-brand">
-        {/* <div className="w-full flex h-16 sm:h-20 items-center justify-between gap-3 lg:gap-5 px-4 sm:px-6 lg:px-8 xl:px-10">
-          <form
-            onSubmit={handleSearchSubmit}
-            className="flex relative items-center w-52 sm:w-64 xl:w-72 2xl:w-80 shrink-0 transition-all focus-within:w-60 sm:focus-within:w-72"
-          >
-            <Search className="absolute left-3.5 h-3.5 w-3.5 text-slate-400" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search castings & forgings..."
-              className="w-full rounded-full border border-navy-700 bg-navy-950/80 py-1.5 pl-9 pr-3 text-xs text-white placeholder:text-slate-400 shadow-inner transition-all focus:border-brand focus:bg-navy-950 focus:outline-hidden focus:ring-1 focus:ring-brand"
-            />
-          </form> */}
-        {/* Logo in heaer section */}
-        <div style={{ height: '100px'}} className="mx-auto flex h-20  items-center justify-between gap-3 lg:gap-5 px-4 sm:px-6 lg:px-8">
-          <form
-            onSubmit={handleSearchSubmit}
-            className="hidden lg:flex relative items-center w-40 xl:w-48 2xl:w-60 shrink-0 transition-all focus-within:w-56 xl:focus-within:w-64"
-          >
-            <Search className="absolute left-3.5 h-3.5 w-3.5 text-slate-400" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search castings & forgings..."
-              className="w-full rounded-full border border-navy-700 bg-navy-950/80 py-1.5 pl-9 pr-3 text-xs text-white placeholder:text-slate-400 shadow-inner transition-all focus:border-brand focus:bg-navy-950 focus:outline-hidden focus:ring-1 focus:ring-brand"
-            />
-          </form>
-
-          <Link href="/" className="flex items-center gap-3 shrink-0">
-            <div className="relative flex items-center bg-white px-3 sm:px-4 py-1.5 rounded-md shadow-sm border border-white/20">
-              <Image
-                style={{ width: "300px", height: "70px" }}
-                src="/foundry-logo.png"
-                alt="Foundry Exchange Logo"
-                width={220}
-                height={65}
-                priority
-                className="h-11 sm:h-12 md:h-13 lg:h-14 w-auto object-contain"
+        {/* Main Header Bar with Perfectly Centered Logo */}
+        <div className="relative w-full flex h-20 sm:h-24 items-center justify-between px-4 sm:px-6 lg:px-8 xl:px-10">
+          {/* Left Zone: Compact Search Form */}
+          <div className="flex items-center min-w-0">
+            <form
+              onSubmit={handleSearchSubmit}
+              className="hidden lg:flex relative items-center w-48 xl:w-56 2xl:w-64 shrink-0 transition-all focus-within:w-64 xl:focus-within:w-72"
+            >
+              <Search className="absolute left-3.5 h-3.5 w-3.5 text-slate-400" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search castings & forgings..."
+                className="w-full rounded-full border border-navy-700 bg-navy-950/80 py-1.5 pl-9 pr-3 text-xs text-white placeholder:text-slate-400 shadow-inner transition-all focus:border-brand focus:bg-navy-950 focus:outline-hidden focus:ring-1 focus:ring-brand"
               />
-            </div>
-          </Link>
+            </form>
+          </div>
 
-          {/* Desktop Navigation Links — Precast-inspired Sheet Numbers & Red Hover Accents */}
-          <nav className="hidden xl:flex items-center gap-5 2xl:gap-7 whitespace-nowrap shrink-0">
-            {navItems.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="group relative flex flex-col justify-center py-2 text-left transition-colors"
-              >
-                <span className="font-mono text-[10px] text-brand font-bold leading-none mb-0.5">
-                  {item.num}
-                </span>
-                <span className="text-xs xl:text-sm font-bold tracking-wide text-white group-hover:text-brand transition-colors">
-                  {item.label}
-                </span>
-                {/* Red Underline indicator */}
-                <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-brand transition-all duration-200 group-hover:w-full" />
-              </Link>
-            ))}
-          </nav>
-
-          {/* Header Action Buttons — Red & Crisp White Dual CTAs */}
-          {/* <div className="hidden sm:flex items-center gap-2.5 shrink-0 whitespace-nowrap">
-            <Link
-              href="/#contact-form"
-              className="rounded-md bg-brand px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm transition-all hover:bg-brand-hover hover:scale-[1.02] whitespace-nowrap shrink-0"
-            >
-              Post RFQ
+          {/* Center Zone: Exact Mathematically Centered Logo (Increased Size) */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-10 pointer-events-auto">
+            <Link href="/" className="flex items-center shrink-0">
+              <div className="relative flex items-center bg-white px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-xl shadow-lg border border-white/40 transition-transform hover:scale-105">
+                <Image
+                  src="/foundry-logo.png"
+                  alt="Foundry Exchange Logo"
+                  width={280}
+                  height={84}
+                  priority
+                  className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain"
+                />
+              </div>
             </Link>
-            <Link
-              href="/#contact-form"
-              className="rounded-md border border-navy-600 bg-navy-800 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white shadow-xs transition-all hover:bg-white hover:text-navy-900 whitespace-nowrap shrink-0"
-            >
-              List Products
-            </Link>
-          </div> */}
+          </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="flex p-2 text-white xl:hidden rounded-md hover:bg-navy-800 focus:outline-hidden focus:ring-2 focus:ring-brand shrink-0"
-            aria-label="Toggle navigation menu"
-            aria-expanded={mobileMenuOpen}
-          >
-            {mobileMenuOpen ? (
-              <X className="h-6 w-6 text-brand" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
-          </button>
+          {/* Right Zone: Desktop Navigation Links & Mobile Menu Button */}
+          <div className="flex items-center gap-4 lg:gap-6 shrink-0">
+            <nav className="hidden xl:flex items-center gap-4 2xl:gap-6 whitespace-nowrap shrink-0">
+              {navItems.map((item) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="group relative flex flex-col justify-center py-2 text-left transition-colors"
+                >
+                  <span className="font-mono text-[10px] text-brand font-bold leading-none mb-0.5">
+                    {item.num}
+                  </span>
+                  <span className="text-xs xl:text-sm font-bold tracking-wide text-white group-hover:text-brand transition-colors">
+                    {item.label}
+                  </span>
+                  <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-brand transition-all duration-200 group-hover:w-full" />
+                </Link>
+              ))}
+            </nav>
+
+            {/* Mobile Menu Button */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="flex p-2 text-white xl:hidden rounded-md hover:bg-navy-800 focus:outline-hidden focus:ring-2 focus:ring-brand shrink-0 cursor-pointer"
+              aria-label="Toggle navigation menu"
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? (
+                <X className="h-6 w-6 text-brand" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
+            </button>
+          </div>
         </div>
 
         {/* 3. BidSpotter-Style Category Header Navigation Bar */}
