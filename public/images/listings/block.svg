@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="navyBgBlock" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a3161" />
+      <stop offset="100%" stop-color="#062040" />
+    </linearGradient>
+    <radialGradient id="moltenGlowBlock" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#c82425" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#062040" stop-opacity="0" />
+    </radialGradient>
+    <pattern id="gridBlock" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#13396b" stroke-width="0.8" />
+    </pattern>
+  </defs>
+  <rect width="600" height="400" fill="url(#navyBgBlock)" />
+  <rect width="600" height="400" fill="url(#gridBlock)" opacity="0.7" />
+  <circle cx="300" cy="180" r="160" fill="url(#moltenGlowBlock)" />
+  
+  <!-- Forged Fluid End Block Isometric Outline -->
+  <g transform="translate(170, 60)" stroke-width="2.5" fill="none">
+    <!-- Main Solid Monoblock Cuboid -->
+    <path d="M 40 70 L 180 30 L 250 80 L 110 120 Z" stroke="#ffffff" stroke-width="2.5" fill="#13396b" />
+    <path d="M 40 70 L 40 190 L 110 240 L 110 120 Z" stroke="#f26a1b" stroke-width="3" fill="#0d2b52" />
+    <path d="M 110 120 L 250 80 L 250 200 L 110 240 Z" stroke="#c82425" stroke-width="2.5" fill="#062040" />
+    
+    <!-- Cross-Bore Cavities (Autofrettaged High-Pressure Plunger Bores) -->
+    <ellipse cx="65" cy="160" rx="14" ry="24" stroke="#ffffff" stroke-width="2" fill="#062040" />
+    <ellipse cx="85" cy="175" rx="14" ry="24" stroke="#ffffff" stroke-width="2" fill="#062040" />
+    <ellipse cx="160" cy="175" rx="18" ry="28" stroke="#f26a1b" stroke-width="2" fill="#0d2b52" />
+    <ellipse cx="210" cy="155" rx="18" ry="28" stroke="#f26a1b" stroke-width="2" fill="#0d2b52" />
+    
+    <!-- Top Valve Chamber Ports -->
+    <ellipse cx="100" cy="70" rx="16" ry="9" stroke="#ffffff" stroke-width="1.8" />
+    <ellipse cx="150" cy="55" rx="16" ry="9" stroke="#ffffff" stroke-width="1.8" />
+    <ellipse cx="200" cy="40" rx="16" ry="9" stroke="#ffffff" stroke-width="1.8" />
+  </g>
+  
+  <text x="30" y="360" fill="#f7f7f5" font-family="sans-serif" font-size="14" font-weight="700" letter-spacing="1.5">FORGED FRAC PUMP FLUID END BLOCK</text>
+  <text x="30" y="380" fill="#f26a1b" font-family="monospace" font-size="12">AISI 4330V MODIFIED • 15,000 PSI AUTOFRETTAGED • 100% 3D UT LEVEL 1</text>
+</svg>
