@@ -57,14 +57,14 @@ export default function Footer() {
           <div className="order-1 lg:order-2 flex justify-center">
             <Link
               href="/"
-              className="inline-flex items-center bg-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-2xl shadow-lg border border-white/20 hover:scale-105 transition-transform"
+              className="inline-flex items-center justify-center bg-white px-6 sm:px-7 md:px-8 lg:px-9 xl:px-10 py-3 sm:py-3.5 md:py-4 lg:py-4.5 xl:py-5 rounded-2xl md:rounded-3xl shadow-lg border border-white/30 hover:scale-[1.03] transition-all duration-300"
             >
               <Image
                 src="/foundry-logo.png"
                 alt="Foundry Exchange Logo"
-                width={360}
-                height={108}
-                className="h-14 sm:h-16 md:h-18 lg:h-20 w-auto object-contain"
+                width={400}
+                height={133}
+                className="h-14 sm:h-[64px] md:h-[72px] lg:h-[80px] xl:h-[92px] 2xl:h-[104px] w-auto object-contain transition-all duration-300"
               />
             </Link>
           </div>

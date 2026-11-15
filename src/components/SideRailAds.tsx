@@ -147,17 +147,28 @@ function RailColumn({ side, ads, visible, speed = 0.55 }: RailProps) {
               >
                 {/* Media Presentation: Logo on crisp white plate, Photo with object-cover */}
                 <div
-                  className={`relative h-[85px] min-[1660px]:h-[95px] w-full overflow-hidden flex items-center justify-center ${mediaBg}`}
+                  className={`relative h-[115px] min-[1660px]:h-[130px] w-full overflow-hidden flex items-center justify-center ${mediaBg}`}
                 >
-                  <Image
-                    src={ad.imageUrl}
-                    alt={ad.title}
-                    fill
-                    sizes="(max-width: 1660px) 155px, 175px"
-                    className={`transition-transform duration-500 ease-out group-hover/ad:scale-105 ${
-                      isLogo ? "object-contain p-2" : "object-cover"
-                    }`}
-                  />
+                  {ad.videoUrl ? (
+                    <video
+                      src={ad.videoUrl}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover/ad:scale-105"
+                    />
+                  ) : (
+                    <Image
+                      src={ad.imageUrl}
+                      alt={ad.title}
+                      fill
+                      sizes="(max-width: 1660px) 155px, 175px"
+                      className={`transition-transform duration-500 ease-out group-hover/ad:scale-105 ${
+                        isLogo ? "object-contain p-2" : "object-cover"
+                      }`}
+                    />
+                  )}
 
                   {/* Top Badges */}
                   <div className="pointer-events-none absolute left-1.5 top-1.5 right-1.5 z-10 flex items-center justify-between gap-1">

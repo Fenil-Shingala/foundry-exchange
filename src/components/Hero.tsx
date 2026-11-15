@@ -62,19 +62,19 @@ export default function Hero() {
 
       <div className="relative w-full px-4 sm:px-6 lg:px-8 xl:px-10 text-center">
         {/* Centered Brand Header Logo */}
-        <div className="mx-auto mb-6 flex justify-center">
+        <div className="mx-auto mb-6 sm:mb-7 lg:mb-8 flex justify-center">
           <Link
             href="/"
             aria-label="Foundry Exchange Home"
-            className="group inline-flex items-center justify-center bg-white px-6 sm:px-8 py-3 sm:py-4 rounded-2xl shadow-2xl border border-white/50 transition-all duration-300 hover:scale-105"
+            className="group inline-flex items-center justify-center bg-white px-6 sm:px-8 md:px-10 lg:px-11 xl:px-12 py-3.5 sm:py-4 md:py-5 lg:py-5.5 xl:py-6 rounded-2xl md:rounded-3xl shadow-2xl border border-white/60 transition-all duration-300 hover:scale-[1.03]"
           >
             <Image
               src="/foundry-logo.png"
               alt="Foundry Exchange Logo"
-              width={320}
-              height={96}
+              width={420}
+              height={140}
               priority
-              className="h-12 sm:h-14 md:h-16 lg:h-18 w-auto object-contain"
+              className="h-14 sm:h-[68px] md:h-[78px] lg:h-[86px] xl:h-[100px] 2xl:h-[114px] w-auto object-contain transition-all duration-300"
             />
           </Link>
         </div>
