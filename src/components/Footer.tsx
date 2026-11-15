@@ -42,9 +42,19 @@ export default function Footer() {
 
       {/* Main Footer Links */}
       <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-10 py-16">
-        {/* Brand Showcase with Increased Footer Logo */}
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 pb-12 border-b border-navy-800">
-          <div className="space-y-4 max-w-xl">
+        {/* Brand Showcase: Left Text, Centered Logo, Right Contact Details */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 items-center gap-8 pb-12 border-b border-navy-800">
+          {/* Left Column: Mission Statement */}
+          <div className="order-2 lg:order-1 text-center lg:text-left">
+            <p className="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-md mx-auto lg:mx-0">
+              The premier industrial exchange built specifically for the
+              metal casting and forging sectors. Connecting North American and global foundries,
+              pattern shops, melt equipment builders, and OEMs.
+            </p>
+          </div>
+
+          {/* Center Column: Prominent Centered Brand Logo */}
+          <div className="order-1 lg:order-2 flex justify-center">
             <Link
               href="/"
               className="inline-flex items-center bg-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-2xl shadow-lg border border-white/20 hover:scale-105 transition-transform"
@@ -57,15 +67,10 @@ export default function Footer() {
                 className="h-14 sm:h-16 md:h-18 lg:h-20 w-auto object-contain"
               />
             </Link>
-
-            <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-              The premier industrial exchange built specifically for the
-              metal casting and forging sectors. Connecting North American and global foundries,
-              pattern shops, melt equipment builders, and OEMs.
-            </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row items-start sm:items-center gap-6 lg:gap-8 shrink-0">
+          {/* Right Column: Contact & Socials */}
+          <div className="order-3 flex flex-col sm:flex-row lg:flex-col xl:flex-row items-center lg:items-end justify-center lg:justify-end gap-6 lg:gap-8 shrink-0">
             <div className="space-y-2 text-xs text-slate-300">
               <div className="flex items-center gap-2">
                 <Phone className="h-4 w-4 text-brand" />
