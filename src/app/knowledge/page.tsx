@@ -167,7 +167,7 @@ export default function KnowledgePage() {
             <span className="inline-block text-xs font-bold uppercase tracking-wider text-red-400 mb-2">
               Engineering &amp; Metallurgy Reference Library
             </span>
-            <h1 className="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-white font-heading">
+            <h1 className="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-brand font-heading">
               Foundry Standards &amp; Metallurgy Desk
             </h1>
             <p className="mt-4 text-base sm:text-lg text-slate-200 leading-relaxed font-body">

@@ -40,7 +40,7 @@ export default function WhySection() {
                 Industrial Grade Advantage
               </span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-navy font-heading leading-tight">
+            <h2 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-brand font-heading leading-tight">
               Why Heavy Industry Chooses Foundry Exchange
             </h2>
             <p className="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed">

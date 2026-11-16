@@ -31,8 +31,8 @@ export default function LoginPage() {
         {/* Logo / Header */}
         <div className="text-center mb-8">
           <Link href="/" className="inline-block">
-            <span className="font-heading text-3xl font-extrabold uppercase tracking-tight text-navy">
-              Foundry <span className="text-brand">Exchange</span>
+            <span className="font-heading text-3xl font-extrabold uppercase tracking-tight text-brand">
+              Foundry Exchange
             </span>
           </Link>
           <p className="mt-2 text-xs text-slate-500 font-bold uppercase tracking-wider">

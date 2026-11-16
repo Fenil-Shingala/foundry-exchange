@@ -59,7 +59,7 @@ export default function CategoryGrid() {
                 Industrial Taxonomy
               </span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-navy uppercase font-heading">
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-brand uppercase font-heading">
               Browse by Category
             </h2>
             <p className="mt-3 max-w-2xl text-sm sm:text-base text-slate-600">

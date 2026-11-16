@@ -23,20 +23,20 @@ export default function HomePage() {
         {/* 1. How It Works (3-Step Sourcing Workflow) */}
         <HowItWorks />
 
-        {/* 2. Browse by Category Grid (Industrial Taxonomy) */}
+        {/* 2. Exchange Modes (8 Transaction & Procurement Channels) */}
+        <ExchangeModes />
+
+        {/* 3. Browse by Category Grid (Industrial Taxonomy) */}
         <CategoryGrid />
 
-        {/* 3. Featured Listings (Core Products Section - Ready Stock, Made to Order & Surplus Lots) */}
+        {/* 4. Featured Listings (Core Products Section - Ready Stock, Made to Order & Surplus Lots) */}
         <FeaturedListings />
 
-        {/* 4. Industrial Auctions & Plant Liquidations (Timed Auction Events & High-Value Machinery Lots) */}
+        {/* 5. Industrial Auctions & Plant Liquidations (Timed Auction Events & High-Value Machinery Lots) */}
         <AuctionSection />
 
-        {/* 5. 50% Castings & 50% Forgings Dual Capability Division */}
+        {/* 6. 50% Castings & 50% Forgings Dual Capability Division */}
         <CastingsForgingsDualSection />
-
-        {/* 6. Exchange Modes (8 Transaction & Procurement Channels) */}
-        <ExchangeModes />
 
         {/* 7. Why Foundry Exchange (Metallurgical Verification & Trust) */}
         <WhySection />

@@ -146,7 +146,7 @@ export default async function CategoryDetailPage({
                   <span className="text-xs font-bold uppercase tracking-wider text-red-400 block">
                     {category.subheading}
                   </span>
-                  <h1 className="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-white font-heading">
+                  <h1 className="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-brand font-heading">
                     {category.name}
                   </h1>
                 </div>
@@ -202,7 +202,7 @@ export default async function CategoryDetailPage({
                 Division Classifications
               </span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-navy font-heading mb-6">
+            <h2 className="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-brand font-heading mb-6">
               Subcategories &amp; Component Types
             </h2>
 
@@ -272,7 +272,7 @@ export default async function CategoryDetailPage({
                   Available Inventory
                 </span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-navy font-heading">
+              <h2 className="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-brand font-heading">
                 Verified {category.name} Listings
               </h2>
             </div>

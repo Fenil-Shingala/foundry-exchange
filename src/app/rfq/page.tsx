@@ -73,7 +73,7 @@ export default function RFQPage() {
               <Clock className="h-3.5 w-3.5" />
               Guaranteed 24-Hour Routing
             </div>
-            <h1 className="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-white font-heading">
+            <h1 className="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-brand font-heading">
               Post an Industrial Casting or Forging RFQ
             </h1>
             <p className="mt-4 text-base sm:text-lg text-slate-200 leading-relaxed font-body">

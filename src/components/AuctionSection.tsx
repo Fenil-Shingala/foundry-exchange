@@ -47,24 +47,38 @@ export default function AuctionSection() {
     <section id="auctions" className="relative isolate bg-slate-50 py-20 border-b border-slate-200 scroll-mt-20">
       <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-10">
         {/* 1. Section Header & Live Bidding Status */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
-          <div>
-            <div className="flex items-center gap-3 mb-2">
-              <span className="h-[3px] w-10 bg-brand" aria-hidden="true" />
-              <span className="text-xs font-bold uppercase tracking-wider text-brand">
-                Industrial Liquidations &amp; Timed Bidding
-              </span>
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-10 gap-6">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-5">
+            {/* Foundry Surplus Official Clearinghouse Logo */}
+            <div className="relative shrink-0 rounded-xl bg-navy-950 p-2 sm:p-2.5 border border-navy-800 shadow-md flex items-center justify-center">
+              <Image
+                src="/images/foundry-surplus-logo.jpg"
+                alt="Foundry Surplus"
+                width={200}
+                height={60}
+                className="h-12 sm:h-14 w-auto object-contain"
+                priority
+              />
             </div>
-            <h2 className="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-navy font-heading">
-              Live Foundry Auctions &amp; Plant Closures
-            </h2>
-            <p className="mt-3 max-w-2xl text-sm sm:text-base text-slate-600 leading-relaxed">
-              Acquire decommissioned melt decks, automated molding systems, fettling robotics, and surplus pattern tooling directly through verified liquidations with escrow protection.
-            </p>
+
+            <div>
+              <div className="flex items-center gap-3 mb-1.5">
+                <span className="h-[3px] w-10 bg-brand" aria-hidden="true" />
+                <span className="text-xs font-bold uppercase tracking-wider text-brand font-mono">
+                  Official Foundry Surplus Liquidation Clearinghouse
+                </span>
+              </div>
+              <h2 className="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-brand font-heading">
+                Live Foundry Auctions &amp; Plant Closures
+              </h2>
+              <p className="mt-2 max-w-2xl text-sm sm:text-base text-slate-600 leading-relaxed">
+                Acquire decommissioned melt decks, automated molding systems, fettling robotics, and surplus pattern tooling directly through verified liquidations with escrow protection.
+              </p>
+            </div>
           </div>
 
           {/* Live Status Badge */}
-          <div className="flex items-center gap-2.5 rounded-lg border border-red-200 bg-red-50/80 px-3.5 py-2 text-xs font-semibold text-brand shrink-0 shadow-2xs">
+          <div className="flex items-center gap-2.5 rounded-lg border border-red-200 bg-red-50/80 px-3.5 py-2 text-xs font-semibold text-brand shrink-0 shadow-2xs self-start lg:self-auto">
             <span className="relative flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75" />
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand" />

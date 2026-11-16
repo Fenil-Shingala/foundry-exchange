@@ -449,7 +449,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                   <span className="text-xs text-slate-500 font-mono">ID: {listing.id}</span>
                 </div>
 
-                <h1 className="font-heading text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-navy leading-tight">
+                <h1 className="font-heading text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-brand leading-tight">
                   {listing.title}
                 </h1>
 

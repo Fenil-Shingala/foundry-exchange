@@ -80,7 +80,7 @@ export default function AboutPage() {
           <span className="inline-block text-xs font-bold uppercase tracking-wider text-brand">
             About Foundry Exchange
           </span>
-          <h1 className="mt-2 text-4xl sm:text-5xl font-extrabold uppercase tracking-tight text-navy font-heading">
+          <h1 className="mt-2 text-4xl sm:text-5xl font-extrabold uppercase tracking-tight text-brand font-heading">
             The Digital Backbone of the Metal Casting Industry
           </h1>
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed max-w-3xl">
@@ -95,7 +95,7 @@ export default function AboutPage() {
         <div className="mt-12 space-y-12">
           {/* Section 1: Mission */}
           <section className="rounded-2xl border border-slate-200 bg-white p-8 shadow-2xs">
-            <h2 className="font-heading text-2xl font-bold uppercase text-navy">
+            <h2 className="font-heading text-2xl font-bold uppercase text-brand">
               Our Metallurgical Mission
             </h2>
             <p className="mt-3 text-sm text-slate-600 leading-relaxed">
@@ -147,7 +147,7 @@ export default function AboutPage() {
                 Executive Governance
               </span>
             </div>
-            <h2 className="font-heading text-2xl font-bold uppercase text-navy">
+            <h2 className="font-heading text-2xl font-bold uppercase text-brand">
               Technical Advisory Board
             </h2>
             <p className="mt-2 text-xs text-slate-600 leading-relaxed mb-6">
@@ -182,7 +182,7 @@ export default function AboutPage() {
                 Facility Accreditation
               </span>
             </div>
-            <h2 className="font-heading text-2xl font-bold uppercase text-navy">
+            <h2 className="font-heading text-2xl font-bold uppercase text-brand">
               Foundry Exchange Verified Program
             </h2>
             <p className="mt-2 text-xs text-slate-600 leading-relaxed mb-6">
@@ -212,7 +212,7 @@ export default function AboutPage() {
                 Ethics &amp; Environmental Stewardship
               </span>
             </div>
-            <h2 className="font-heading text-2xl font-bold uppercase text-navy">
+            <h2 className="font-heading text-2xl font-bold uppercase text-brand">
               Supplier Code of Conduct
             </h2>
             <p className="mt-2 text-xs text-slate-600 leading-relaxed">
@@ -228,7 +228,7 @@ export default function AboutPage() {
                 Talent &amp; Engineering
               </span>
             </div>
-            <h2 className="font-heading text-2xl font-bold uppercase text-navy">
+            <h2 className="font-heading text-2xl font-bold uppercase text-brand">
               Careers at Foundry Exchange
             </h2>
             <p className="mt-2 text-xs text-slate-600 leading-relaxed mb-6">

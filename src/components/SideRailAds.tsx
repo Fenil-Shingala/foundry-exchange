@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Zap, ChevronRight } from "lucide-react";
 import {
   leftRailAds,
   rightRailAds,
@@ -18,10 +18,26 @@ interface RailProps {
   speed?: number; // Pixels to advance per animation frame
 }
 
+export const quickCategoryLinks = [
+  { name: "Castings", href: "/marketplace/castings", count: "1,420" },
+  { name: "Forgings", href: "/marketplace/forgings", count: "1,890" },
+  { name: "Equipment", href: "/marketplace/equipment", count: "840" },
+  { name: "Tooling & Dies", href: "/marketplace/tooling", count: "510" },
+  { name: "Raw Alloys", href: "/marketplace/raw-materials", count: "620" },
+  { name: "Sand Systems", href: "/marketplace/sand-binders", count: "290" },
+  { name: "Refractories", href: "/marketplace/refractories", count: "340" },
+  { name: "Machining", href: "/marketplace/machining", count: "480" },
+  { name: "Lab & Testing", href: "/marketplace/testing-inspection", count: "215" },
+  { name: "Heat Treating", href: "/marketplace/heat-treating", count: "310" },
+  { name: "Live Auctions", href: "/auctions", count: "Live", isHot: true },
+  { name: "Glossary A–Z", href: "/glossary", count: "82", isNew: true },
+];
+
 function RailColumn({ side, ads, visible, bottomOffset = 16, speed = 0.55 }: RailProps) {
   const isLeft = side === "left";
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [leftMode, setLeftMode] = useState<"categories" | "ads">("categories");
 
   // Triplicate ads array for an endless, seamless looping ticker
   const loopingAds = useMemo(() => {
@@ -102,7 +118,7 @@ function RailColumn({ side, ads, visible, bottomOffset = 16, speed = 0.55 }: Rai
 
   return (
     <aside
-      aria-label={`${side} side advertisements`}
+      aria-label={`${side} side navigation and advertisements`}
       className={`fixed z-30 w-[155px] min-[1660px]:w-[175px] transition-all duration-500 ease-out ${
         isLeft ? "left-2" : "right-2"
       } ${
@@ -117,12 +133,99 @@ function RailColumn({ side, ads, visible, bottomOffset = 16, speed = 0.55 }: Rai
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Scrollable Container */}
-      <div
-        ref={scrollContainerRef}
-        onWheel={handleWheel}
-        className="flex-1 overflow-y-auto overflow-x-hidden [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden flex flex-col gap-2.5 pb-2"
-      >
+      {/* Left Rail Header: Toggle between Quick Categories and Sponsored Ads */}
+      {isLeft && (
+        <div className="mb-2 shrink-0 rounded-xl border border-navy-700/80 bg-navy-950 p-1 shadow-md flex items-center gap-1">
+          <button
+            type="button"
+            onClick={() => setLeftMode("categories")}
+            className={`flex-1 rounded-lg py-1 px-1.5 text-[9px] min-[1660px]:text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-1 ${
+              leftMode === "categories"
+                ? "bg-brand text-white shadow-xs"
+                : "text-slate-400 hover:text-white hover:bg-navy-900"
+            }`}
+            title="Show Quick Category Links"
+          >
+            <Zap className="h-2.5 w-2.5" />
+            <span>Categories</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setLeftMode("ads")}
+            className={`flex-1 rounded-lg py-1 px-1.5 text-[9px] min-[1660px]:text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-1 ${
+              leftMode === "ads"
+                ? "bg-brand text-white shadow-xs"
+                : "text-slate-400 hover:text-white hover:bg-navy-900"
+            }`}
+            title="Show Sponsored Ads Feed"
+          >
+            <span>Ads</span>
+          </button>
+        </div>
+      )}
+
+      {/* Main Content Area: Category Quick Links or Looping Ads Feed */}
+      {isLeft && leftMode === "categories" ? (
+        <div className="flex-1 overflow-y-auto overflow-x-hidden [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden flex flex-col gap-1.5 pb-2">
+          <div className="px-1 py-1 flex items-center justify-between border-b border-navy-800 mb-0.5">
+            <span className="text-[9px] font-heading font-bold uppercase tracking-wider text-slate-400">
+              Quick Links
+            </span>
+            <span className="text-[8px] font-mono font-bold text-brand uppercase bg-brand/10 px-1 py-0.2 rounded border border-brand/20">
+              12 Sectors
+            </span>
+          </div>
+
+          {quickCategoryLinks.map((cat) => (
+            <Link
+              key={cat.name}
+              href={cat.href}
+              className="group relative flex items-center justify-between rounded-lg border border-navy-800/90 bg-navy-950/95 hover:bg-navy-900 px-2 py-1.5 text-left transition-all hover:border-brand hover:shadow-xs cursor-pointer"
+              title={`Explore ${cat.name}`}
+            >
+              <div className="flex items-center gap-1.5 min-w-0">
+                <span
+                  className={`h-1.5 w-1.5 rounded-full shrink-0 transition-transform group-hover:scale-125 ${
+                    cat.isHot
+                      ? "bg-red-500 animate-pulse"
+                      : cat.isNew
+                      ? "bg-emerald-400"
+                      : "bg-brand"
+                  }`}
+                />
+                <span className="text-[10px] min-[1660px]:text-[11px] font-bold text-white group-hover:text-brand transition-colors truncate">
+                  {cat.name}
+                </span>
+              </div>
+              <span
+                className={`shrink-0 font-mono text-[8px] min-[1660px]:text-[9px] font-bold px-1 py-0.2 rounded border ${
+                  cat.isHot
+                    ? "bg-red-500/20 text-red-400 border-red-500/40"
+                    : cat.isNew
+                    ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/40"
+                    : "text-slate-400 group-hover:text-white bg-navy-900 border-navy-800"
+                }`}
+              >
+                {cat.count}
+              </span>
+            </Link>
+          ))}
+
+          <Link
+            href="/marketplace"
+            className="mt-1 flex items-center justify-center gap-1 rounded-lg bg-navy-900 border border-navy-700/80 hover:border-brand hover:bg-brand hover:text-white py-1.5 text-[9px] min-[1660px]:text-[10px] font-bold uppercase tracking-wider text-slate-300 transition-all cursor-pointer"
+          >
+            <span>All Categories</span>
+            <ChevronRight className="h-3 w-3 text-brand group-hover:text-white" />
+          </Link>
+        </div>
+      ) : (
+        /* Scrollable Container for Ads */
+        <div
+          ref={scrollContainerRef}
+          onWheel={handleWheel}
+          className="flex-1 overflow-y-auto overflow-x-hidden [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden flex flex-col gap-2.5 pb-2"
+        >
         {loopingAds.map((ad) => {
           const isExternal = ad.actionHref.startsWith("http");
           const isLogo = ad.imageUrl.includes("-logo");
@@ -217,6 +320,7 @@ function RailColumn({ side, ads, visible, bottomOffset = 16, speed = 0.55 }: Rai
           );
         })}
       </div>
+      )}
     </aside>
   );
 }

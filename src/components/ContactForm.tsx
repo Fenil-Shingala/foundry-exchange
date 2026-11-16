@@ -66,7 +66,7 @@ export default function ContactForm() {
               <span className="inline-block text-xs font-bold uppercase tracking-wider text-brand">
                 Industrial Sourcing Desk
               </span>
-              <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-navy font-heading">
+              <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-brand font-heading">
                 Connect With An Exchange Metallurgist
               </h2>
               <p className="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed">

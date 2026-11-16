@@ -63,7 +63,7 @@ export default function AuctionsPage() {
               <span className="h-2 w-2 rounded-full bg-red-500 animate-ping" />
               Live Timed Liquidations &amp; Plant Closures
             </div>
-            <h1 className="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-white font-heading">
+            <h1 className="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-brand font-heading">
               Foundry Auctions &amp; Equipment Liquidations
             </h1>
             <p className="mt-4 text-base sm:text-lg text-slate-200 leading-relaxed font-body">
@@ -259,7 +259,7 @@ export default function AuctionsPage() {
                 <Flame className="h-4 w-4 text-brand" />
                 <span>High Competitive Activity</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-navy font-heading">
+              <h2 className="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-brand font-heading">
                 Hot Auction Lots Closing Soon
               </h2>
             </div>

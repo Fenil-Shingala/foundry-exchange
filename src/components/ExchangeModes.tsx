@@ -52,7 +52,7 @@ export default function ExchangeModes() {
                 Versatile Commercial Channels
               </span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-navy font-heading">
+            <h2 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-brand font-heading">
               8 Dynamic Exchange Modes
             </h2>
             <p className="mt-3 max-w-2xl text-sm sm:text-base text-slate-600">

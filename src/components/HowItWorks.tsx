@@ -48,7 +48,7 @@ export default function HowItWorks() {
             </span>
             <span className="h-[3px] w-10 bg-brand" aria-hidden="true" />
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-white font-heading">
+          <h2 className="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-brand font-heading">
             How The Exchange Works
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-300">

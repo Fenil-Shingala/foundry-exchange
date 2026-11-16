@@ -100,7 +100,7 @@ export default function FeaturedListings() {
                 Spotlight Products &amp; Assets
               </span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-navy font-heading">
+            <h2 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-brand font-heading">
               Featured Marketplace Listings
             </h2>
             <p className="mt-2 text-sm sm:text-base text-slate-600 leading-relaxed">
