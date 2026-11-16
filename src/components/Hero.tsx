@@ -4,9 +4,35 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Search, ArrowRight } from "lucide-react";
+import {
+  Search,
+  ArrowRight,
+  Layers,
+  Hammer,
+  Factory,
+  Wrench,
+  Flame,
+  Droplets,
+  Box,
+  ShieldCheck,
+  Gavel,
+  BookOpen,
+} from "lucide-react";
 import { siteConfig } from "@/data/siteConfig";
 import CustomDropdown, { DropdownOption } from "@/components/CustomDropdown";
+
+const heroQuickLinks = [
+  { label: "Castings", href: "/marketplace/castings", icon: Layers },
+  { label: "Forgings", href: "/marketplace/forgings", icon: Hammer },
+  { label: "Equipment", href: "/marketplace/equipment", icon: Factory },
+  { label: "Tooling", href: "/marketplace/tooling", icon: Wrench },
+  { label: "Raw Alloys", href: "/marketplace/raw-materials", icon: Flame },
+  { label: "Sand Systems", href: "/marketplace/sand-binders", icon: Droplets },
+  { label: "Refractories", href: "/marketplace/refractories", icon: Box },
+  { label: "Lab & QA", href: "/marketplace/testing-inspection", icon: ShieldCheck },
+  { label: "Live Auctions", href: "/auctions", icon: Gavel, badge: "HOT" },
+  { label: "Glossary A–Z", href: "/glossary", icon: BookOpen, badge: "82" },
+];
 
 const categoryOptions: DropdownOption[] = [
   { value: "all", label: "All Categories" },
@@ -180,6 +206,35 @@ export default function Hero() {
             >
               Tooling Matchplates
             </button>
+          </div>
+        </div>
+
+        {/* Quick Links Navigation Strip */}
+        <div className="mx-auto mt-6 max-w-4xl">
+          <div className="flex items-center justify-center gap-2 mb-2.5">
+            <span className="h-[2px] w-6 bg-brand" />
+            <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-brand">
+              Quick Links
+            </span>
+            <span className="h-[2px] w-6 bg-brand" />
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            {heroQuickLinks.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="group inline-flex items-center gap-1.5 rounded-lg border border-navy-700 bg-navy-900/90 hover:bg-brand hover:border-brand px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-slate-200 hover:text-white transition-all shadow-xs backdrop-blur-xs cursor-pointer hover:-translate-y-0.5"
+              >
+                <link.icon className="h-3.5 w-3.5 text-brand group-hover:text-white transition-colors" />
+                <span>{link.label}</span>
+                {link.badge && (
+                  <span className="rounded bg-brand/30 px-1 py-0.2 text-[9px] font-mono font-extrabold text-white group-hover:bg-white group-hover:text-brand transition-colors">
+                    {link.badge}
+                  </span>
+                )}
+              </Link>
+            ))}
           </div>
         </div>
 
