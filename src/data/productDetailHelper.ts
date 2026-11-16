@@ -341,7 +341,7 @@ export function getProductDetailData(listing: ProductListing): ProductDetailData
     variants = [
       { id: "v1", name: "Cast Tooling Urethane on Al 7075 Base (Standard)", short: "Urethane/Al 7075", badge: "80k+ Cycle Life", priceOffset: 0, image: listing.imageUrl, swatchColor: "#475569" },
       { id: "v2", name: "Hardened Tool Steel Inserts for High-Wear Parting Lines", short: "Steel Insert Tier", badge: "200k+ Cycle Life", priceOffset: 3200, image: listing.imageUrl, swatchColor: "#1e293b" },
-      { id: "v3", name: "Includes Complete CAD 3D Solid Model & Gating CAM Files", short: "With Full CAD/CAM", badge: "Digital Twin", priceOffset: 1500, image: listing.imageUrl, swatchColor: "#0284c7" },
+      { id: "v3", name: "Includes Complete CAD 3D Solid Model & Gating CAM Files", short: "With Full CAD/CAM", badge: "Digital Twin", priceOffset: 1500, image: listing.imageUrl, swatchColor: "#1d4ed8" },
     ];
     sizeTableHeader = ["Tooling Section", "Mold Size Fit", "Cavity Count", "Total Assembly Mass", "Tolerance Class"];
     sizes = [

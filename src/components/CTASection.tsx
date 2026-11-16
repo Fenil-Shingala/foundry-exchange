@@ -41,20 +41,20 @@ export default function CTASection() {
 
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 shrink-0">
             <Link
-              href="/#contact-form"
+              href="/rfq"
               className="inline-flex items-center justify-center gap-2 rounded-lg bg-navy px-7 py-4 text-sm font-bold uppercase tracking-wider text-white shadow-xl transition-all hover:bg-navy-dark hover:scale-[1.02]"
             >
               <span>List Your Products</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
 
-            <a
-              href="#contact-form"
+            <Link
+              href="/contact"
               className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white bg-white/10 px-7 py-4 text-sm font-bold uppercase tracking-wider text-white backdrop-blur-xs transition-all hover:bg-white hover:text-brand"
             >
               <PhoneCall className="h-4 w-4" />
               <span>Talk to Us</span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

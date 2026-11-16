@@ -34,7 +34,7 @@ export default function Hero() {
       if (elem) {
         elem.scrollIntoView({ behavior: "smooth" });
       } else {
-        router.push("/#marketplace");
+        router.push("/marketplace");
       }
     }
   };
@@ -66,7 +66,7 @@ export default function Hero() {
           <Link
             href="/"
             aria-label="Foundry Exchange Home"
-            className="group inline-flex items-center justify-center bg-white px-6 sm:px-8 md:px-10 lg:px-11 xl:px-12 py-3.5 sm:py-4 md:py-5 lg:py-5.5 xl:py-6 rounded-2xl md:rounded-3xl shadow-2xl border border-white/60 transition-all duration-300 hover:scale-[1.03]"
+            className="inline-flex items-center justify-center bg-white px-6 sm:px-8 md:px-10 lg:px-11 xl:px-12 py-3.5 sm:py-4 md:py-5 lg:py-5.5 xl:py-6 rounded-2xl md:rounded-3xl shadow-2xl border border-white/60 cursor-pointer"
           >
             <Image
               src="/foundry-logo.png"
@@ -74,7 +74,7 @@ export default function Hero() {
               width={420}
               height={140}
               priority
-              className="h-14 sm:h-[68px] md:h-[78px] lg:h-[86px] xl:h-[100px] 2xl:h-[114px] w-auto object-contain transition-all duration-300"
+              className="h-14 sm:h-[68px] md:h-[78px] lg:h-[86px] xl:h-[100px] 2xl:h-[114px] w-auto object-contain"
             />
           </Link>
         </div>
@@ -139,7 +139,7 @@ export default function Hero() {
             {/* Submit Button in Brand Red */}
             <button
               type="submit"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-brand px-6 py-3 text-sm font-bold uppercase tracking-wider text-white shadow-md transition-all hover:bg-brand-hover hover:shadow-lg focus:outline-hidden focus:ring-2 focus:ring-brand shrink-0"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-brand px-6 py-3 text-sm font-bold uppercase tracking-wider text-white shadow-md transition-all hover:bg-brand-hover hover:shadow-lg focus:outline-hidden focus:ring-2 focus:ring-brand shrink-0 cursor-pointer"
             >
               <span>Search</span>
               <ArrowRight className="h-4 w-4" />
@@ -152,7 +152,7 @@ export default function Hero() {
             <button
               type="button"
               onClick={() => setKeyword("ASTM A536 Ductile Iron")}
-              className="hover:text-brand hover:underline transition-colors"
+              className="hover:text-brand hover:underline transition-colors cursor-pointer"
             >
               ASTM A536 Ductile
             </button>
@@ -160,7 +160,7 @@ export default function Hero() {
             <button
               type="button"
               onClick={() => setKeyword("Induction Furnace")}
-              className="hover:text-brand hover:underline transition-colors"
+              className="hover:text-brand hover:underline transition-colors cursor-pointer"
             >
               Induction Furnace
             </button>
@@ -168,7 +168,7 @@ export default function Hero() {
             <button
               type="button"
               onClick={() => setKeyword("Foundry Pig Iron")}
-              className="hover:text-brand hover:underline transition-colors"
+              className="hover:text-brand hover:underline transition-colors cursor-pointer"
             >
               Pig Iron
             </button>
@@ -176,7 +176,7 @@ export default function Hero() {
             <button
               type="button"
               onClick={() => setKeyword("Green Sand Matchplate")}
-              className="hover:text-brand hover:underline transition-colors"
+              className="hover:text-brand hover:underline transition-colors cursor-pointer"
             >
               Tooling Matchplates
             </button>
@@ -186,15 +186,15 @@ export default function Hero() {
         {/* Dual Primary CTAs: USA Red & White/Navy */}
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <Link
-            href="/#contact-form"
-            className="inline-flex items-center gap-2.5 rounded-lg bg-brand px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-lg transition-all hover:bg-brand-hover hover:scale-[1.02] focus:outline-hidden focus:ring-2 focus:ring-brand"
+            href="/rfq"
+            className="inline-flex items-center gap-2.5 rounded-lg bg-brand px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-lg transition-all hover:bg-brand-hover hover:scale-[1.02] focus:outline-hidden focus:ring-2 focus:ring-brand cursor-pointer"
           >
             <span>Post an RFQ</span>
             <ArrowRight className="h-4 w-4" />
           </Link>
           <Link
-            href="/#contact-form"
-            className="inline-flex items-center gap-2 rounded-lg border-2 border-white bg-white px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-navy shadow-sm transition-all hover:bg-slate-100 focus:outline-hidden"
+            href="/marketplace"
+            className="inline-flex items-center gap-2 rounded-lg border-2 border-white bg-white px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-navy shadow-sm transition-all hover:bg-slate-100 focus:outline-hidden cursor-pointer"
           >
             <span>List Your Products</span>
           </Link>

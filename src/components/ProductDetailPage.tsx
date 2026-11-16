@@ -45,7 +45,6 @@ import {
 } from "lucide-react";
 import { ProductListing, featuredListings } from "@/data/listings";
 import { getProductDetailData, DetailVariant, DetailSizeOption } from "@/data/productDetailHelper";
-import SideRailAds from "@/components/SideRailAds";
 
 interface ProductDetailPageProps {
   initialListing?: ProductListing;
@@ -230,9 +229,6 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
 
   return (
     <div className="bg-[#f7f8fa] min-h-screen text-slate-800 antialiased font-sans pb-24">
-      {/* Floating Side-Rail Advertisements (Detail Page) */}
-      <SideRailAds alwaysVisible />
-
       {/* Main Content Column with tight, clean side margins around side-rail ads */}
       <div className="w-full product-detail-wrapper transition-all duration-300">
         {/* ============================================================ */}
@@ -243,7 +239,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
             <nav className="flex items-center gap-2 text-xs text-slate-500 font-medium overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               <Link href="/" className="hover:text-brand transition-colors shrink-0">Home</Link>
               <ChevronRight className="h-3 w-3 text-slate-400 shrink-0" />
-              <Link href="/#marketplace" className="hover:text-brand transition-colors shrink-0">Marketplace</Link>
+              <Link href="/marketplace" className="hover:text-brand transition-colors shrink-0">Marketplace</Link>
               <ChevronRight className="h-3 w-3 text-slate-400 shrink-0" />
               <span className="text-slate-400 shrink-0">{listing.category}</span>
               <ChevronRight className="h-3 w-3 text-slate-400 shrink-0" />
@@ -645,7 +641,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                 </button>
 
                 <Link
-                  href="/#contact-form"
+                  href="/rfq"
                   className="w-full rounded-lg bg-navy py-3.5 px-6 text-center text-xs sm:text-sm font-bold uppercase tracking-wider text-white hover:bg-navy-light transition-all shadow-md flex items-center justify-center gap-2"
                 >
                   <Lock className="h-4 w-4" />
@@ -808,9 +804,9 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
 
                 <div className="mt-3 flex items-center justify-between text-[11px] text-slate-500">
                   <span>Vendor: {listing.vendorName}</span>
-                  <a href="#contact-form" className="text-brand font-semibold hover:underline">
+                  <Link href="/rfq" className="text-brand font-semibold hover:underline">
                     Request Custom Machining Tolerance
-                  </a>
+                  </Link>
                 </div>
               </div>
 
@@ -1138,7 +1134,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
 
             <div className="shrink-0 flex items-center gap-2">
               <Link
-                href="/#contact-form"
+                href="/contact"
                 className="rounded-lg bg-brand hover:bg-brand-dark text-white px-5 py-2.5 text-xs font-bold uppercase tracking-wider transition-all shadow-md flex items-center gap-2"
               >
                 <Building2 className="h-4 w-4" />
@@ -1265,7 +1261,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
             </p>
           </div>
           <Link
-            href="/#marketplace"
+            href="/products"
             className="text-xs font-bold uppercase tracking-wider text-brand hover:underline flex items-center gap-1 shrink-0"
           >
             <span>View All 24 Listings</span>
@@ -1277,7 +1273,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
           {relatedListings.map((rel) => (
             <div
               key={rel.id}
-              className="group rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-xs hover:shadow-lg transition-all flex flex-col justify-between"
+              className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-xs flex flex-col justify-between"
             >
               <div>
                 <div className="relative aspect-4/3 w-full bg-slate-100 overflow-hidden">
@@ -1285,7 +1281,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                     src={rel.imageUrl}
                     alt={rel.title}
                     fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="object-cover"
                     onError={(e) => {
                       const target = e.currentTarget as HTMLImageElement;
                       target.srcset = "";
@@ -1304,7 +1300,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
 
                 <div className="p-4 sm:p-5">
                   <div className="text-[11px] font-mono text-slate-400 mb-1">{rel.id}</div>
-                  <h5 className="font-heading text-sm font-bold uppercase text-slate-900 group-hover:text-brand transition-colors line-clamp-2 leading-snug">
+                  <h5 className="font-heading text-sm font-bold uppercase text-slate-900 line-clamp-2 leading-snug">
                     {rel.title}
                   </h5>
                   <p className="mt-1 text-xs text-slate-500 font-mono truncate">
@@ -1320,7 +1316,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
               <div className="p-4 pt-0">
                 <Link
                   href={`/listings/${rel.id}`}
-                  className="w-full rounded-lg bg-slate-100 hover:bg-navy hover:text-white text-slate-800 py-2 px-3 text-center text-xs font-bold uppercase tracking-wider transition-all block"
+                  className="w-full rounded-lg bg-slate-100 hover:bg-navy hover:text-white text-slate-800 py-2 px-3 text-center text-xs font-bold uppercase tracking-wider transition-all block cursor-pointer"
                 >
                   View Lot Specs →
                 </Link>

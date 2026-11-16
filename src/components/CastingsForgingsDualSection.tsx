@@ -61,7 +61,7 @@ export default function CastingsForgingsDualSection() {
           {/* -------------------------------------------------------------- */}
           {/* CARD 1: METAL CASTINGS                                         */}
           {/* -------------------------------------------------------------- */}
-          <div className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-navy-700 bg-navy-900/90 shadow-xl transition-all duration-300 hover:border-brand/70 hover:shadow-2xl">
+          <div className="flex flex-col justify-between overflow-hidden rounded-2xl border border-navy-700 bg-navy-900/90 shadow-xl">
             <div>
               {/* Photo Banner with Clean Floating Badges */}
               <div className="relative h-56 sm:h-64 w-full overflow-hidden bg-navy-950">
@@ -70,7 +70,7 @@ export default function CastingsForgingsDualSection() {
                   alt="Liquid metal casting ladle pour into sand mold"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                  className="object-cover"
                 />
                 <div className="pointer-events-none absolute inset-0 bg-navy-950/30" />
 
@@ -166,15 +166,15 @@ export default function CastingsForgingsDualSection() {
             <div className="border-t border-navy-800 bg-navy-950/60 p-6 sm:p-8 pt-4">
               <div className="flex flex-col sm:flex-row items-center gap-3">
                 <Link
-                  href="/#contact-form"
-                  className="w-full sm:w-auto flex-1 rounded-lg bg-brand px-5 py-3 text-center text-xs sm:text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-brand-hover shadow-lg flex items-center justify-center gap-2"
+                  href="/rfq"
+                  className="w-full sm:w-auto flex-1 rounded-lg bg-brand px-5 py-3 text-center text-xs sm:text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-brand-hover shadow-lg flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <span>Post Casting RFQ</span>
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
-                  href="/#marketplace"
-                  className="w-full sm:w-auto rounded-lg bg-navy-800 px-5 py-3 text-center text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-200 border border-navy-700 hover:bg-white hover:text-navy-950 transition-colors"
+                  href="/marketplace/castings"
+                  className="w-full sm:w-auto rounded-lg bg-navy-800 px-5 py-3 text-center text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-200 border border-navy-700 hover:bg-white hover:text-navy-950 transition-colors cursor-pointer"
                 >
                   Browse Castings
                 </Link>
@@ -185,7 +185,7 @@ export default function CastingsForgingsDualSection() {
           {/* -------------------------------------------------------------- */}
           {/* CARD 2: PRECISION FORGINGS                                     */}
           {/* -------------------------------------------------------------- */}
-          <div className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-navy-700 bg-navy-900/90 shadow-xl transition-all duration-300 hover:border-blue-500/70 hover:shadow-2xl">
+          <div className="flex flex-col justify-between overflow-hidden rounded-2xl border border-navy-700 bg-navy-900/90 shadow-xl">
             <div>
               {/* Photo Banner with Clean Floating Badges */}
               <div className="relative h-56 sm:h-64 w-full overflow-hidden bg-navy-950">
@@ -194,7 +194,7 @@ export default function CastingsForgingsDualSection() {
                   alt="Industrial hydraulic press forging incandescent steel billet"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                  className="object-cover"
                 />
                 <div className="pointer-events-none absolute inset-0 bg-navy-950/30" />
 
@@ -290,15 +290,15 @@ export default function CastingsForgingsDualSection() {
             <div className="border-t border-navy-800 bg-navy-950/60 p-6 sm:p-8 pt-4">
               <div className="flex flex-col sm:flex-row items-center gap-3">
                 <Link
-                  href="/#contact-form"
-                  className="w-full sm:w-auto flex-1 rounded-lg bg-blue-600 px-5 py-3 text-center text-xs sm:text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-blue-500 shadow-lg flex items-center justify-center gap-2"
+                  href="/rfq"
+                  className="w-full sm:w-auto flex-1 rounded-lg bg-blue-600 px-5 py-3 text-center text-xs sm:text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-blue-500 shadow-lg flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <span>Post Forging RFQ</span>
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
-                  href="/#marketplace"
-                  className="w-full sm:w-auto rounded-lg bg-navy-800 px-5 py-3 text-center text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-200 border border-navy-700 hover:bg-white hover:text-navy-950 transition-colors"
+                  href="/marketplace/forgings"
+                  className="w-full sm:w-auto rounded-lg bg-navy-800 px-5 py-3 text-center text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-200 border border-navy-700 hover:bg-white hover:text-navy-950 transition-colors cursor-pointer"
                 >
                   Browse Forgings
                 </Link>
@@ -445,8 +445,8 @@ export default function CastingsForgingsDualSection() {
 
                 <div className="mt-5 pt-3 border-t border-navy-800/80">
                   <Link
-                    href="/#contact-form"
-                    className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-white px-4 py-2.5 text-xs font-bold uppercase text-navy-950 hover:bg-slate-100 transition-colors shadow-sm"
+                    href="/contact"
+                    className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-white px-4 py-2.5 text-xs font-bold uppercase text-navy-950 hover:bg-slate-100 transition-colors shadow-sm cursor-pointer"
                   >
                     <span>Consult An Exchange Metallurgist</span>
                     <ArrowRight className="h-3.5 w-3.5" />

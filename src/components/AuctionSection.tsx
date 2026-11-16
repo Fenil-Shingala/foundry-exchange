@@ -80,7 +80,7 @@ export default function AuctionSection() {
           <button
             type="button"
             onClick={() => setActiveCategory("all")}
-            className={`rounded-lg px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap shrink-0 ${
+            className={`rounded-lg px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap shrink-0 cursor-pointer ${
               activeCategory === "all"
                 ? "bg-navy-950 text-white shadow-xs"
                 : "bg-white text-slate-600 border border-slate-200 hover:border-brand hover:text-navy"
@@ -93,7 +93,7 @@ export default function AuctionSection() {
               key={cat.id}
               type="button"
               onClick={() => setActiveCategory(cat.shortName)}
-              className={`rounded-lg px-3.5 py-2 text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap shrink-0 ${
+              className={`rounded-lg px-3.5 py-2 text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap shrink-0 cursor-pointer ${
                 activeCategory.toLowerCase() === cat.shortName.toLowerCase()
                   ? "bg-brand text-white shadow-xs"
                   : "bg-white text-slate-600 border border-slate-200 hover:border-brand hover:text-navy"
@@ -112,7 +112,7 @@ export default function AuctionSection() {
           {filteredEvents.map((event: AuctionEvent) => (
             <div
               key={event.id}
-              className="group rounded-xl border border-slate-200 bg-white overflow-hidden shadow-sm transition-all duration-200 hover:border-brand hover:shadow-lg"
+              className="rounded-xl border border-slate-200 bg-white overflow-hidden shadow-sm"
             >
               {/* Event Header Banner */}
               <div className="bg-slate-50/80 p-5 sm:p-6 border-b border-slate-200 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
@@ -145,7 +145,7 @@ export default function AuctionSection() {
                   </div>
 
                   {/* Event Title */}
-                  <h3 className="text-xl sm:text-2xl font-bold uppercase tracking-tight text-navy font-heading group-hover:text-brand transition-colors">
+                  <h3 className="text-xl sm:text-2xl font-bold uppercase tracking-tight text-navy font-heading">
                     {event.title}
                   </h3>
 
@@ -175,8 +175,8 @@ export default function AuctionSection() {
 
                   <div className="flex items-center gap-2 w-full sm:w-auto">
                     <Link
-                      href="/#contact-form"
-                      className="inline-flex items-center justify-center gap-1.5 rounded-md bg-brand px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-xs hover:bg-brand-hover transition-all"
+                      href="/auctions"
+                      className="inline-flex items-center justify-center gap-1.5 rounded-md bg-brand px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-xs hover:bg-brand-hover transition-all cursor-pointer"
                     >
                       <span>Register to Bid</span>
                     </Link>
@@ -198,9 +198,10 @@ export default function AuctionSection() {
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {event.previewLots.map((lot, idx) => (
-                    <div
+                    <Link
                       key={idx}
-                      className="group/lot rounded-lg border border-slate-200 bg-white p-3 hover:border-brand hover:shadow-md transition-all flex flex-col justify-between"
+                      href="/auctions"
+                      className="group/lot rounded-lg border border-slate-200 bg-white p-3 hover:border-brand hover:shadow-md transition-all flex flex-col justify-between cursor-pointer"
                     >
                       <div>
                         {/* Lot Image Preview */}
@@ -237,7 +238,7 @@ export default function AuctionSection() {
                           {lot.bidsCount} bids
                         </span>
                       </div>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -263,8 +264,8 @@ export default function AuctionSection() {
                 </div>
 
                 <Link
-                  href="/#contact-form"
-                  className="inline-flex items-center gap-1.5 font-bold uppercase tracking-wider text-brand hover:text-brand-dark transition-colors"
+                  href="/auctions"
+                  className="inline-flex items-center gap-1.5 font-bold uppercase tracking-wider text-brand hover:text-brand-dark transition-colors cursor-pointer"
                 >
                   <span>Explore Complete Catalog ({event.totalLots} Lots)</span>
                   <ChevronRight className="h-4 w-4" />
@@ -289,8 +290,8 @@ export default function AuctionSection() {
               </h3>
             </div>
             <Link
-              href="/#contact-form"
-              className="hidden sm:inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-navy hover:text-brand transition-colors"
+              href="/auctions"
+              className="hidden sm:inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-navy hover:text-brand transition-colors cursor-pointer"
             >
               <span>View All 180+ Active Lots</span>
               <ChevronRight className="h-4 w-4" />
@@ -309,7 +310,7 @@ export default function AuctionSection() {
             {hotAuctionLots.map((lot) => (
               <div
                 key={lot.id}
-                className="group flex flex-col justify-between rounded-xl border border-slate-200 bg-white p-5 shadow-xs hover:border-brand hover:shadow-lg transition-all"
+                className="flex flex-col justify-between rounded-xl border border-slate-200 bg-white p-5 shadow-xs"
               >
                 <div>
                   {/* Lot Image with Badges */}
@@ -319,7 +320,7 @@ export default function AuctionSection() {
                       alt={lot.title}
                       fill
                       sizes="(max-width: 768px) 100vw, 360px"
-                      className="object-cover transition-transform duration-200 group-hover:scale-105"
+                      className="object-cover"
                     />
                     <span className="absolute top-2.5 left-2.5 rounded bg-brand text-white font-mono font-bold text-[10px] px-2 py-0.5 shadow-2xs z-10">
                       {lot.lotNumber}
@@ -337,7 +338,7 @@ export default function AuctionSection() {
                       {lot.location}
                     </span>
                   </div>
-                  <h4 className="font-heading text-base font-bold uppercase tracking-tight text-navy leading-snug group-hover:text-brand transition-colors line-clamp-2">
+                  <h4 className="font-heading text-base font-bold uppercase tracking-tight text-navy leading-snug line-clamp-2">
                     {lot.title}
                   </h4>
                   <p className="mt-2 text-xs text-slate-600 line-clamp-2 font-mono">
@@ -384,7 +385,7 @@ export default function AuctionSection() {
                     type="button"
                     onClick={() => handleQuickBid(lot.lotNumber, lot.nextBid)}
                     disabled={biddingLotId === lot.lotNumber}
-                    className="w-full inline-flex items-center justify-center gap-1.5 rounded-lg border border-slate-200 bg-white py-2 text-xs font-bold uppercase tracking-wider text-navy hover:border-brand hover:bg-brand hover:text-white transition-all shadow-2xs group/btn disabled:opacity-50"
+                    className="w-full inline-flex items-center justify-center gap-1.5 rounded-lg border border-slate-200 bg-white py-2 text-xs font-bold uppercase tracking-wider text-navy hover:border-brand hover:bg-brand hover:text-white transition-all shadow-2xs group/btn disabled:opacity-50 cursor-pointer"
                   >
                     <Gavel className="h-3.5 w-3.5 text-brand group-hover/btn:text-white transition-colors" />
                     <span>Quick Bid {lot.nextBid}</span>
@@ -411,13 +412,13 @@ export default function AuctionSection() {
 
             <div className="mt-6 flex flex-wrap items-center gap-4">
               <Link
-                href="/#contact-form"
+                href="/contact"
                 className="inline-flex items-center justify-center rounded-lg bg-brand px-6 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-md hover:bg-brand-hover hover:scale-[1.02] transition-all"
               >
                 <span>Request Liquidation Proposal</span>
               </Link>
               <Link
-                href="/#contact-form"
+                href="/services#fee-structure"
                 className="inline-flex items-center justify-center rounded-lg border border-navy-700 bg-navy-900/80 px-6 py-3 text-xs font-bold uppercase tracking-wider text-white hover:bg-white hover:text-navy-950 transition-all"
               >
                 <span>Consignment Commission Rates</span>

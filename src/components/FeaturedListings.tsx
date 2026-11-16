@@ -116,7 +116,7 @@ export default function FeaturedListings() {
                 key={tab.name}
                 type="button"
                 onClick={() => setActiveFilter(tab.name)}
-                className={`inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap shrink-0 ${
+                className={`inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap shrink-0 cursor-pointer ${
                   activeFilter === tab.name
                     ? "bg-brand text-white shadow-xs"
                     : "text-slate-600 hover:text-navy hover:bg-white"
@@ -188,7 +188,7 @@ export default function FeaturedListings() {
                       <span className="truncate">{listing.location}</span>
                     </div>
 
-                    <Link href={`/listings/${listing.id}`} className="block">
+                    <Link href={`/listings/${listing.id}`} className="block cursor-pointer">
                       <h3 className="font-heading text-sm xl:text-[15px] font-bold uppercase tracking-tight text-navy group-hover:text-brand transition-colors line-clamp-2 min-h-[2.4rem] leading-snug">
                         {listing.title}
                       </h3>
@@ -204,13 +204,13 @@ export default function FeaturedListings() {
                         <span
                           key={std}
                           title={std}
-                          className="inline-block max-w-[125px] truncate rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-mono font-medium text-navy border border-slate-200/60 whitespace-nowrap"
+                          className="inline-block max-w-[125px] truncate rounded-md bg-navy-50 px-1.5 py-0.5 text-[10px] font-mono font-bold text-navy border border-navy-200/80 whitespace-nowrap"
                         >
                           {std}
                         </span>
                       ))}
                       {listing.standards.length > 2 && (
-                        <span className="text-[10px] font-mono font-medium text-slate-400 self-center shrink-0">
+                        <span className="text-[10px] font-mono font-bold text-brand bg-red-50 border border-brand/20 px-1.5 py-0.5 rounded-md self-center shrink-0">
                           +{listing.standards.length - 2}
                         </span>
                       )}
@@ -254,7 +254,7 @@ export default function FeaturedListings() {
 
                       <Link
                         href={`/listings/${listing.id}`}
-                        className="shrink-0 rounded bg-brand px-2 py-1 text-[10.5px] font-bold uppercase tracking-wider text-white hover:bg-brand-hover shadow-2xs hover:scale-105 transition-all text-center whitespace-nowrap"
+                        className="shrink-0 rounded bg-brand px-2 py-1 text-[10.5px] font-bold uppercase tracking-wider text-white hover:bg-brand-hover shadow-2xs hover:scale-105 transition-all text-center whitespace-nowrap cursor-pointer"
                       >
                         View Details
                       </Link>
@@ -340,7 +340,7 @@ export default function FeaturedListings() {
                 {/* Action Link Button */}
                 <Link
                   href="/products"
-                  className="w-full rounded bg-brand py-2 px-3 text-xs font-bold uppercase tracking-wider text-white hover:bg-brand-hover shadow-2xs hover:scale-[1.02] transition-all flex items-center justify-center gap-1.5 text-center"
+                  className="w-full rounded bg-brand py-2 px-3 text-xs font-bold uppercase tracking-wider text-white hover:bg-brand-hover shadow-2xs hover:scale-[1.02] transition-all flex items-center justify-center gap-1.5 text-center cursor-pointer"
                 >
                   <span>View All Products</span>
                   <ArrowRight className="h-3.5 w-3.5" />
@@ -354,7 +354,7 @@ export default function FeaturedListings() {
         <div className="mt-12 text-center">
           <Link
             href="/products"
-            className="inline-flex items-center gap-2 rounded-lg border-2 border-brand bg-white px-6 py-3 text-xs font-bold uppercase tracking-wider text-brand shadow-xs hover:bg-brand hover:text-white transition-all"
+            className="inline-flex items-center gap-2 rounded-lg border-2 border-brand bg-white px-6 py-3 text-xs font-bold uppercase tracking-wider text-brand shadow-xs hover:bg-brand hover:text-white transition-all cursor-pointer"
           >
             <span>View All Marketplace Listings ({featuredListings.length})</span>
             <ArrowRight className="h-4 w-4" />

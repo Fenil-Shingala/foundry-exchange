@@ -14,10 +14,11 @@ interface RailProps {
   side: "left" | "right";
   ads: Advertisement[];
   visible: boolean;
+  bottomOffset?: number;
   speed?: number; // Pixels to advance per animation frame
 }
 
-function RailColumn({ side, ads, visible, speed = 0.55 }: RailProps) {
+function RailColumn({ side, ads, visible, bottomOffset = 16, speed = 0.55 }: RailProps) {
   const isLeft = side === "left";
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -110,8 +111,8 @@ function RailColumn({ side, ads, visible, speed = 0.55 }: RailProps) {
           : "hidden opacity-0 -translate-y-4 pointer-events-none"
       }`}
       style={{
-        top: "128px",
-        bottom: "16px",
+        top: "120px",
+        bottom: `${bottomOffset}px`,
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -142,7 +143,7 @@ function RailColumn({ side, ads, visible, speed = 0.55 }: RailProps) {
                 href={ad.actionHref}
                 target={isExternal ? "_blank" : undefined}
                 rel={isExternal ? "noopener noreferrer" : undefined}
-                className="relative block w-full overflow-hidden"
+                className="relative block w-full overflow-hidden cursor-pointer"
                 title={`Visit ${ad.title}`}
               >
                 {/* Media Presentation: Logo on crisp white plate, Photo with object-cover */}
@@ -198,15 +199,15 @@ function RailColumn({ side, ads, visible, speed = 0.55 }: RailProps) {
                   href={ad.actionHref}
                   target={isExternal ? "_blank" : undefined}
                   rel={isExternal ? "noopener noreferrer" : undefined}
-                  className="rounded-[3px] bg-brand py-1 px-1 text-center text-[8px] min-[1660px]:text-[8.5px] font-bold uppercase leading-none tracking-wide text-white transition-colors hover:bg-brand-hover whitespace-nowrap truncate flex items-center justify-center gap-1 h-[22px] shadow-2xs"
+                  className="rounded-[3px] bg-brand py-1 px-1 text-center text-[8px] min-[1660px]:text-[8.5px] font-bold uppercase leading-none tracking-wide text-white transition-colors hover:bg-brand-hover whitespace-nowrap truncate flex items-center justify-center gap-1 h-[22px] shadow-2xs cursor-pointer"
                 >
                   <span>{ad.actionText}</span>
                   <ExternalLink className="h-2 w-2 opacity-80 shrink-0" />
                 </Link>
 
                 <Link
-                  href="/#contact-form"
-                  className="rounded-[3px] bg-navy-800/80 py-1 px-1 text-center text-[8px] min-[1660px]:text-[8.5px] font-bold uppercase leading-none tracking-wide text-slate-200 transition-colors hover:bg-white hover:text-navy-950 whitespace-nowrap truncate flex items-center justify-center h-[22px] border border-navy-700/60"
+                  href="/contact"
+                  className="rounded-[3px] bg-navy-800/80 py-1 px-1 text-center text-[8px] min-[1660px]:text-[8.5px] font-bold uppercase leading-none tracking-wide text-slate-200 transition-colors hover:bg-white hover:text-navy-950 whitespace-nowrap truncate flex items-center justify-center h-[22px] border border-navy-700/60 cursor-pointer"
                   title="Sponsor an ad rail on Foundry Exchange"
                 >
                   Advertise
@@ -226,13 +227,12 @@ interface SideRailAdsProps {
 
 export default function SideRailAds({ alwaysVisible = false }: SideRailAdsProps) {
   const [visible, setVisible] = useState(alwaysVisible);
+  const [bottomOffset, setBottomOffset] = useState(16);
 
   useEffect(() => {
     let animFrame = 0;
 
     const checkVisibility = () => {
-      const scrollY = window.scrollY;
-
       // 1. Hero Check: Rails are visible after hero ends, or immediately if alwaysVisible / no hero on page
       const hero = document.getElementById("hero-section");
       let hasHeroEnded = false;
@@ -241,20 +241,31 @@ export default function SideRailAds({ alwaysVisible = false }: SideRailAdsProps)
         // Hero has ended when its bottom edge reaches or passes the top sticky header area
         hasHeroEnded = heroBottom <= 165;
       } else {
-        hasHeroEnded = alwaysVisible ? true : scrollY > 300;
+        hasHeroEnded = true;
       }
 
-      // 2. Footer Collision Prevention: Hide completely when footer enters view
+      // 2. Footer Collision Avoidance:
+      // Dynamically clamp the bottom edge above the footer so ads remain visible without overlapping
       const footer = document.querySelector("footer");
-      let isFooterInView = false;
+      let calculatedBottom = 16;
+      let hasAdequateSpace = true;
+
       if (footer) {
-        const footerTop = footer.getBoundingClientRect().top;
-        isFooterInView = footerTop <= window.innerHeight + 30;
+        const footerRect = footer.getBoundingClientRect();
+        // If the top of the footer has entered the viewport:
+        if (footerRect.top < window.innerHeight) {
+          calculatedBottom = Math.max(16, window.innerHeight - footerRect.top + 16);
+        }
+        // If the footer occupies almost the entire screen (less than 240px available), hide rails
+        const availableHeight = footerRect.top - 120;
+        if (availableHeight < 240) {
+          hasAdequateSpace = false;
+        }
       }
 
-      // The ads are strictly visible ONLY after hero (or immediately on detail page) and before footer
-      const shouldBeVisible = hasHeroEnded && !isFooterInView;
+      const shouldBeVisible = (hasHeroEnded || alwaysVisible) && hasAdequateSpace;
       setVisible(shouldBeVisible);
+      setBottomOffset(calculatedBottom);
 
       animFrame = window.requestAnimationFrame(checkVisibility);
     };
@@ -270,6 +281,10 @@ export default function SideRailAds({ alwaysVisible = false }: SideRailAdsProps)
     };
   }, [alwaysVisible]);
 
+  // Previous clearance for TOP button preserved as commented-out code:
+  // const rightBottomOffset = bottomOffset + 56;
+  const rightBottomOffset = bottomOffset;
+
   return (
     <>
       {/* Left Skyscraper Rail — Continuous Auto-Scroll Feed */}
@@ -277,6 +292,7 @@ export default function SideRailAds({ alwaysVisible = false }: SideRailAdsProps)
         side="left"
         ads={leftRailAds}
         visible={visible}
+        bottomOffset={bottomOffset}
         speed={0.52}
       />
 
@@ -285,6 +301,7 @@ export default function SideRailAds({ alwaysVisible = false }: SideRailAdsProps)
         side="right"
         ads={rightRailAds}
         visible={visible}
+        bottomOffset={rightBottomOffset}
         speed={0.62}
       />
     </>

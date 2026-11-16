@@ -64,15 +64,15 @@ export default function HowItWorks() {
             return (
               <div
                 key={step.stepNumber}
-                className="group relative flex flex-col justify-between rounded-xl border border-navy-700 bg-navy-900/90 p-8 shadow-xl backdrop-blur-xs transition-all hover:border-brand hover:-translate-y-1"
+                className="relative flex flex-col justify-between rounded-xl border border-navy-700 bg-navy-900/90 p-8 shadow-xl backdrop-blur-xs"
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
                     <span className="font-heading text-4xl font-extrabold text-brand">
                       {step.stepNumber}
                     </span>
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-navy-800 border border-navy-600 text-brand shadow-xs transition-all duration-300 group-hover:scale-105 group-hover:bg-brand group-hover:text-white group-hover:border-brand group-hover:shadow-md">
-                      <Icon className="h-6 w-6 transition-colors duration-200" />
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-navy-800 border border-navy-600 text-brand shadow-xs">
+                      <Icon className="h-6 w-6" />
                     </div>
                   </div>
 
@@ -115,7 +115,7 @@ export default function HowItWorks() {
               href="http://foundrydrawings.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg bg-brand px-6 py-3 text-xs font-bold uppercase tracking-wider text-white hover:bg-brand-hover shadow-lg hover:scale-105 transition-all"
+              className="inline-flex items-center gap-2 rounded-lg bg-brand px-6 py-3 text-xs font-bold uppercase tracking-wider text-white hover:bg-brand-hover shadow-lg hover:scale-105 transition-all cursor-pointer"
             >
               <span>Submit RFQ Now</span>
               <ArrowRight className="h-4 w-4" />

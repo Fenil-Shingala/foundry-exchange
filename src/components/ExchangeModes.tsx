@@ -74,11 +74,11 @@ export default function ExchangeModes() {
           {siteConfig.exchangeModes.map((mode) => (
             <div
               key={mode.id}
-              className="group relative flex flex-col justify-between rounded-xl border border-slate-200 border-t-2 border-t-brand bg-white p-6 shadow-sm transition-all hover:border-brand hover:shadow-lg"
+              className="relative flex flex-col justify-between rounded-xl border border-slate-200 border-t-2 border-t-brand bg-white p-6 shadow-sm"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white border border-brand shadow-xs transition-all duration-300 group-hover:scale-105 group-hover:bg-white group-hover:text-brand group-hover:border-brand group-hover:shadow-md">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white border border-brand shadow-xs">
                     {renderModeIcon(mode.iconName)}
                   </div>
                   <span className="rounded-md border border-slate-200 bg-slate-50 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-navy">
@@ -86,7 +86,7 @@ export default function ExchangeModes() {
                   </span>
                 </div>
 
-                <h3 className="font-heading text-xl font-bold uppercase tracking-tight text-navy group-hover:text-brand transition-colors">
+                <h3 className="font-heading text-xl font-bold uppercase tracking-tight text-navy">
                   {mode.name}
                 </h3>
 
@@ -97,11 +97,11 @@ export default function ExchangeModes() {
 
               <div className="mt-6 pt-4 border-t border-slate-100">
                 <Link
-                  href="/#contact-form"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand hover:text-brand-hover"
+                  href="/exchange"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand hover:text-brand-hover cursor-pointer"
                 >
                   <span>Explore {mode.name}</span>
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
               </div>
             </div>

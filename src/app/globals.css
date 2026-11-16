@@ -30,9 +30,9 @@
   --color-surface: #f5f7fa;
   --color-surface-white: #ffffff;
   
-  /* Molten Heat Accents */
-  --color-molten: #f26a1b;
-  --color-molten-hover: #d6550f;
+  /* Brand Red Heat Accents (strictly Red, Blue & White theme) */
+  --color-molten: #c82425;
+  --color-molten-hover: #b01f20;
   
   /* Typography */
   --font-heading: var(--font-heading), "Rajdhani", sans-serif;
@@ -49,6 +49,25 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-body);
+}
+
+/* Ensure all clickable interactive items explicitly show cursor pointer */
+button,
+a,
+[role="button"],
+select,
+summary,
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+.cursor-pointer {
+  cursor: pointer;
+}
+
+button:disabled,
+input:disabled,
+select:disabled {
+  cursor: not-allowed;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -96,6 +115,18 @@ a, button {
   scrollbar-color: rgba(148, 163, 184, 0.4) transparent;
 }
 
+/* Universal No-Scrollbar utility to eliminate browser scrollbar artifacts */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Continuous Marquee Rail Animation */
 @keyframes marquee {
   0% {
@@ -123,7 +154,7 @@ a, button {
   }
 }
 
-/* Product Detail Page Content Wrapper (Tight, elegant 13px gutter around side-rail ads) */
+/* Product Detail Page Content Wrapper */
 .product-detail-wrapper {
   width: 100%;
   padding-left: 1rem;
@@ -145,22 +176,73 @@ a, button {
   }
 }
 
+/* =========================================================================
+   CENTRALIZED SIDE RAIL ADS LAYOUT ENGINE
+   Automatically handles viewport padding and eliminates side voids without
+   touching individual pages or section classes.
+   ========================================================================= */
+
+.layout-with-ads {
+  width: 100%;
+}
+
 @media (min-width: 1360px) {
-  /* Side rail ads: 155px width + 8px viewport inset = 163px outer edge.
-     175px padding creates an exact, balanced 12px gutter matching the homepage with zero collision. */
-  .product-detail-wrapper {
+  /* Inner content containers fluidly span the entire width between the 155px rails,
+     with exact 175px edge padding, guaranteeing zero collision and zero empty voids */
+  .layout-with-ads .max-w-7xl,
+  .layout-with-ads .max-w-6xl,
+  .layout-with-ads .max-w-5xl,
+  .layout-with-ads .product-detail-wrapper {
+    max-width: 100% !important;
     padding-left: 175px !important;
     padding-right: 175px !important;
+  }
+
+  /* Full-width sections like home category grid, listings, auctions, etc. */
+  .layout-with-ads .home-sub-hero {
+    padding-left: 175px !important;
+    padding-right: 175px !important;
+  }
+
+  /* Prevent nested double padding inside home-sub-hero */
+  .layout-with-ads .home-sub-hero .max-w-7xl,
+  .layout-with-ads .home-sub-hero .max-w-6xl,
+  .layout-with-ads .home-sub-hero .max-w-5xl {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
   }
 }
 
 @media (min-width: 1660px) {
-  /* Side rail ads: 175px width + 8px viewport inset = 183px outer edge.
-     195px padding maintains the exact 12px gutter matching the homepage on wide screens. */
-  .product-detail-wrapper {
+  /* On ultrawide displays (≥1660px), ads are 175px + 8px = 183px.
+     195px padding maintains the clean 12px gutter. */
+  .layout-with-ads .max-w-7xl,
+  .layout-with-ads .max-w-6xl,
+  .layout-with-ads .max-w-5xl,
+  .layout-with-ads .product-detail-wrapper {
     padding-left: 195px !important;
     padding-right: 195px !important;
   }
+
+  .layout-with-ads .home-sub-hero {
+    padding-left: 195px !important;
+    padding-right: 195px !important;
+  }
+
+  /* Prevent nested double padding inside home-sub-hero on ultrawide */
+  .layout-with-ads .home-sub-hero .max-w-7xl,
+  .layout-with-ads .home-sub-hero .max-w-6xl,
+  .layout-with-ads .home-sub-hero .max-w-5xl {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
 }
+
+/* When side rail ads are disabled (via flag or route config):
+   Zero extra padding, standard full-width layout with normal container centering */
+.layout-without-ads {
+  width: 100%;
+}
+
 
 

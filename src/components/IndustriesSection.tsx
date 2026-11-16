@@ -53,14 +53,14 @@ export default function IndustriesSection() {
           {siteConfig.industries.map((ind) => (
             <div
               key={ind.name}
-              className="group rounded-xl border border-slate-200 border-t-2 border-t-transparent hover:border-t-brand bg-slate-50 p-6 shadow-sm transition-all hover:border-brand hover:shadow-xl hover:bg-white"
+              className="rounded-xl border border-slate-200 border-t-2 border-t-brand bg-slate-50 p-6 shadow-sm"
             >
               <div className="flex items-center gap-4 mb-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white border border-brand shadow-xs transition-all duration-300 group-hover:scale-105 group-hover:bg-white group-hover:text-brand group-hover:border-brand group-hover:shadow-md">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white border border-brand shadow-xs">
                   {renderIndustryIcon(ind.iconName)}
                 </div>
                 <div>
-                  <h3 className="font-heading text-lg font-bold uppercase tracking-tight text-navy group-hover:text-brand transition-colors">
+                  <h3 className="font-heading text-lg font-bold uppercase tracking-tight text-navy">
                     {ind.name}
                   </h3>
                   <p className="text-[11px] text-slate-500 font-bold uppercase tracking-wider">

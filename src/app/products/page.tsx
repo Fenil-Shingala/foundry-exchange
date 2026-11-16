@@ -162,7 +162,7 @@ export default function AllProductsPage() {
     <div className="bg-slate-50 min-h-screen text-slate-800 antialiased font-sans pb-24 border-b border-slate-200">
       {/* Top Header & Breadcrumb Ribbon */}
       <div className="bg-navy-950 text-white border-b border-navy-800 py-8 sm:py-10">
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb Navigation */}
           <div className="flex items-center gap-2 text-xs font-mono text-slate-400 mb-4 flex-wrap">
             <Link
@@ -198,8 +198,8 @@ export default function AllProductsPage() {
 
             <div className="flex items-center gap-3 shrink-0">
               <Link
-                href="/#contact-form"
-                className="rounded-lg bg-brand hover:bg-brand-hover text-white px-5 py-2.5 text-xs font-bold uppercase tracking-wider transition-all shadow-md flex items-center gap-2"
+                href="/rfq"
+                className="rounded-lg bg-brand hover:bg-brand-hover text-white px-5 py-2.5 text-xs font-bold uppercase tracking-wider transition-all shadow-md flex items-center gap-2 cursor-pointer"
               >
                 <span>Request Custom Lot RFQ</span>
               </Link>
@@ -209,8 +209,8 @@ export default function AllProductsPage() {
       </div>
 
       {/* Filter & Search Bar Ribbon */}
-      <div className="sticky top-0 z-30 bg-white border-b border-slate-200 shadow-xs py-3.5">
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 space-y-3">
+      <div className="bg-white border-b border-slate-200 shadow-xs py-3.5">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-3">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
             {/* Search Input Box */}
             <div className="relative flex-1 max-w-xl">
@@ -318,7 +318,7 @@ export default function AllProductsPage() {
       </div>
 
       {/* Main Product Grid Container */}
-      <main className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 py-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
         {sortedListings.length === 0 ? (
           <div className="rounded-2xl border-2 border-dashed border-slate-300 bg-white p-12 text-center max-w-lg mx-auto my-12">
             <Search className="h-10 w-10 text-slate-400 mx-auto mb-3" />
@@ -388,7 +388,7 @@ export default function AllProductsPage() {
                         <span className="truncate">{listing.location}</span>
                       </div>
 
-                      <Link href={`/listings/${listing.id}`} className="block">
+                      <Link href={`/listings/${listing.id}`} className="block cursor-pointer">
                         <h3 className="font-heading text-sm xl:text-[15px] font-bold uppercase tracking-tight text-navy group-hover:text-brand transition-colors line-clamp-2 min-h-[2.4rem] leading-snug">
                           {listing.title}
                         </h3>
@@ -404,13 +404,13 @@ export default function AllProductsPage() {
                           <span
                             key={std}
                             title={std}
-                            className="inline-block max-w-[125px] truncate rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-mono font-medium text-navy border border-slate-200/60 whitespace-nowrap"
+                            className="inline-block max-w-[125px] truncate rounded-md bg-navy-50 px-1.5 py-0.5 text-[10px] font-mono font-bold text-navy border border-navy-200/80 whitespace-nowrap"
                           >
                             {std}
                           </span>
                         ))}
                         {listing.standards.length > 2 && (
-                          <span className="text-[10px] font-mono font-medium text-slate-400 self-center shrink-0">
+                          <span className="text-[10px] font-mono font-bold text-brand bg-red-50 border border-brand/20 px-1.5 py-0.5 rounded-md self-center shrink-0">
                             +{listing.standards.length - 2}
                           </span>
                         )}
@@ -454,7 +454,7 @@ export default function AllProductsPage() {
 
                         <Link
                           href={`/listings/${listing.id}`}
-                          className="shrink-0 rounded bg-brand px-2.5 py-1.5 text-[10.5px] font-bold uppercase tracking-wider text-white hover:bg-brand-hover shadow-2xs hover:scale-105 transition-all text-center whitespace-nowrap"
+                          className="shrink-0 rounded bg-brand px-2.5 py-1.5 text-[10.5px] font-bold uppercase tracking-wider text-white hover:bg-brand-hover shadow-2xs hover:scale-105 transition-all text-center whitespace-nowrap cursor-pointer"
                         >
                           View Details
                         </Link>
@@ -466,7 +466,7 @@ export default function AllProductsPage() {
             })}
           </div>
         )}
-      </main>
+      </div>
     </div>
   );
 }

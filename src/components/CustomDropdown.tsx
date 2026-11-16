@@ -283,7 +283,7 @@ export default function CustomDropdown({
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         aria-label={ariaLabel || selectedOption?.label || placeholder}
-        className={`group relative flex w-full items-center justify-between rounded-lg border font-medium transition-all duration-150 focus:outline-hidden disabled:cursor-not-allowed disabled:opacity-50 ${sizeStyles[size]} ${buttonBaseStyles} ${buttonClassName}`}
+        className={`group relative flex w-full items-center justify-between rounded-lg border font-medium transition-all duration-150 focus:outline-hidden disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer ${sizeStyles[size]} ${buttonBaseStyles} ${buttonClassName}`}
       >
         <span className="flex items-center gap-2 truncate">
           {selectedOption?.icon && (

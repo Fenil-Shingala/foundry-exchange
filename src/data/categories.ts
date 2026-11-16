@@ -18,7 +18,7 @@ export const foundryCategories: Category[] = [
     subheading: "Ferrous & Non-Ferrous",
     description: "Grey iron, ductile iron, carbon & alloy steel, aluminum, brass, bronze, and precision investment castings.",
     iconName: "Layers",
-    href: "/#marketplace",
+    href: "/marketplace/castings",
     featuredTags: ["ASTM A48", "Ductile 65-45-12", "A356 Al", "Stainless 316"],
     productCount: 1420,
     subcategories: [
@@ -39,7 +39,7 @@ export const foundryCategories: Category[] = [
     subheading: "Open & Closed Die, Rolled Rings",
     description: "High-integrity open-die shafts, impression drop forgings, seamless rolled rings, and high-pressure flanges in carbon, alloy & stainless steel.",
     iconName: "Hammer",
-    href: "/#marketplace",
+    href: "/marketplace/forgings",
     featuredTags: ["ASTM A105", "A182 F316L", "4140 Q&T", "ASTM A350 LF2"],
     productCount: 1890,
     subcategories: [
@@ -60,7 +60,7 @@ export const foundryCategories: Category[] = [
     subheading: "Primary & Auxiliary Machinery",
     description: "Hot forging mechanical presses, coreless induction melt systems, cold knuckle presses, flaskless green sand lines, and automated trimming presses.",
     iconName: "Factory",
-    href: "/#marketplace",
+    href: "/marketplace/equipment",
     featuredTags: ["Sutherland 1000T", "Inductotherm 3.5T", "KNP Cold Forge", "DISA Match"],
     productCount: 380,
     subcategories: [
@@ -81,7 +81,7 @@ export const foundryCategories: Category[] = [
     subheading: "Molds, Cores & Dies",
     description: "CNC machined urethane & aluminum patterns, high-pressure die cast inserts, and permanent shell tooling.",
     iconName: "Wrench",
-    href: "/#marketplace",
+    href: "/marketplace/tooling",
     featuredTags: ["Matchplates", "Die Cast Dies", "Core Boxes"],
     productCount: 420,
     subcategories: [
@@ -97,7 +97,7 @@ export const foundryCategories: Category[] = [
     subheading: "Melt Feedstock & Inoculants",
     description: "Premium foundry pig iron, shredded heavy melt scrap, Ferro-Silicon (FeSi), Ferro-Manganese, and nodulizers.",
     iconName: "Flame",
-    href: "/#marketplace",
+    href: "/marketplace/raw-materials",
     featuredTags: ["Foundry Pig Iron", "FeSi 75%", "HMS 1/2 Scrap"],
     productCount: 650,
     subcategories: [
@@ -113,7 +113,7 @@ export const foundryCategories: Category[] = [
     subheading: "Aggregate & Chemical Systems",
     description: "High-purity silica sand, chromite chill sand, furan resins, phenolic urethanes, and bentonite clays.",
     iconName: "Droplets",
-    href: "/#marketplace",
+    href: "/marketplace/sand-binders",
     featuredTags: ["AFS 55 Silica", "Chromite Sand", "No-Bake Resin"],
     productCount: 310,
     subcategories: [
@@ -129,7 +129,7 @@ export const foundryCategories: Category[] = [
     subheading: "Thermal Linings & Protection",
     description: "Alumina-magnesite ramming mixes, dense firebrick, ladle shrouds, crucibles, and fiber insulation boards.",
     iconName: "Box",
-    href: "/#marketplace",
+    href: "/marketplace/refractories",
     featuredTags: ["90% Alumina Dry Vibe", "Isostatic Crucibles", "Zircon Patch"],
     productCount: 290,
     subcategories: [
@@ -145,7 +145,7 @@ export const foundryCategories: Category[] = [
     subheading: "Post-Cast Processing",
     description: "Robotic fettling, horizontal & vertical CNC machining, thermal stress relief, shot peening, and e-coating.",
     iconName: "SlidersHorizontal",
-    href: "/#marketplace",
+    href: "/marketplace/machining-finishing",
     featuredTags: ["5-Axis CNC", "Stress Relief", "Robotic Grinding"],
     productCount: 480,
     subcategories: [
@@ -161,7 +161,7 @@ export const foundryCategories: Category[] = [
     subheading: "Quality & Metallurgical QA",
     description: "Optical emission spectrometry (OES), ultrasonic NDT, X-ray radiography, tensile testing, and CMM scans.",
     iconName: "ShieldCheck",
-    href: "/#marketplace",
+    href: "/marketplace/testing-inspection",
     featuredTags: ["OES Chemistry", "Radiography RT", "CMM Inspection"],
     productCount: 240,
     subcategories: [
@@ -178,7 +178,7 @@ export const foundryCategories: Category[] = [
     subheading: "Thermal Processing & Quench",
     description: "Car bottom furnaces, continuous austempering, solution annealing, quench tanks, and vacuum hardening ovens.",
     iconName: "Thermometer",
-    href: "/#marketplace",
+    href: "/marketplace/heat-treating",
     featuredTags: ["Car Bottom 1200°C", "Austempering", "Q&T Oil Quench"],
     productCount: 195,
     subcategories: [

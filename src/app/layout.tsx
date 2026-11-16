@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Rajdhani, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
+import MainLayoutWrapper from "@/components/MainLayoutWrapper";
 import "./globals.css";
 
 // Machined, square-shouldered industrial heading font — forged metal / foundry aesthetic
@@ -77,8 +79,9 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col bg-surface text-ink antialiased font-body">
         <Header />
-        <main className="flex-1 w-full">{children}</main>
+        <MainLayoutWrapper>{children}</MainLayoutWrapper>
         <Footer />
+        {/* <ScrollToTop /> */}
       </body>
     </html>
   );

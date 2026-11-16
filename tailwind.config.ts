@@ -37,8 +37,8 @@ const config: Config = {
           white: "#ffffff",
         },
         molten: {
-          DEFAULT: "#f26a1b",
-          hover: "#d6550f",
+          DEFAULT: "#c82425",
+          hover: "#b01f20",
         },
       },
       fontFamily: {

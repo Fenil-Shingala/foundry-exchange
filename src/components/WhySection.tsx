@@ -80,15 +80,15 @@ export default function WhySection() {
             {siteConfig.whyFeatures.map((feat, idx) => (
               <div
                 key={feat.title}
-                className={`group rounded-xl border border-slate-200 border-t-2 border-t-brand bg-white p-6 shadow-sm transition-all hover:border-brand hover:shadow-lg ${
+                className={`rounded-xl border border-slate-200 border-t-2 border-t-brand bg-white p-6 shadow-sm ${
                   idx === 4 ? "sm:col-span-2" : ""
                 }`}
               >
-                <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-brand text-white border border-brand shadow-xs mb-4 transition-all duration-300 group-hover:scale-105 group-hover:bg-white group-hover:text-brand group-hover:border-brand group-hover:shadow-md">
+                <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-brand text-white border border-brand shadow-xs mb-4">
                   {renderFeatureIcon(feat.iconName)}
                 </div>
 
-                <h3 className="font-heading text-lg font-bold uppercase tracking-tight text-navy group-hover:text-brand transition-colors">
+                <h3 className="font-heading text-lg font-bold uppercase tracking-tight text-navy">
                   {feat.title}
                 </h3>
                 <p className="mt-2 text-xs font-bold text-brand">

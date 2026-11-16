@@ -69,8 +69,8 @@ export default function CategoryGrid() {
           </div>
 
           <Link
-            href="/#marketplace"
-            className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand hover:text-brand-hover hover:underline"
+            href="/marketplace"
+            className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand hover:text-brand-hover hover:underline cursor-pointer"
           >
             <span>View All Categories &amp; Specs</span>
             <ArrowRight className="h-4 w-4" />
@@ -83,14 +83,14 @@ export default function CategoryGrid() {
             <Link
               key={category.id}
               href={category.href}
-              className="group relative flex flex-col justify-between rounded-xl border border-slate-200 border-t-4 border-t-brand bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-brand hover:shadow-lg"
+              className="group relative flex flex-col justify-between rounded-xl border border-slate-200 border-t-4 border-t-brand bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-brand hover:shadow-lg cursor-pointer"
             >
               <div className="flex flex-col flex-1">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand text-white border border-brand shadow-xs transition-all duration-300 group-hover:scale-105 group-hover:bg-white group-hover:text-brand group-hover:border-brand group-hover:shadow-md">
                     {renderCategoryIcon(category.iconName)}
                   </div>
-                  <span className="inline-flex items-center justify-center rounded-full bg-slate-100 border border-slate-200 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-navy transition-all duration-200 hover:bg-brand hover:text-white hover:border-brand hover:scale-105 group-hover:border-slate-300">
+                  <span className="inline-flex items-center justify-center rounded-full bg-slate-100 border border-slate-200 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-navy transition-all duration-200 group-hover:bg-brand group-hover:text-white group-hover:border-brand group-hover:scale-105">
                     Explore
                   </span>
                 </div>
@@ -112,7 +112,7 @@ export default function CategoryGrid() {
                 <div className="h-[52px] flex flex-col justify-between">
                   {/* Line 1: Primary Specification Tag */}
                   <div className="flex items-center">
-                    <span className="rounded bg-slate-100 px-2 py-0.5 text-[11px] font-mono font-medium text-navy truncate max-w-full">
+                    <span className="rounded-md bg-navy-50 border border-navy-200/80 px-2 py-0.5 text-[11px] font-mono font-bold text-navy truncate max-w-full">
                       {category.featuredTags[0]}
                     </span>
                   </div>
@@ -120,12 +120,12 @@ export default function CategoryGrid() {
                   {/* Line 2: Secondary Specification Tag + Count Badge */}
                   <div className="flex items-center gap-1.5">
                     {category.featuredTags[1] && (
-                      <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[10.5px] font-mono font-medium text-navy truncate">
+                      <span className="rounded-md bg-navy-50 border border-navy-200/80 px-1.5 py-0.5 text-[10.5px] font-mono font-bold text-navy truncate">
                         {category.featuredTags[1]}
                       </span>
                     )}
                     {category.featuredTags.length > 2 && (
-                      <span className="shrink-0 rounded bg-slate-50 border border-slate-200/70 px-1.5 py-0.5 text-[10.5px] font-mono font-medium text-slate-500">
+                      <span className="shrink-0 rounded-md bg-red-50 border border-brand/30 px-1.5 py-0.5 text-[10.5px] font-mono font-bold text-brand">
                         +{category.featuredTags.length - 2} more
                       </span>
                     )}
