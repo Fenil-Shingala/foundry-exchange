@@ -20,23 +20,23 @@ export default function HomePage() {
 
       {/* 2. Sub-Hero Content Column */}
       <div className="w-full home-sub-hero transition-all duration-300">
-        {/* 1. Browse by Category Grid (Industrial Taxonomy) */}
+        {/* 1. How It Works (3-Step Sourcing Workflow) */}
+        <HowItWorks />
+
+        {/* 2. Browse by Category Grid (Industrial Taxonomy) */}
         <CategoryGrid />
 
-        {/* 2. Featured Listings (Core Products Section - Ready Stock, Made to Order & Surplus Lots) */}
+        {/* 3. Featured Listings (Core Products Section - Ready Stock, Made to Order & Surplus Lots) */}
         <FeaturedListings />
 
-        {/* 3. Industrial Auctions & Plant Liquidations (Timed Auction Events & High-Value Machinery Lots) */}
+        {/* 4. Industrial Auctions & Plant Liquidations (Timed Auction Events & High-Value Machinery Lots) */}
         <AuctionSection />
 
-        {/* 4. 50% Castings & 50% Forgings Dual Capability Division */}
+        {/* 5. 50% Castings & 50% Forgings Dual Capability Division */}
         <CastingsForgingsDualSection />
 
-        {/* 5. Exchange Modes (8 Transaction & Procurement Channels) */}
+        {/* 6. Exchange Modes (8 Transaction & Procurement Channels) */}
         <ExchangeModes />
-
-        {/* 6. How It Works (3-Step Sourcing Workflow) */}
-        <HowItWorks />
 
         {/* 7. Why Foundry Exchange (Metallurgical Verification & Trust) */}
         <WhySection />
