@@ -97,7 +97,7 @@ export default function Hero() {
             {/* Quick Links Heading */}
             <div className="flex items-center justify-center gap-1.5 pb-2 mb-2 border-b border-navy-800">
               <span className="h-0.5 w-2.5 bg-brand rounded-full" />
-              <h3 className="text-xs font-heading font-bold uppercase tracking-wider text-brand">
+              <h3 className="text-xs font-heading font-bold uppercase tracking-wider text-white">
                 Quick Links
               </h3>
               <span className="h-0.5 w-2.5 bg-brand rounded-full" />
@@ -171,7 +171,7 @@ export default function Hero() {
         </div>
 
         {/* Strong Heading — Single Line Fluid Typography */}
-        <h1 className="mx-auto w-full max-w-7xl font-bold uppercase tracking-tight text-brand font-heading whitespace-nowrap leading-none mt-2 text-[clamp(1.15rem,3.2vw,3.75rem)]">
+        <h1 className="mx-auto w-full max-w-7xl font-bold uppercase tracking-tight text-white font-heading whitespace-nowrap leading-none mt-2 text-[clamp(1.15rem,3.2vw,3.75rem)]">
           {siteConfig.tagline}
         </h1>
 
@@ -266,7 +266,7 @@ export default function Hero() {
         <div className="min-[1360px]:hidden mx-auto mt-6 max-w-4xl">
           <div className="flex items-center justify-center gap-2 mb-2.5">
             <span className="h-[2px] w-6 bg-brand" />
-            <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-brand">
+            <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-white">
               Quick Links
             </span>
             <span className="h-[2px] w-6 bg-brand" />

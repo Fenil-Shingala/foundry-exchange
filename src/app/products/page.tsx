@@ -186,7 +186,7 @@ export default function AllProductsPage() {
                   Certified Industrial Inventory
                 </span>
               </div>
-              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight text-brand font-heading">
+              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight text-white font-heading">
                 All Marketplace Products &amp; Lots
               </h1>
               <p className="mt-2.5 text-xs sm:text-sm text-slate-300 max-w-3xl leading-relaxed">

@@ -48,7 +48,7 @@ export default function HowItWorks() {
             </span>
             <span className="h-[3px] w-10 bg-brand" aria-hidden="true" />
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-brand font-heading">
+          <h2 className="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-white font-heading">
             How The Exchange Works
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-300">
@@ -79,7 +79,7 @@ export default function HowItWorks() {
                   <h3 className="font-heading text-2xl font-bold uppercase tracking-tight text-white">
                     {step.title}
                   </h3>
-                  <p className="mt-2 text-xs font-bold uppercase tracking-wider text-brand">
+                  <p className="mt-2 text-xs font-bold uppercase tracking-wider text-slate-200">
                     {step.summary}
                   </p>
                   <p className="mt-4 text-xs sm:text-sm text-slate-300 leading-relaxed">

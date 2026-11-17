@@ -134,7 +134,7 @@ export default function GlossaryPage() {
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight font-heading text-brand">
+          <h1 className="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight font-heading text-white">
             Foundry &amp; Metallurgical Engineering Glossary
           </h1>
 

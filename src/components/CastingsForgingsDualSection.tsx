@@ -46,7 +46,7 @@ export default function CastingsForgingsDualSection() {
             <span className="h-[3px] w-10 bg-brand" aria-hidden="true" />
           </div>
 
-          <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight text-brand">
+          <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight text-white">
             Metal Castings &amp; Precision Forgings
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-300 font-normal leading-relaxed">

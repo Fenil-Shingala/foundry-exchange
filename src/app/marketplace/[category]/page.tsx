@@ -146,7 +146,7 @@ export default async function CategoryDetailPage({
                   <span className="text-xs font-bold uppercase tracking-wider text-red-400 block">
                     {category.subheading}
                   </span>
-                  <h1 className="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-brand font-heading">
+                  <h1 className="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-white font-heading">
                     {category.name}
                   </h1>
                 </div>
