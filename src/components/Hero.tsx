@@ -109,17 +109,17 @@ export default function Hero() {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="group flex items-center justify-between rounded-lg border border-navy-800/80 bg-navy-950/80 hover:bg-navy-800 hover:border-brand px-2 py-1.5 transition-all cursor-pointer"
+                  className="group flex items-center justify-between rounded-lg border border-red-700/60 bg-brand hover:bg-brand-hover px-2 py-1.5 transition-all cursor-pointer shadow-xs"
                   title={`Go to ${link.label}`}
                 >
                   <div className="flex items-center gap-1.5 min-w-0">
-                    <link.icon className="h-3 w-3 text-brand group-hover:text-white transition-colors shrink-0" />
-                    <span className="text-[10.5px] min-[1660px]:text-[11px] font-bold text-slate-200 group-hover:text-white transition-colors truncate">
+                    <link.icon className="h-3 w-3 text-white shrink-0" />
+                    <span className="text-[10.5px] min-[1660px]:text-[11px] font-bold text-white truncate">
                       {link.label}
                     </span>
                   </div>
                   {link.badge && (
-                    <span className="shrink-0 rounded bg-brand/20 border border-brand/30 px-1 py-0.2 text-[8px] font-mono font-extrabold text-brand group-hover:bg-brand group-hover:text-white transition-colors">
+                    <span className="shrink-0 rounded bg-white/20 border border-white/30 px-1 py-0.2 text-[8px] font-mono font-extrabold text-white">
                       {link.badge}
                     </span>
                   )}
@@ -131,10 +131,10 @@ export default function Hero() {
           {/* Bottom All Categories Link */}
           <Link
             href="/marketplace"
-            className="mt-2 flex items-center justify-center gap-1 rounded-lg bg-navy-950 border border-navy-800 hover:border-brand hover:bg-brand hover:text-white py-1.5 text-[9px] font-bold uppercase tracking-wider text-slate-300 transition-all cursor-pointer"
+            className="mt-2 flex items-center justify-center gap-1 rounded-lg bg-brand border border-red-700/60 hover:bg-brand-hover py-1.5 text-[9px] font-bold uppercase tracking-wider text-white transition-all cursor-pointer shadow-xs"
           >
             <span>All Categories</span>
-            <ChevronRight className="h-3 w-3 text-brand group-hover:text-white" />
+            <ChevronRight className="h-3 w-3 text-white" />
           </Link>
         </div>
       </aside>
@@ -277,12 +277,12 @@ export default function Hero() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="group inline-flex items-center gap-1.5 rounded-lg border border-navy-700 bg-navy-900/90 hover:bg-brand hover:border-brand px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-slate-200 hover:text-white transition-all shadow-xs backdrop-blur-xs cursor-pointer hover:-translate-y-0.5"
+                className="group inline-flex items-center gap-1.5 rounded-lg border border-red-700/60 bg-brand hover:bg-brand-hover px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-white transition-all shadow-xs backdrop-blur-xs cursor-pointer hover:-translate-y-0.5"
               >
-                <link.icon className="h-3.5 w-3.5 text-brand group-hover:text-white transition-colors" />
+                <link.icon className="h-3.5 w-3.5 text-white" />
                 <span>{link.label}</span>
                 {link.badge && (
-                  <span className="rounded bg-brand/30 px-1 py-0.2 text-[9px] font-mono font-extrabold text-white group-hover:bg-white group-hover:text-brand transition-colors">
+                  <span className="rounded bg-white/20 border border-white/30 px-1 py-0.2 text-[9px] font-mono font-extrabold text-white">
                     {link.badge}
                   </span>
                 )}
