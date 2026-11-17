@@ -14,11 +14,19 @@ interface RailProps {
   side: "left" | "right";
   ads: Advertisement[];
   visible: boolean;
+  topOffset?: number;
   bottomOffset?: number;
   speed?: number; // Pixels to advance per animation frame
 }
 
-function RailColumn({ side, ads, visible, bottomOffset = 16, speed = 0.55 }: RailProps) {
+function RailColumn({
+  side,
+  ads,
+  visible,
+  topOffset = 120,
+  bottomOffset = 16,
+  speed = 0.55,
+}: RailProps) {
   const isLeft = side === "left";
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -103,15 +111,15 @@ function RailColumn({ side, ads, visible, bottomOffset = 16, speed = 0.55 }: Rai
   return (
     <aside
       aria-label={`${side} side advertisements`}
-      className={`fixed z-30 w-[155px] min-[1660px]:w-[175px] transition-all duration-500 ease-out ${
+      className={`fixed z-30 w-[155px] min-[1660px]:w-[175px] transition-opacity duration-300 ease-out ${
         isLeft ? "left-2" : "right-2"
       } ${
         visible
-          ? "hidden min-[1360px]:flex flex-col opacity-100 translate-y-0 pointer-events-auto"
-          : "hidden opacity-0 -translate-y-4 pointer-events-none"
+          ? "hidden min-[1360px]:flex flex-col opacity-100 pointer-events-auto"
+          : "hidden opacity-0 pointer-events-none"
       }`}
       style={{
-        top: "120px",
+        top: `${topOffset}px`,
         bottom: `${bottomOffset}px`,
       }}
       onMouseEnter={() => setIsHovered(true)}
@@ -227,21 +235,22 @@ interface SideRailAdsProps {
 
 export default function SideRailAds({ alwaysVisible = false }: SideRailAdsProps) {
   const [visible, setVisible] = useState(alwaysVisible);
+  const [topOffset, setTopOffset] = useState(120);
   const [bottomOffset, setBottomOffset] = useState(16);
 
   useEffect(() => {
     let animFrame = 0;
 
     const checkVisibility = () => {
-      // 1. Hero Check: Rails are visible after hero ends, or immediately if alwaysVisible / no hero on page
+      // 1. Hero Check & Dynamic Top Positioning:
+      // Ads begin immediately below the hero section (tracking its bottom edge),
+      // clamped to a minimum of 120px under the sticky header.
       const hero = document.getElementById("hero-section");
-      let hasHeroEnded = false;
-      if (hero) {
+      let calculatedTop = 120;
+
+      if (hero && !alwaysVisible) {
         const heroBottom = hero.getBoundingClientRect().bottom;
-        // Hero has ended when its bottom edge reaches or passes the top sticky header area
-        hasHeroEnded = heroBottom <= 165;
-      } else {
-        hasHeroEnded = true;
+        calculatedTop = Math.max(120, heroBottom);
       }
 
       // 2. Footer Collision Avoidance:
@@ -256,15 +265,16 @@ export default function SideRailAds({ alwaysVisible = false }: SideRailAdsProps)
         if (footerRect.top < window.innerHeight) {
           calculatedBottom = Math.max(16, window.innerHeight - footerRect.top + 16);
         }
-        // If the footer occupies almost the entire screen (less than 240px available), hide rails
-        const availableHeight = footerRect.top - 120;
-        if (availableHeight < 240) {
-          hasAdequateSpace = false;
-        }
       }
 
-      const shouldBeVisible = (hasHeroEnded || alwaysVisible) && hasAdequateSpace;
-      setVisible(shouldBeVisible);
+      // Ensure there is at least 150px of vertical height between top and bottom edges for ads to render
+      const availableHeight = window.innerHeight - calculatedTop - calculatedBottom;
+      if (availableHeight < 150) {
+        hasAdequateSpace = false;
+      }
+
+      setVisible(hasAdequateSpace);
+      setTopOffset(calculatedTop);
       setBottomOffset(calculatedBottom);
 
       animFrame = window.requestAnimationFrame(checkVisibility);
@@ -292,6 +302,7 @@ export default function SideRailAds({ alwaysVisible = false }: SideRailAdsProps)
         side="left"
         ads={leftRailAds}
         visible={visible}
+        topOffset={topOffset}
         bottomOffset={bottomOffset}
         speed={0.52}
       />
@@ -301,6 +312,7 @@ export default function SideRailAds({ alwaysVisible = false }: SideRailAdsProps)
         side="right"
         ads={rightRailAds}
         visible={visible}
+        topOffset={topOffset}
         bottomOffset={rightBottomOffset}
         speed={0.62}
       />
