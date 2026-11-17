@@ -160,7 +160,7 @@ export default function ContactForm() {
                   <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-blue-50 text-cobalt mb-4 border border-blue-200">
                     <CheckCircle2 className="h-8 w-8" />
                   </div>
-                  <h3 className="font-heading text-2xl font-bold uppercase tracking-tight text-navy">
+                  <h3 className="font-heading text-2xl font-bold uppercase tracking-tight text-brand">
                     Inquiry Received Successfully
                   </h3>
                   <p className="mt-2 text-sm text-slate-600 max-w-md mx-auto">
@@ -189,7 +189,7 @@ export default function ContactForm() {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="border-b border-slate-100 pb-4 mb-2">
-                    <h3 className="font-heading text-xl font-bold uppercase tracking-tight text-navy">
+                    <h3 className="font-heading text-xl font-bold uppercase tracking-tight text-brand">
                       Submit Your Technical Inquiry
                     </h3>
                     <p className="text-xs text-slate-500">

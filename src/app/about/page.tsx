@@ -114,7 +114,7 @@ export default function AboutPage() {
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-50 text-brand border border-brand/20 mb-4">
                 <ShieldCheck className="h-5 w-5" />
               </div>
-              <h3 className="font-heading text-lg font-bold uppercase text-navy">
+              <h3 className="font-heading text-lg font-bold uppercase text-brand">
                 Strict Quality Standards
               </h3>
               <p className="mt-2 text-xs text-slate-600 leading-relaxed">
@@ -128,7 +128,7 @@ export default function AboutPage() {
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-navy mb-4 border border-blue-200">
                 <Factory className="h-5 w-5" />
               </div>
-              <h3 className="font-heading text-lg font-bold uppercase text-navy">
+              <h3 className="font-heading text-lg font-bold uppercase text-brand">
                 Circular Tooling Economy
               </h3>
               <p className="mt-2 text-xs text-slate-600 leading-relaxed">
@@ -160,7 +160,7 @@ export default function AboutPage() {
                   key={m.name}
                   className="rounded-xl border border-slate-200 bg-slate-50 p-5"
                 >
-                  <h3 className="font-heading text-base font-bold uppercase text-navy">
+                  <h3 className="font-heading text-base font-bold uppercase text-brand">
                     {m.name}
                   </h3>
                   <span className="block text-[11px] font-bold uppercase text-brand mt-0.5">
@@ -242,7 +242,7 @@ export default function AboutPage() {
                   className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl border border-slate-200 bg-slate-50"
                 >
                   <div>
-                    <h3 className="font-heading text-sm font-bold uppercase text-navy">
+                    <h3 className="font-heading text-sm font-bold uppercase text-brand">
                       {c.title}
                     </h3>
                     <p className="text-[11px] text-slate-500 font-mono mt-0.5">

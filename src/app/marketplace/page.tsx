@@ -144,7 +144,7 @@ export default function MarketplacePage() {
                 <p className="text-[11px] font-bold uppercase tracking-wider text-brand mb-1">
                   {cat.subheading}
                 </p>
-                <h3 className="font-heading text-xl font-bold uppercase tracking-tight text-navy group-hover:text-brand transition-colors">
+                <h3 className="font-heading text-xl font-bold uppercase tracking-tight text-brand group-hover:text-brand-hover transition-colors">
                   {cat.name}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-slate-600">
@@ -192,7 +192,7 @@ export default function MarketplacePage() {
                   Live Available Inventory
                 </span>
               </div>
-              <h2 className="text-2xl sm:text-4xl font-extrabold uppercase tracking-tight text-navy font-heading">
+              <h2 className="text-2xl sm:text-4xl font-extrabold uppercase tracking-tight text-brand font-heading">
                 Featured Verified Machinery &amp; Castings
               </h2>
             </div>
@@ -233,7 +233,7 @@ export default function MarketplacePage() {
                     <p className="text-[10px] font-mono font-bold text-brand uppercase">
                       {listing.alloySpec}
                     </p>
-                    <h3 className="font-heading text-base font-bold text-navy group-hover:text-brand transition-colors line-clamp-2 mt-1">
+                    <h3 className="font-heading text-base font-bold text-brand group-hover:text-brand-hover transition-colors line-clamp-2 mt-1">
                       {listing.title}
                     </h3>
                   </div>

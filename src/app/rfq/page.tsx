@@ -92,7 +92,7 @@ export default function RFQPage() {
             <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-50 text-brand mx-auto mb-6">
               <CheckCircle className="h-10 w-10 text-brand" />
             </div>
-            <h2 className="text-3xl font-extrabold uppercase text-navy font-heading">
+            <h2 className="text-3xl font-extrabold uppercase text-brand font-heading">
               RFQ Package Successfully Routed!
             </h2>
             <p className="mt-4 text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
@@ -125,7 +125,7 @@ export default function RFQPage() {
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand mb-1">
                 <span>Step 1 of 4</span>
               </div>
-              <h3 className="font-heading text-xl font-bold uppercase text-navy mb-6">
+              <h3 className="font-heading text-xl font-bold uppercase text-brand mb-6">
                 Process Classification &amp; Metallurgy
               </h3>
 
@@ -174,7 +174,7 @@ export default function RFQPage() {
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand mb-1">
                 <span>Step 2 of 4</span>
               </div>
-              <h3 className="font-heading text-xl font-bold uppercase text-navy mb-6">
+              <h3 className="font-heading text-xl font-bold uppercase text-brand mb-6">
                 Batch Dimensions &amp; Machining State
               </h3>
 
@@ -239,7 +239,7 @@ export default function RFQPage() {
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand mb-1">
                 <span>Step 3 of 4</span>
               </div>
-              <h3 className="font-heading text-xl font-bold uppercase text-navy mb-4">
+              <h3 className="font-heading text-xl font-bold uppercase text-brand mb-4">
                 Mandatory Quality &amp; Lab Certifications
               </h3>
 
@@ -276,7 +276,7 @@ export default function RFQPage() {
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand mb-1">
                 <span>Step 4 of 4</span>
               </div>
-              <h3 className="font-heading text-xl font-bold uppercase text-navy mb-6">
+              <h3 className="font-heading text-xl font-bold uppercase text-brand mb-6">
                 Drawing Package &amp; Buyer Coordinates
               </h3>
 

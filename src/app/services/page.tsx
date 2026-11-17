@@ -217,7 +217,7 @@ export default function ServicesPage() {
                     </span>
                   </div>
 
-                  <h3 className="font-heading text-xl font-bold uppercase tracking-tight text-navy">
+                  <h3 className="font-heading text-xl font-bold uppercase tracking-tight text-brand">
                     {svc.name}
                   </h3>
                   <p className="mt-1 text-xs font-bold text-brand uppercase">
@@ -266,7 +266,7 @@ export default function ServicesPage() {
             <span className="text-xs font-bold uppercase tracking-wider text-brand">
               Clear &amp; Predictable Pricing
             </span>
-            <h2 className="mt-2 text-3xl font-extrabold uppercase font-heading text-navy">
+            <h2 className="mt-2 text-3xl font-extrabold uppercase font-heading text-brand">
               Transparent Commercial Fee Structure
             </h2>
             <p className="mt-3 text-sm text-slate-600">
@@ -279,7 +279,7 @@ export default function ServicesPage() {
               <span className="block text-xs font-bold uppercase text-brand">
                 Standard Marketplace
               </span>
-              <h3 className="font-heading text-2xl font-bold uppercase text-navy mt-1">
+              <h3 className="font-heading text-2xl font-bold uppercase text-brand mt-1">
                 Direct Buy &amp; Catalog
               </h3>
               <div className="mt-4 flex items-baseline gap-1">
@@ -316,7 +316,7 @@ export default function ServicesPage() {
               <span className="block text-xs font-bold uppercase text-brand">
                 Custom Casting Routing
               </span>
-              <h3 className="font-heading text-2xl font-bold uppercase text-navy mt-1">
+              <h3 className="font-heading text-2xl font-bold uppercase text-brand mt-1">
                 Drawing RFQ Engine
               </h3>
               <div className="mt-4 flex items-baseline gap-1">
@@ -350,7 +350,7 @@ export default function ServicesPage() {
               <span className="block text-xs font-bold uppercase text-brand">
                 Plant Liquidations
               </span>
-              <h3 className="font-heading text-2xl font-bold uppercase text-navy mt-1">
+              <h3 className="font-heading text-2xl font-bold uppercase text-brand mt-1">
                 Auctions &amp; Dispersals
               </h3>
               <div className="mt-4 flex items-baseline gap-1">

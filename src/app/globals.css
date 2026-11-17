@@ -133,17 +133,19 @@ a, button {
     transform: translateX(0%);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
   }
 }
 
 .animate-marquee {
   display: flex;
-  width: max-content;
-  animation: marquee 28s linear infinite;
+  flex-shrink: 0;
+  animation: marquee 38s linear infinite;
 }
 
-.animate-marquee:hover {
+/* Pause BOTH mirror tracks synchronously so they NEVER overlap on hover */
+.marquee-container:hover .animate-marquee,
+.group\/marquee:hover .animate-marquee {
   animation-play-state: paused;
 }
 

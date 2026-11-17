@@ -22,6 +22,13 @@ import {
   Thermometer,
   FileText,
   Building2,
+  Zap,
+  Sparkles,
+  Truck,
+  Boxes,
+  ArrowLeftRight,
+  FileCheck2,
+  BadgeCheck,
 } from "lucide-react";
 import { siteConfig } from "@/data/siteConfig";
 import CustomDropdown, { DropdownOption } from "@/components/CustomDropdown";
@@ -34,12 +41,15 @@ const heroQuickLinks = [
   { label: "Raw Alloys", href: "/marketplace/raw-materials", icon: Flame },
   { label: "Sand Systems", href: "/marketplace/sand-binders", icon: Droplets },
   { label: "Refractories", href: "/marketplace/refractories", icon: Box },
+  { label: "Melt Furnaces", href: "/marketplace/equipment", icon: Zap },
+  { label: "Fettling & Blast", href: "/marketplace/machining-finishing", icon: Sparkles },
   { label: "Machining", href: "/marketplace/machining-finishing", icon: SlidersHorizontal },
   { label: "Heat Treating", href: "/marketplace/heat-treating", icon: Thermometer },
   { label: "Lab & Testing", href: "/marketplace/testing-inspection", icon: ShieldCheck },
   { label: "Live Auctions", href: "/auctions", icon: Gavel, badge: "HOT" },
   { label: "Plant Closures", href: "/auctions", icon: Building2, badge: "LIVE" },
   { label: "Post an RFQ", href: "/rfq", icon: FileText, badge: "24h" },
+  { label: "ASTM / DIN Specs", href: "/knowledge", icon: FileCheck2, badge: "SPEC" },
   { label: "Glossary A–Z", href: "/glossary", icon: BookOpen, badge: "82" },
 ];
 
@@ -98,51 +108,53 @@ export default function Hero() {
       {/* Desktop Quick Links Sidebar (Positioned on the Left Side of Hero Section) */}
       <aside
         aria-label="Hero Sector Quick Links"
-        className="hidden min-[1360px]:flex flex-col w-[165px] min-[1660px]:w-[185px] absolute left-2 min-[1660px]:left-3 top-4 bottom-4 z-20 text-left"
+        className="hidden min-[1360px]:flex flex-col w-[172px] min-[1660px]:w-[190px] absolute left-2.5 min-[1660px]:left-3.5 top-3 bottom-3 z-20 text-left"
       >
         <div className="flex-1 rounded-2xl border border-navy-700/80 bg-navy-900/95 p-2 min-[1660px]:p-2.5 shadow-2xl backdrop-blur-md flex flex-col justify-between overflow-hidden">
-          <div className="flex flex-col flex-1 min-h-0">
-            {/* Quick Links Heading */}
-            <div className="flex items-center justify-center gap-1.5 pb-1.5 mb-1.5 border-b border-navy-800 shrink-0">
-              <span className="h-0.5 w-2.5 bg-brand rounded-full" />
-              <h3 className="text-xs font-heading font-bold uppercase tracking-wider text-white">
+          {/* Quick Links Heading */}
+          <div className="flex items-center justify-between pb-1.5 mb-1.5 border-b border-navy-800 shrink-0 px-0.5">
+            <div className="flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-brand animate-pulse" />
+              <h3 className="text-[11.5px] min-[1660px]:text-xs font-heading font-extrabold uppercase tracking-wider text-white">
                 Quick Links
               </h3>
-              <span className="h-0.5 w-2.5 bg-brand rounded-full" />
             </div>
-
-            {/* Vertical Category Links (14 Sectors & Action Hubs) */}
-            <nav className="flex flex-col gap-1 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pr-0.5 flex-1 min-h-0">
-              {heroQuickLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="group flex items-center justify-between rounded-lg border border-red-700/60 bg-brand hover:bg-brand-hover px-2 py-1 min-[1660px]:py-1.5 transition-all cursor-pointer shadow-xs shrink-0"
-                  title={`Go to ${link.label}`}
-                >
-                  <div className="flex items-center gap-1.5 min-w-0">
-                    <link.icon className="h-3 w-3 text-white shrink-0" />
-                    <span className="text-[10px] min-[1660px]:text-[11px] font-bold text-white truncate">
-                      {link.label}
-                    </span>
-                  </div>
-                  {link.badge && (
-                    <span className="shrink-0 rounded bg-white/20 border border-white/30 px-1 py-0.2 text-[8px] font-mono font-extrabold text-white">
-                      {link.badge}
-                    </span>
-                  )}
-                </Link>
-              ))}
-            </nav>
+            <span className="rounded bg-navy-950 border border-navy-700/70 px-1.5 py-0.5 text-[9px] min-[1660px]:text-[10px] font-mono font-bold text-slate-300">
+              17 Sectors
+            </span>
           </div>
+
+          {/* Vertical Category Links (17 Sectors & Action Hubs) */}
+          <nav className="flex flex-col justify-between flex-1 min-h-0 gap-1 py-0.5">
+            {heroQuickLinks.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="group flex items-center justify-between rounded-lg border border-red-500/40 bg-brand hover:bg-brand-hover px-2.5 h-[32px] min-[1660px]:h-[34px] transition-all cursor-pointer shadow-xs shrink-0"
+                title={`Go to ${link.label}`}
+              >
+                <div className="flex items-center gap-2 min-w-0">
+                  <link.icon className="h-3.5 w-3.5 text-white shrink-0 group-hover:scale-110 transition-transform" />
+                  <span className="text-[11px] min-[1660px]:text-[11.5px] font-bold text-white truncate tracking-tight">
+                    {link.label}
+                  </span>
+                </div>
+                {link.badge && (
+                  <span className="shrink-0 rounded bg-navy-950/80 border border-white/20 px-1.5 py-0.5 text-[8px] min-[1660px]:text-[8.5px] font-mono font-extrabold text-white">
+                    {link.badge}
+                  </span>
+                )}
+              </Link>
+            ))}
+          </nav>
 
           {/* Bottom All Categories Link */}
           <Link
             href="/marketplace"
-            className="mt-1.5 flex items-center justify-center gap-1 rounded-lg bg-brand border border-red-700/60 hover:bg-brand-hover py-1.5 text-[9px] font-bold uppercase tracking-wider text-white transition-all cursor-pointer shadow-xs shrink-0"
+            className="mt-1 flex items-center justify-center gap-1.5 rounded-lg border border-navy-700 bg-navy-950 hover:bg-white hover:text-navy hover:border-white h-[30px] text-[10px] min-[1660px]:text-[11px] font-bold uppercase tracking-wider text-slate-200 transition-all cursor-pointer shadow-xs shrink-0 group/all"
           >
             <span>All Categories</span>
-            <ChevronRight className="h-3 w-3 text-white" />
+            <ChevronRight className="h-3 w-3 text-brand group-hover/all:text-navy transition-colors" />
           </Link>
         </div>
       </aside>

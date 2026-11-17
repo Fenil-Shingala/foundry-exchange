@@ -322,7 +322,7 @@ export default function AllProductsPage() {
         {sortedListings.length === 0 ? (
           <div className="rounded-2xl border-2 border-dashed border-slate-300 bg-white p-12 text-center max-w-lg mx-auto my-12">
             <Search className="h-10 w-10 text-slate-400 mx-auto mb-3" />
-            <h3 className="font-heading text-lg font-bold uppercase text-navy">
+            <h3 className="font-heading text-lg font-bold uppercase text-brand">
               No matching listings found
             </h3>
             <p className="mt-2 text-xs text-slate-500 leading-relaxed">
@@ -389,7 +389,7 @@ export default function AllProductsPage() {
                       </div>
 
                       <Link href={`/listings/${listing.id}`} className="block cursor-pointer">
-                        <h3 className="font-heading text-sm xl:text-[15px] font-bold uppercase tracking-tight text-navy group-hover:text-brand transition-colors line-clamp-2 min-h-[2.4rem] leading-snug">
+                        <h3 className="font-heading text-sm xl:text-[15px] font-bold uppercase tracking-tight text-brand group-hover:text-brand-hover transition-colors line-clamp-2 min-h-[2.4rem] leading-snug">
                           {listing.title}
                         </h3>
                       </Link>

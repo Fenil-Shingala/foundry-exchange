@@ -60,7 +60,7 @@ export default function IndustriesSection() {
                   {renderIndustryIcon(ind.iconName)}
                 </div>
                 <div>
-                  <h3 className="font-heading text-lg font-bold uppercase tracking-tight text-navy">
+                  <h3 className="font-heading text-lg font-bold uppercase tracking-tight text-brand">
                     {ind.name}
                   </h3>
                   <p className="text-[11px] text-slate-500 font-bold uppercase tracking-wider">

@@ -34,7 +34,7 @@ export default function AssociationsSection() {
         {/* Index Accent Bar (PrecastXchange Signature Style) */}
         <div className="mt-12 flex items-baseline gap-4 border-l-[3px] border-brand pl-4">
           <div>
-            <p className="text-sm font-bold uppercase tracking-wider text-navy font-heading">
+            <p className="text-sm font-bold uppercase tracking-wider text-brand font-heading">
               Recognized Governing Bodies &amp; Regional Chapters
             </p>
             <p className="text-xs text-slate-500">
@@ -78,7 +78,7 @@ export default function AssociationsSection() {
                 </div>
 
                 {/* Association Title */}
-                <h3 className="mt-3 font-heading text-lg font-bold uppercase tracking-tight text-navy leading-snug">
+                <h3 className="mt-3 font-heading text-lg font-bold uppercase tracking-tight text-brand leading-snug">
                   {assoc.name}
                 </h3>
                 {assoc.chapterOrSubtitle && (
@@ -137,16 +137,43 @@ export default function AssociationsSection() {
             </div>
           </div>
 
-          {/* Marquee Track */}
-          <div className="relative mt-6 overflow-hidden">
-            <div className="flex w-max items-center gap-8 py-2 animate-marquee">
-              {/* Render twice for continuous infinite scroll */}
-              {[...associations, ...associations].map((assoc, index) => (
+          {/* Marquee Track — Seamless Infinite Loop with Synchronized Dual-Track Hover Pause */}
+          <div className="marquee-container group/marquee relative mt-6 flex overflow-hidden">
+            {/* Track 1 */}
+            <div className="flex shrink-0 items-center gap-8 pr-8 py-2 animate-marquee">
+              {[...associations, ...associations, ...associations, ...associations].map((assoc, index) => (
                 <Link
-                  key={`${assoc.id}-${index}`}
+                  key={`track1-${assoc.id}-${index}`}
                   href={assoc.websiteUrl}
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="flex h-20 w-52 shrink-0 items-center justify-center rounded-lg border border-navy-200 bg-white p-4 transition-all hover:border-brand hover:shadow-xs group/rail cursor-pointer"
+                  title={assoc.name}
+                >
+                  <Image
+                    src={assoc.logoUrl}
+                    alt={assoc.name}
+                    width={160}
+                    height={50}
+                    className="max-h-12 w-auto max-w-[80%] object-contain transition-transform group-hover/rail:scale-105"
+                    unoptimized
+                  />
+                </Link>
+              ))}
+            </div>
+
+            {/* Track 2 (Identical mirror track ensuring 100% gapless continuous loop) */}
+            <div
+              className="flex shrink-0 items-center gap-8 pr-8 py-2 animate-marquee"
+              aria-hidden="true"
+            >
+              {[...associations, ...associations, ...associations, ...associations].map((assoc, index) => (
+                <Link
+                  key={`track2-${assoc.id}-${index}`}
+                  href={assoc.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  tabIndex={-1}
                   className="flex h-20 w-52 shrink-0 items-center justify-center rounded-lg border border-navy-200 bg-white p-4 transition-all hover:border-brand hover:shadow-xs group/rail cursor-pointer"
                   title={assoc.name}
                 >

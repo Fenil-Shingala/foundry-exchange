@@ -269,7 +269,7 @@ export default function ExchangeModesPage() {
                             {mode.badge}
                           </span>
                         </div>
-                        <h2 className="font-heading text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-navy">
+                        <h2 className="font-heading text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-brand">
                           {mode.name}
                         </h2>
                       </div>
@@ -284,7 +284,7 @@ export default function ExchangeModesPage() {
 
                     {/* How it works steps */}
                     <div className="mt-6 pt-6 border-t border-slate-100">
-                      <h4 className="text-xs font-bold uppercase tracking-wider text-navy mb-3">
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-brand mb-3">
                         How This Mode Executes:
                       </h4>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

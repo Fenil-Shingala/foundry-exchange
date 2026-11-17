@@ -239,7 +239,7 @@ export default function KnowledgePage() {
                 North American Metallurgical Standards
               </span>
             </div>
-            <h2 className="text-2xl sm:text-4xl font-extrabold uppercase tracking-tight text-navy font-heading mb-8">
+            <h2 className="text-2xl sm:text-4xl font-extrabold uppercase tracking-tight text-brand font-heading mb-8">
               Key ASTM Specifications for Castings &amp; Forgings
             </h2>
 
@@ -254,7 +254,7 @@ export default function KnowledgePage() {
                       <span className="rounded bg-navy px-3 py-1 text-sm font-mono font-bold text-white">
                         {std.code}
                       </span>
-                      <h3 className="font-heading text-lg font-bold uppercase text-navy">
+                      <h3 className="font-heading text-lg font-bold uppercase text-brand">
                         {std.title}
                       </h3>
                     </div>
@@ -306,7 +306,7 @@ export default function KnowledgePage() {
                 European Harmonized Specifications
               </span>
             </div>
-            <h2 className="text-2xl sm:text-4xl font-extrabold uppercase tracking-tight text-navy font-heading mb-8">
+            <h2 className="text-2xl sm:text-4xl font-extrabold uppercase tracking-tight text-brand font-heading mb-8">
               DIN EN Standards &amp; Cross-Reference Table
             </h2>
 
@@ -366,7 +366,7 @@ export default function KnowledgePage() {
                 Manufacturing Methodologies
               </span>
             </div>
-            <h2 className="text-2xl sm:text-4xl font-extrabold uppercase tracking-tight text-navy font-heading mb-8">
+            <h2 className="text-2xl sm:text-4xl font-extrabold uppercase tracking-tight text-brand font-heading mb-8">
               Process Capabilities, Tolerances &amp; Lead Times
             </h2>
 
@@ -376,7 +376,7 @@ export default function KnowledgePage() {
                   key={proc.name}
                   className="rounded-xl border border-slate-200 bg-white p-6 shadow-xs"
                 >
-                  <h3 className="font-heading text-xl font-bold uppercase text-navy mb-4 border-b border-slate-100 pb-2">
+                  <h3 className="font-heading text-xl font-bold uppercase text-brand mb-4 border-b border-slate-100 pb-2">
                     {proc.name}
                   </h3>
 
@@ -438,7 +438,7 @@ export default function KnowledgePage() {
                     Terminology &amp; Definitions
                   </span>
                 </div>
-                <h2 className="text-2xl sm:text-4xl font-extrabold uppercase tracking-tight text-navy font-heading">
+                <h2 className="text-2xl sm:text-4xl font-extrabold uppercase tracking-tight text-brand font-heading">
                   Foundry &amp; Metallurgical Engineering Glossary
                 </h2>
                 <p className="mt-1 text-sm text-slate-600">
@@ -466,7 +466,7 @@ export default function KnowledgePage() {
                         <span className="h-7 w-7 rounded-md bg-navy text-white font-mono font-bold text-xs flex items-center justify-center shrink-0">
                           {term.letter}
                         </span>
-                        <h3 className="font-heading text-lg font-bold uppercase text-navy">
+                        <h3 className="font-heading text-lg font-bold uppercase text-brand">
                           {term.term}
                         </h3>
                       </div>
@@ -513,7 +513,7 @@ export default function KnowledgePage() {
             {/* Bottom Banner to dedicated A-Z page */}
             <div className="mt-8 rounded-xl border border-navy-200 bg-navy-50 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div>
-                <h4 className="font-heading text-base font-bold uppercase text-navy">
+                <h4 className="font-heading text-base font-bold uppercase text-brand">
                   Looking for Complete A–Z Technical Definitions?
                 </h4>
                 <p className="text-xs text-slate-600 mt-0.5">

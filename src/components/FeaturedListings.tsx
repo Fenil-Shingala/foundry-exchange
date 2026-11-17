@@ -189,7 +189,7 @@ export default function FeaturedListings() {
                     </div>
 
                     <Link href={`/listings/${listing.id}`} className="block cursor-pointer">
-                      <h3 className="font-heading text-sm xl:text-[15px] font-bold uppercase tracking-tight text-navy group-hover:text-brand transition-colors line-clamp-2 min-h-[2.4rem] leading-snug">
+                      <h3 className="font-heading text-sm xl:text-[15px] font-bold uppercase tracking-tight text-brand group-hover:text-brand-hover transition-colors line-clamp-2 min-h-[2.4rem] leading-snug">
                         {listing.title}
                       </h3>
                     </Link>
@@ -302,7 +302,7 @@ export default function FeaturedListings() {
                 </div>
 
                 <Link href="/products" className="block">
-                  <h3 className="font-heading text-sm xl:text-[15px] font-bold uppercase tracking-tight text-navy group-hover:text-brand transition-colors line-clamp-2 min-h-[2.4rem] leading-snug">
+                  <h3 className="font-heading text-sm xl:text-[15px] font-bold uppercase tracking-tight text-brand group-hover:text-brand-hover transition-colors line-clamp-2 min-h-[2.4rem] leading-snug">
                     View All Metal Castings, Forgings &amp; Melt Assets
                   </h3>
                 </Link>

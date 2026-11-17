@@ -86,7 +86,7 @@ export default function ExchangeModes() {
                   </span>
                 </div>
 
-                <h3 className="font-heading text-xl font-bold uppercase tracking-tight text-navy">
+                <h3 className="font-heading text-xl font-bold uppercase tracking-tight text-brand">
                   {mode.name}
                 </h3>
 

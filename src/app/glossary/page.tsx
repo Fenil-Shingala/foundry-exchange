@@ -300,7 +300,7 @@ export default function GlossaryPage() {
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-navy-50 text-navy mb-4">
               <BookOpen className="h-7 w-7 text-brand" />
             </div>
-            <h3 className="text-xl font-heading font-bold uppercase text-navy">
+            <h3 className="text-xl font-heading font-bold uppercase text-brand">
               No Matching Foundry Terms Found
             </h3>
             <p className="mt-2 text-sm text-slate-600 max-w-md mx-auto">
@@ -334,7 +334,7 @@ export default function GlossaryPage() {
                       <span className="h-9 w-9 rounded-lg bg-navy text-white font-mono font-bold text-sm flex items-center justify-center shrink-0 shadow-2xs">
                         {term.letter}
                       </span>
-                      <h3 className="font-heading text-lg font-bold text-navy leading-snug">
+                      <h3 className="font-heading text-lg font-bold text-brand leading-snug">
                         {term.term}
                       </h3>
                     </div>

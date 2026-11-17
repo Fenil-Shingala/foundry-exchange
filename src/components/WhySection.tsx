@@ -88,7 +88,7 @@ export default function WhySection() {
                   {renderFeatureIcon(feat.iconName)}
                 </div>
 
-                <h3 className="font-heading text-lg font-bold uppercase tracking-tight text-navy">
+                <h3 className="font-heading text-lg font-bold uppercase tracking-tight text-brand">
                   {feat.title}
                 </h3>
                 <p className="mt-2 text-xs font-bold text-brand">

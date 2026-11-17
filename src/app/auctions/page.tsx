@@ -162,7 +162,7 @@ export default function AuctionsPage() {
               Major Timed Events
             </span>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-extrabold uppercase tracking-tight text-navy font-heading mb-8">
+          <h2 className="text-2xl sm:text-4xl font-extrabold uppercase tracking-tight text-brand font-heading mb-8">
             Current Liquidation Auctions
           </h2>
 
@@ -198,7 +198,7 @@ export default function AuctionsPage() {
                       <span>{ev.location}</span>
                     </div>
 
-                    <h3 className="font-heading text-xl font-bold uppercase text-navy group-hover:text-brand transition-colors line-clamp-2">
+                    <h3 className="font-heading text-xl font-bold uppercase text-brand group-hover:text-brand-hover transition-colors line-clamp-2">
                       {ev.title}
                     </h3>
 
@@ -291,7 +291,7 @@ export default function AuctionsPage() {
                     </div>
                   </div>
 
-                  <h4 className="font-heading text-sm font-bold uppercase text-navy line-clamp-2">
+                  <h4 className="font-heading text-sm font-bold uppercase text-brand line-clamp-2">
                     {lot.title}
                   </h4>
                   <p className="text-[11px] text-slate-500 mt-1">
@@ -333,7 +333,7 @@ export default function AuctionsPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="rounded-xl border border-slate-200 bg-white p-6">
             <ShieldCheck className="h-8 w-8 text-brand mb-3" />
-            <h3 className="font-heading text-lg font-bold uppercase text-navy">
+            <h3 className="font-heading text-lg font-bold uppercase text-brand">
               Title Guarantee &amp; Escrow
             </h3>
             <p className="mt-2 text-xs text-slate-600 leading-relaxed">
@@ -343,7 +343,7 @@ export default function AuctionsPage() {
           </div>
           <div className="rounded-xl border border-slate-200 bg-white p-6">
             <Truck className="h-8 w-8 text-brand mb-3" />
-            <h3 className="font-heading text-lg font-bold uppercase text-navy">
+            <h3 className="font-heading text-lg font-bold uppercase text-brand">
               Rigging &amp; Removal Timelines
             </h3>
             <p className="mt-2 text-xs text-slate-600 leading-relaxed">
@@ -353,7 +353,7 @@ export default function AuctionsPage() {
           </div>
           <div className="rounded-xl border border-slate-200 bg-white p-6">
             <FileCheck className="h-8 w-8 text-brand mb-3" />
-            <h3 className="font-heading text-lg font-bold uppercase text-navy">
+            <h3 className="font-heading text-lg font-bold uppercase text-brand">
               Mechanical Inspections
             </h3>
             <p className="mt-2 text-xs text-slate-600 leading-relaxed">

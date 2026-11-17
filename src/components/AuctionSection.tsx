@@ -159,7 +159,7 @@ export default function AuctionSection() {
                   </div>
 
                   {/* Event Title */}
-                  <h3 className="text-xl sm:text-2xl font-bold uppercase tracking-tight text-navy font-heading">
+                  <h3 className="text-xl sm:text-2xl font-bold uppercase tracking-tight text-brand font-heading">
                     {event.title}
                   </h3>
 
@@ -233,7 +233,7 @@ export default function AuctionSection() {
                         </div>
 
                         {/* Lot Title */}
-                        <h4 className="text-xs font-bold text-navy line-clamp-2 leading-snug group-hover/lot:text-brand transition-colors">
+                        <h4 className="text-xs font-bold text-brand line-clamp-2 leading-snug group-hover/lot:text-brand-hover transition-colors">
                           {lot.title}
                         </h4>
                       </div>
@@ -299,7 +299,7 @@ export default function AuctionSection() {
                   Live Timed Bidding
                 </span>
               </div>
-              <h3 className="text-2xl font-extrabold uppercase tracking-tight text-navy font-heading">
+              <h3 className="text-2xl font-extrabold uppercase tracking-tight text-brand font-heading">
                 Hot Foundry Equipment Lots Closing Today
               </h3>
             </div>
@@ -352,7 +352,7 @@ export default function AuctionSection() {
                       {lot.location}
                     </span>
                   </div>
-                  <h4 className="font-heading text-base font-bold uppercase tracking-tight text-navy leading-snug line-clamp-2">
+                  <h4 className="font-heading text-base font-bold uppercase tracking-tight text-brand leading-snug line-clamp-2">
                     {lot.title}
                   </h4>
                   <p className="mt-2 text-xs text-slate-600 line-clamp-2 font-mono">

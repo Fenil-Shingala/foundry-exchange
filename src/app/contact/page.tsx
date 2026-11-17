@@ -87,7 +87,7 @@ export default function ContactPage() {
                 </span>
               </div>
 
-              <h3 className="font-heading text-lg font-bold uppercase text-navy">
+              <h3 className="font-heading text-lg font-bold uppercase text-brand">
                 {hub.role}
               </h3>
 

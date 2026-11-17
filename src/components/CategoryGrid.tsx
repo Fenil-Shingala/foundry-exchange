@@ -95,7 +95,7 @@ export default function CategoryGrid() {
                   </span>
                 </div>
 
-                <h3 className="font-heading text-lg xl:text-xl font-bold uppercase tracking-tight text-navy group-hover:text-brand transition-colors min-h-[3.25rem] flex items-start">
+                <h3 className="font-heading text-lg xl:text-xl font-bold uppercase tracking-tight text-brand group-hover:text-brand-hover transition-colors min-h-[3.25rem] flex items-start">
                   {category.name}
                 </h3>
                 <p className="text-xs font-bold text-slate-500 uppercase tracking-wider min-h-[2rem] flex items-start mt-0.5">

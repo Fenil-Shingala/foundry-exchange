@@ -694,7 +694,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
 
               {/* 2. Problem-Solving Callout Box */}
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-5 sm:p-6 shadow-2xs">
-                <h4 className="font-heading text-base font-extrabold uppercase text-slate-900 tracking-tight mb-3">
+                <h4 className="font-heading text-base font-extrabold uppercase text-brand tracking-tight mb-3">
                   {detailData.painPointsTitle}
                 </h4>
                 <ul className="space-y-3 text-xs text-slate-700">
@@ -717,7 +717,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                     <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand block mb-1">
                       {feat.number}
                     </span>
-                    <h5 className="font-heading text-sm sm:text-base font-bold uppercase text-slate-900">
+                    <h5 className="font-heading text-sm sm:text-base font-bold uppercase text-brand">
                       {feat.title}
                     </h5>
                     <p className="mt-1 text-xs text-slate-600 leading-relaxed">
@@ -851,7 +851,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
                   <CheckCircle className="h-3.5 w-3.5" /> 100% Heat Verified
                 </span>
               </div>
-              <h3 className="font-heading text-lg sm:text-2xl font-bold uppercase text-slate-900 tracking-tight">
+              <h3 className="font-heading text-lg sm:text-2xl font-bold uppercase text-brand tracking-tight">
                 Certified Chemical Metallurgy &amp; Mechanical Properties
               </h3>
               <p className="text-xs sm:text-sm text-slate-500 mt-1 max-w-3xl">
@@ -1044,7 +1044,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
               <span className="rounded bg-brand/10 text-brand font-mono text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 inline-block mb-1.5">
                 Instant Engineering Portal
               </span>
-              <h3 className="font-heading text-lg sm:text-2xl font-bold uppercase text-slate-900 tracking-tight">
+              <h3 className="font-heading text-lg sm:text-2xl font-bold uppercase text-brand tracking-tight">
                 Technical Documentation &amp; 3D CAD Center
               </h3>
               <p className="text-xs sm:text-sm text-slate-500 mt-1">
@@ -1205,7 +1205,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
             <span className="rounded bg-slate-100 text-slate-700 font-mono text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 inline-block mb-1.5">
               Buyer Knowledge Base
             </span>
-            <h3 className="font-heading text-lg sm:text-2xl font-bold uppercase text-slate-900 tracking-tight">
+            <h3 className="font-heading text-lg sm:text-2xl font-bold uppercase text-brand tracking-tight">
               Technical Procurement &amp; Engineering FAQs
             </h3>
             <p className="text-xs sm:text-sm text-slate-500 mt-1">
@@ -1253,7 +1253,7 @@ export default function ProductDetailPage({ initialListing }: ProductDetailPageP
             <span className="rounded bg-brand/10 text-brand font-mono text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 inline-block mb-1.5">
               Companion Components &amp; Tooling
             </span>
-            <h3 className="font-heading text-lg sm:text-2xl font-bold uppercase text-slate-900 tracking-tight">
+            <h3 className="font-heading text-lg sm:text-2xl font-bold uppercase text-brand tracking-tight">
               Related Industrial Lots
             </h3>
             <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
