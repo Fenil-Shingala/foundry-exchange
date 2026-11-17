@@ -18,6 +18,10 @@ import {
   ShieldCheck,
   Gavel,
   BookOpen,
+  SlidersHorizontal,
+  Thermometer,
+  FileText,
+  Building2,
 } from "lucide-react";
 import { siteConfig } from "@/data/siteConfig";
 import CustomDropdown, { DropdownOption } from "@/components/CustomDropdown";
@@ -26,12 +30,16 @@ const heroQuickLinks = [
   { label: "Castings", href: "/marketplace/castings", icon: Layers },
   { label: "Forgings", href: "/marketplace/forgings", icon: Hammer },
   { label: "Equipment", href: "/marketplace/equipment", icon: Factory },
-  { label: "Tooling", href: "/marketplace/tooling", icon: Wrench },
+  { label: "Tooling & Dies", href: "/marketplace/tooling", icon: Wrench },
   { label: "Raw Alloys", href: "/marketplace/raw-materials", icon: Flame },
   { label: "Sand Systems", href: "/marketplace/sand-binders", icon: Droplets },
   { label: "Refractories", href: "/marketplace/refractories", icon: Box },
-  { label: "Lab & QA", href: "/marketplace/testing-inspection", icon: ShieldCheck },
+  { label: "Machining", href: "/marketplace/machining-finishing", icon: SlidersHorizontal },
+  { label: "Heat Treating", href: "/marketplace/heat-treating", icon: Thermometer },
+  { label: "Lab & Testing", href: "/marketplace/testing-inspection", icon: ShieldCheck },
   { label: "Live Auctions", href: "/auctions", icon: Gavel, badge: "HOT" },
+  { label: "Plant Closures", href: "/auctions", icon: Building2, badge: "LIVE" },
+  { label: "Post an RFQ", href: "/rfq", icon: FileText, badge: "24h" },
   { label: "Glossary A–Z", href: "/glossary", icon: BookOpen, badge: "82" },
 ];
 
@@ -90,12 +98,12 @@ export default function Hero() {
       {/* Desktop Quick Links Sidebar (Positioned on the Left Side of Hero Section) */}
       <aside
         aria-label="Hero Sector Quick Links"
-        className="hidden min-[1360px]:flex flex-col w-[160px] min-[1660px]:w-[180px] absolute left-2 min-[1660px]:left-3 top-6 bottom-6 z-20 text-left"
+        className="hidden min-[1360px]:flex flex-col w-[165px] min-[1660px]:w-[185px] absolute left-2 min-[1660px]:left-3 top-4 bottom-4 z-20 text-left"
       >
-        <div className="flex-1 rounded-2xl border border-navy-700/80 bg-navy-900/95 p-2.5 shadow-2xl backdrop-blur-md flex flex-col justify-between">
-          <div>
+        <div className="flex-1 rounded-2xl border border-navy-700/80 bg-navy-900/95 p-2 min-[1660px]:p-2.5 shadow-2xl backdrop-blur-md flex flex-col justify-between overflow-hidden">
+          <div className="flex flex-col flex-1 min-h-0">
             {/* Quick Links Heading */}
-            <div className="flex items-center justify-center gap-1.5 pb-2 mb-2 border-b border-navy-800">
+            <div className="flex items-center justify-center gap-1.5 pb-1.5 mb-1.5 border-b border-navy-800 shrink-0">
               <span className="h-0.5 w-2.5 bg-brand rounded-full" />
               <h3 className="text-xs font-heading font-bold uppercase tracking-wider text-white">
                 Quick Links
@@ -103,18 +111,18 @@ export default function Hero() {
               <span className="h-0.5 w-2.5 bg-brand rounded-full" />
             </div>
 
-            {/* Vertical Category Links */}
-            <nav className="flex flex-col gap-1">
+            {/* Vertical Category Links (14 Sectors & Action Hubs) */}
+            <nav className="flex flex-col gap-1 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pr-0.5 flex-1 min-h-0">
               {heroQuickLinks.map((link) => (
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="group flex items-center justify-between rounded-lg border border-red-700/60 bg-brand hover:bg-brand-hover px-2 py-1.5 transition-all cursor-pointer shadow-xs"
+                  className="group flex items-center justify-between rounded-lg border border-red-700/60 bg-brand hover:bg-brand-hover px-2 py-1 min-[1660px]:py-1.5 transition-all cursor-pointer shadow-xs shrink-0"
                   title={`Go to ${link.label}`}
                 >
                   <div className="flex items-center gap-1.5 min-w-0">
                     <link.icon className="h-3 w-3 text-white shrink-0" />
-                    <span className="text-[10.5px] min-[1660px]:text-[11px] font-bold text-white truncate">
+                    <span className="text-[10px] min-[1660px]:text-[11px] font-bold text-white truncate">
                       {link.label}
                     </span>
                   </div>
@@ -131,7 +139,7 @@ export default function Hero() {
           {/* Bottom All Categories Link */}
           <Link
             href="/marketplace"
-            className="mt-2 flex items-center justify-center gap-1 rounded-lg bg-brand border border-red-700/60 hover:bg-brand-hover py-1.5 text-[9px] font-bold uppercase tracking-wider text-white transition-all cursor-pointer shadow-xs"
+            className="mt-1.5 flex items-center justify-center gap-1 rounded-lg bg-brand border border-red-700/60 hover:bg-brand-hover py-1.5 text-[9px] font-bold uppercase tracking-wider text-white transition-all cursor-pointer shadow-xs shrink-0"
           >
             <span>All Categories</span>
             <ChevronRight className="h-3 w-3 text-white" />
