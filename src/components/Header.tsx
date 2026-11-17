@@ -268,7 +268,7 @@ export default function Header() {
                   </span>
                 </div>
                 <span className="text-[11px] font-semibold tracking-wide text-slate-300">
-                  • Serving North American &amp; Global Foundries
+                  • The Frontier of Foundries &amp; Forgings
                 </span>
                 <span className="text-[9px] font-mono font-bold uppercase px-1.5 py-0.2 rounded bg-navy-900 text-brand border border-navy-700 shadow-2xs">
                   3 Hubs

@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import {
   Search,
   ArrowRight,
+  ChevronRight,
   Layers,
   Hammer,
   Factory,
@@ -86,6 +87,58 @@ export default function Hero() {
         />
       </div>
 
+      {/* Desktop Quick Links Sidebar (Positioned on the Left Side of Hero Section) */}
+      <aside
+        aria-label="Hero Sector Quick Links"
+        className="hidden min-[1360px]:flex flex-col w-[160px] min-[1660px]:w-[180px] absolute left-2 min-[1660px]:left-3 top-6 bottom-6 z-20 text-left"
+      >
+        <div className="flex-1 rounded-2xl border border-navy-700/80 bg-navy-900/95 p-2.5 shadow-2xl backdrop-blur-md flex flex-col justify-between">
+          <div>
+            {/* Quick Links Heading */}
+            <div className="flex items-center justify-center gap-1.5 pb-2 mb-2 border-b border-navy-800">
+              <span className="h-0.5 w-2.5 bg-brand rounded-full" />
+              <h3 className="text-xs font-heading font-bold uppercase tracking-wider text-brand">
+                Quick Links
+              </h3>
+              <span className="h-0.5 w-2.5 bg-brand rounded-full" />
+            </div>
+
+            {/* Vertical Category Links */}
+            <nav className="flex flex-col gap-1">
+              {heroQuickLinks.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="group flex items-center justify-between rounded-lg border border-navy-800/80 bg-navy-950/80 hover:bg-navy-800 hover:border-brand px-2 py-1.5 transition-all cursor-pointer"
+                  title={`Go to ${link.label}`}
+                >
+                  <div className="flex items-center gap-1.5 min-w-0">
+                    <link.icon className="h-3 w-3 text-brand group-hover:text-white transition-colors shrink-0" />
+                    <span className="text-[10.5px] min-[1660px]:text-[11px] font-bold text-slate-200 group-hover:text-white transition-colors truncate">
+                      {link.label}
+                    </span>
+                  </div>
+                  {link.badge && (
+                    <span className="shrink-0 rounded bg-brand/20 border border-brand/30 px-1 py-0.2 text-[8px] font-mono font-extrabold text-brand group-hover:bg-brand group-hover:text-white transition-colors">
+                      {link.badge}
+                    </span>
+                  )}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          {/* Bottom All Categories Link */}
+          <Link
+            href="/marketplace"
+            className="mt-2 flex items-center justify-center gap-1 rounded-lg bg-navy-950 border border-navy-800 hover:border-brand hover:bg-brand hover:text-white py-1.5 text-[9px] font-bold uppercase tracking-wider text-slate-300 transition-all cursor-pointer"
+          >
+            <span>All Categories</span>
+            <ChevronRight className="h-3 w-3 text-brand group-hover:text-white" />
+          </Link>
+        </div>
+      </aside>
+
       <div className="relative w-full px-4 sm:px-6 lg:px-8 xl:px-10 text-center">
         {/* Centered Brand Header Logo */}
         <div className="mx-auto mb-6 sm:mb-7 lg:mb-8 flex justify-center">
@@ -108,8 +161,8 @@ export default function Hero() {
         {/* USA Industrial Badge */}
         <div className="inline-flex items-center gap-2 rounded-full border border-navy-700 bg-navy-900/90 px-4 py-1.5 text-xs font-semibold tracking-wide text-zinc-200 shadow-inner mb-6 backdrop-blur-xs">
           <span className="flex h-2 w-2 rounded-full bg-brand animate-pulse" />
-          <span className="text-white font-bold tracking-wider uppercase">
-            Foundry & Forge Exchange
+          <span className="text-white font-bold tracking-wider uppercase font-mono">
+            The Frontier of Foundries &amp; Forgings
           </span>
           <span className="text-slate-500">•</span>
           <span className="text-slate-300">
@@ -209,8 +262,8 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Quick Links Navigation Strip */}
-        <div className="mx-auto mt-6 max-w-4xl">
+        {/* Mobile/Tablet Quick Links (Hidden on desktop ≥1360px where Left Sidebar is displayed) */}
+        <div className="min-[1360px]:hidden mx-auto mt-6 max-w-4xl">
           <div className="flex items-center justify-center gap-2 mb-2.5">
             <span className="h-[2px] w-6 bg-brand" />
             <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-brand">

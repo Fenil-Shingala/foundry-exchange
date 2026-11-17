@@ -32,9 +32,9 @@ const ibmPlexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://foundryexchange.com"),
-  title: "Foundry Exchange | The Marketplace for Metal Casting & Foundry",
+  title: "Foundry Exchange | The Frontier of Foundries & Forgings",
   description:
-    "Everything Foundry. One Exchange. Buy, sell, trade, and source ferrous and non-ferrous castings, foundry equipment, raw materials, tooling, and testing services.",
+    "The Frontier of Foundries & Forgings — Everything Foundry & Forging In One Exchange. Buy, sell, trade, and source ferrous and non-ferrous castings, foundry equipment, raw materials, tooling, and testing services.",
   keywords: [
     "foundry marketplace",
     "metal castings",

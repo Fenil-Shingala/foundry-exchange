@@ -18,8 +18,9 @@ export const siteConfig = {
   name: "Foundry Exchange",
   shortName: "FE",
   tagline: "Everything Foundry & Forging In One Exchange",
+  subtagline: "The Frontier of Foundries & Forgings",
   subline:
-    "The premier marketplace to buy, sell, trade, and source ferrous & non-ferrous castings, precision forgings, foundry & forge equipment, patterns, raw materials, and metallurgical services.",
+    "The Frontier of Foundries & Forgings — the premier marketplace to buy, sell, trade, and source ferrous & non-ferrous castings, precision forgings, foundry & forge equipment, patterns, raw materials, and metallurgical services.",
   contactPhone: "+1 (800) 459-CAST",
   contactEmail: "foundryxchange@gmail.com",
   officeAddress: "Cleveland Metallurgical Hub, 1400 Industrial Pkwy, Cleveland, OH 44114",

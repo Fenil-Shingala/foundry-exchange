@@ -46,6 +46,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 lg:grid-cols-3 items-center gap-8 pb-12 border-b border-navy-800">
           {/* Left Column: Mission Statement */}
           <div className="order-2 lg:order-1 text-center lg:text-left">
+            <p className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand mb-1">
+              The Frontier of Foundries &amp; Forgings
+            </p>
             <p className="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-md mx-auto lg:mx-0">
               The premier industrial exchange built specifically for the
               metal casting and forging sectors. Connecting North American and global foundries,
